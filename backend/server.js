@@ -79,54 +79,91 @@ app.get('/', (req, res) => {
   res.send(listEndpoints(app))
 })
 
-app.get('/pokemons', (req, res) => {
-    res.json(pokemonsData)
+// app.get('/pokemons', authenticateUser) UNCOMMENT WHEN USERAUTHENTICATION IS SET UP
+app.get('/pokemons', async (req, res) => {
+  try {
+    if (!pokemonsData) {
+      res.status(404).send('No data to show')
+    } else {
+      res.json(pokemonsData)
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Not found' })
+  }
 })
 
-app.get('/pokemons/:id', (req, res) => {
-    const { id } = req.params
-    const pokemon = pokemonsData.find(item => item.id === +id)
+// app.get('/pokemons/:ids', authenticateUser) UNCOMMENT WHEN USERAUTHENTICATION IS SET UP
+app.get('/pokemons/:id', async (req, res) => {
+  const { id } = req.params
+  const pokemon = pokemonsData.find((item) => item.id === +id)
+  try {
     if (!pokemon) {
       res.status(404).send('No pokemon found with this ID')
     } else {
       res.json(pokemon)
     }
-  })
+  } catch (error) {
+    res.status(400).json({ error: 'Not found' })
+  }
+})
 
-app.get('pokemons/')
 
-// app.get('/pokemons', authenticateUser)
-// app.get('/pokemons', async (req, res) => {
-//   const { pokemonsearch } = req.query
-//   try {
-//     let allPokemons = await Pokemons.find().sort({ name: 1 })
-//     if (pokemonsearch) {
-//       allPokemons = allPokemons.filter((Pokemons) =>
-//         Pokemons.name.toLowerCase().includes(pokemonsearch.toLowerCase())
-//       )
-//       res.json(allPokemons)
-//     } else {
-//       res.json(allPokemons)
-//     }
-//   } catch (error) {
-//     res.status(400).json({ success: false, message: 'Invalid request', error })
-//   }
-// })
+app.get('/users', async (req, res) => {
+  const { useraccount } = req.query
+  try {
+    let allUsers = await User.find({}, { password: 0, accessToken: 0 }).sort({
+      PokemonsSeen: -1,
+    })
+    let topUsers = await User.find({}, { password: 0, accessToken: 0 }).sort({
+      PokemonsSeen: -1,
+    })
+    if (useraccount) {
+      allUsers = allUsers.filter((user) =>
+        user.username.toLowerCase().includes(useraccount.toLowerCase())
+      )
+      res.json(allUsers)
+    } else {
+      res.json(topUsers)
+    }
+  } catch (error) {
+    res.status(400).json({ success: false, message: 'Invalid request', error })
+  }
+})
 
-// app.get('/pokemons/:_id', authenticateUser)
-// app.get('/pokemons/:_id', async (req, res) => {
-//   const { _id } = req.params
-//   try {
-//     if (_id) {
-//       const pokemonPage = await Pokemons.findById(_id)
-//       res.json(pokemonPage)
-//     } else {
-//       res.status(404).json({ error: 'Not found' })
-//     }
-//   } catch (error) {
-//     res.status(400).json({ error: 'Invalid request' })
-//   }
-// })
+app.post('/register', async (req, res) => {
+  const { username, password } = req.body
+  try {
+    const salt = bcrypt.genSaltSync()
+    const newUser = await new User({
+      username,
+      password: bcrypt.hashSync(password, salt),
+    }).save()
+    res.json({
+      success: true,
+      userID: newUser._id,
+      user: newUser.username,
+      accessToken: newUser.accessToken,
+    })
+  } catch (error) {
+    if (error.code === 11000) {
+      res
+        .status(409)
+        .json({
+          success: false,
+          message: 'The username you have chosen is already taken.',
+          error,
+        })
+    } else {
+      res
+        .status(400)
+        .json({
+          success: false,
+          message: 'Oops something is not right, try again.',
+          error,
+        })
+    }
+  }
+})
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
