@@ -1,5 +1,4 @@
 import express from 'express'
-import pokemonsData from '../backend/pokemonsData.json'
 import crypto from 'crypto'
 import cors from 'cors'
 import mongoose from 'mongoose'
