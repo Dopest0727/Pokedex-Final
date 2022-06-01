@@ -1,7 +1,6 @@
 import express from 'express'
 import pokemonsData from './pokemonsData.json'
 import crypto from 'crypto'
-import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import listEndpoints from 'express-list-endpoints'
