@@ -48,9 +48,10 @@ const User = mongoose.model('User', {
 })
 
 const Pokemons = mongoose.model('Pokemons', {
-  name: String,
-  image: String,
-  description: String,
+  id: Number,
+  name: Object,
+  type: Array,
+  base: Object,
 })
 
 const authenticateUser = async (req, res, next) => {
@@ -80,10 +81,10 @@ app.get('/', (req, res) => {
 // app.get('/pokemons', authenticateUser) UNCOMMENT WHEN USERAUTHENTICATION IS SET UP
 app.get('/pokemons', async (req, res) => {
   try {
-    if (!pokemonsData) {
-      res.status(404).send('No data to show')
+    if (Pokemons) {
+      res.json(Pokemons)
     } else {
-      res.json(pokemonsData)
+      res.status(404).send('No data to show')
     }
   } catch (error) {
     res.status(400).json({ error: 'Not found' })
