@@ -92,7 +92,7 @@ app.get('/pokemons', async (req, res) => {
   }
 })
 
-// app.get('/pokemons/:ids', authenticateUser) UNCOMMENT WHEN USERAUTHENTICATION IS SET UP
+// app.get('/pokemons/:id', authenticateUser) UNCOMMENT WHEN USERAUTHENTICATION IS SET UP
 app.get('/pokemons/:id', async (req, res) => {
   const { id } = req.params
   const pokemon = pokemonsData.find((item) => item.id === +id)
@@ -106,7 +106,6 @@ app.get('/pokemons/:id', async (req, res) => {
     res.status(400).json({ error: 'Not found' })
   }
 })
-
 
 app.get('/users', async (req, res) => {
   const { useraccount } = req.query
@@ -146,21 +145,17 @@ app.post('/register', async (req, res) => {
     })
   } catch (error) {
     if (error.code === 11000) {
-      res
-        .status(409)
-        .json({
-          success: false,
-          message: 'The username you have chosen is already taken.',
-          error,
-        })
+      res.status(409).json({
+        success: false,
+        message: 'The username you have chosen is already taken.',
+        error,
+      })
     } else {
-      res
-        .status(400)
-        .json({
-          success: false,
-          message: 'Oops something is not right, try again.',
-          error,
-        })
+      res.status(400).json({
+        success: false,
+        message: 'Oops something is not right, try again.',
+        error,
+      })
     }
   }
 })
