@@ -5,8 +5,6 @@ import {
   Container, 
   Button, 
   Input, 
-  RadioGroup, 
-  Radio, 
   Stack, 
   Text 
 } from "@chakra-ui/react"
@@ -19,8 +17,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [mode, setMode] = useState("sign up")
   const [validationError, setValidationError] = useState(null);
-  const [value, setValue] = useState("register");
   const dispatch = useDispatch();
   const accessToken = useSelector((store) => store.user.accessToken);
 
@@ -39,10 +37,9 @@ const Login = () => {
       },
       body: JSON.stringify({ username, password }),
     };
-    fetch(API_URL(value), options)
+    fetch(API_URL(mode), options)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.success) {
           batch(() => {
             dispatch(user.actions.setUserId(data.userId));
@@ -62,42 +59,38 @@ const Login = () => {
         }
       });
   };
-
   return (
-    <Container mt={20}>
-      <Text fontSize='4xl'>Welcome Dude</Text>
-      <RadioGroup mt={5} onChange={setValue} value={value}>
-        <Stack spacing={4} direction='row'>
-          <Radio value="register">
-            Sign up
-          </Radio>
-          <Radio value="login">
-            Sign in
-          </Radio>
-        </Stack>
-      </RadioGroup>
-      <form onSubmit={onFormSubmit}>
-          <Input mt={5} 
-            placeholder='Username'
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Input mt={5} 
-            placeholder="Password"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        {validationError !== null && (
-          <p className="error-message">{validationError}</p>
-        )}
-        <Button colorScheme='blue' mt={5} type="submit">Submit</Button>
-      </form>
-    </Container>
-  );
-};
+    <Container>
+    <form onSubmit={onFormSubmit}>
+      <label htmlFor="username">Username</label>
+      <Input
+        type="text"
+        id="username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)} />
 
-export default Login;
+      <label htmlFor="password">Password</label>
+      <Input
+        type="password"
+        id="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)} />
+
+      <Button type="submit">
+        {mode === "sign up" ? "Sign Up" : "Sign In"}
+      </Button>
+      <Button type="button"
+        onClick={() => setMode(mode === "sign up" ? "sign in" : "sign up")}>
+        {mode === "sign up"
+          ?
+          "Sign In"
+          :
+          "Sign Up"
+        }
+      </Button>
+    </form>
+    </Container>
+  )
+}
+
+export default Login

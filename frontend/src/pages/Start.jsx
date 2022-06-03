@@ -11,7 +11,7 @@ import {
   Badge,
   Stack,
   Button,
-  Spacer,
+  Spacer
 } from '@chakra-ui/react'
 import pokebg from '../IMG/pokebg.jpg'
 
