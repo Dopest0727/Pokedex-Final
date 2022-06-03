@@ -1,12 +1,13 @@
-import express from "express"
-import cors from "cors"
-import mongoose from "mongoose"
-import allEndpoints from "express-list-endpoints"
-import bcrypt from "bcrypt"
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import allEndpoints from 'express-list-endpoints';
+import bcrypt from 'bcrypt';
 
-import User from "./models/User.js"
+import User from './models/User.js';
+import allPokemons from './data/allPokemons.json';
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/pokedex-api"
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/pokedex-api'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -16,11 +17,55 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.send(allEndpoints(app))
 })
 
-app.get("/users", async (req, res) => {
+// POKEMOS
+  
+app.get('/pokemons', async (req, res) => {
+  try {
+    if (!allPokemons) {
+      res.status(404).send('No data to show')
+    } else {
+      res.json(allPokemons.pokemon)
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Not found' })
+  }
+})
+
+app.get('/pokemons/id/:id', async (req, res) => {
+  const { id } = req.params
+  const pokemon = allPokemons.pokemon.find((item) => item.id === +id)
+  try {
+    if (!pokemon) {
+      res.status(404).send('No pokemon found with this ID')
+    } else {
+      res.json(pokemon)
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Not found' })
+  }
+})
+
+app.get('/pokemons/name/:pokeName', async (req, res) => {
+  const { pokeName } = req.params
+  const pokemon = allPokemons.pokemon.find((item) => item.name === pokeName)
+  try {
+    if (!pokemon) {
+      res.status(404).send('No pokemon found with this name')
+    } else {
+      res.json(pokemon)
+    }
+  } catch (error) {
+    res.status(400).json({ error: 'Not found' })
+  }
+})
+
+// USER 
+
+app.get('/users', async (req, res) => {
   try {
     const allUsers = await User.find()
 
@@ -34,14 +79,14 @@ app.get("/users", async (req, res) => {
       success: false,
       status_code: 400,
       response: {
-        message: "Bad request.",
+        message: 'Bad request.',
         errors: error
       }
     })
   }
 })
 
-app.post("/signup", async (req, res) => {
+app.post('/signup', async (req, res) => {
   const { username, email, password } = req.body
   try {
     const existingUser = await User.findOne({ $or: [{ username }, { email }] })
@@ -53,7 +98,7 @@ app.post("/signup", async (req, res) => {
         status_code: 400,
         success: false,
         response: {
-          message: "Username or email already exists."
+          message: 'Username or email already exists.'
         }
       })
     } else if (shortPassword) {
@@ -61,7 +106,7 @@ app.post("/signup", async (req, res) => {
         status_code: 400,
         success: false,
         response: {
-          message: "Password must be at least 10 characters long."
+          message: 'Password must be at least 10 characters long.'
         }
       })
     } else {
@@ -87,14 +132,14 @@ app.post("/signup", async (req, res) => {
       success: false,
       status_code: 400,
       response: {
-        message: "Unable to create user.",
+        message: 'Unable to create user.',
         errors: error.errors
       }
     })
   }
 })
 
-app.post("/signin", async (req, res) => {
+app.post('/signin', async (req, res) => {
   const { username, email, password } = req.body
 
   try {
@@ -116,7 +161,7 @@ app.post("/signin", async (req, res) => {
         status_code: 400,
         success: false,
         response: {
-          message: "Username and email and password don't match."
+          message: 'Username and email and password does not match.'
         },
       })
     }
@@ -125,16 +170,15 @@ app.post("/signin", async (req, res) => {
       success: false,
       status_code: 400,
       response: {
-        message: "Bad request.",
+        message: 'Bad request.',
         errors: error
       }
     })
   }
 })
 
-//--------------------------- AUTHENTICATED ENDPOINT ---------------------------//
 const authenticateUser = async (req, res, next) => {
-  const accessToken = req.header("Authorization")
+  const accessToken = req.header('Authorization')
 
   try {
     const user = await User.findOne({ accessToken: accessToken })
@@ -146,7 +190,7 @@ const authenticateUser = async (req, res, next) => {
         success: false,
         status_code: 401,
         response: {
-          message: "You are logged out, please log in."
+          message: 'You are logged out, please log in.'
         }
       })
     }
@@ -155,27 +199,26 @@ const authenticateUser = async (req, res, next) => {
       success: false,
       status_code: 400,
       response: {
-        message: "Bad request.",
+        message: 'Bad request.',
         errors: error
       }
     })
   }
 }
 
-app.get("/loggedin", authenticateUser)
-app.get("/loggedin", (req, res) => {
+app.get('/loggedin', authenticateUser)
+app.get('/loggedin', (req, res) => {
   res.status(200).json({
     success: true,
     status_code: 200,
     response: {
-      message: "You are logged in!"
+      message: 'You are logged in!'
     }
   })
 })
 
-//--------------------------- EDIT PROFILE ENDPOINT ---------------------------//
-app.patch("/profile/:userId/edit", authenticateUser)
-app.patch("/profile/:userId/edit", async (req, res) => {
+app.patch('/profile/:userId/edit', authenticateUser)
+app.patch('/profile/:userId/edit', async (req, res) => {
   const { userId } = req.params
   const { email, password } = req.body
 
@@ -194,7 +237,7 @@ app.patch("/profile/:userId/edit", async (req, res) => {
       success: true,
       status_code: 200,
       response: {
-        message: "User has been updated."
+        message: 'User has been updated.'
       }
     })
   } catch (err) {
@@ -202,16 +245,15 @@ app.patch("/profile/:userId/edit", async (req, res) => {
       success: false,
       status_code: 400,
       response: {
-        message: "Bad request, could not find and update this user.",
+        message: 'Bad request, could not find and update this user.',
         error: err.errors
       }
     })
   }
 })
 
-//--------------------------- DELETE PROFILE ENDPOINT ---------------------------//
-app.delete("/profile/:userId/delete", authenticateUser)
-app.delete("/profile/:userId/delete", async (req, res) => {
+app.delete('/profile/:userId/delete', authenticateUser)
+app.delete('/profile/:userId/delete', async (req, res) => {
   const { userId } = req.params
 
   try {
@@ -221,7 +263,7 @@ app.delete("/profile/:userId/delete", async (req, res) => {
       success: true,
       status_code: 200,
       response: {
-        message: "User has been deleted."
+        message: 'User has been deleted.'
       }
     })
   } catch (err) {
@@ -229,7 +271,7 @@ app.delete("/profile/:userId/delete", async (req, res) => {
       success: false,
       status_code: 400,
       response: {
-        message: "Bad request, could not find and delete this user.",
+        message: 'Bad request, could not find and delete this user.',
         error: err.errors
       }
     })
