@@ -2,11 +2,9 @@
   "name": "pokedex-final",
   "version": "1.0.0",
   "description": "Pokedex",
-  "type": "module",
   "scripts": {
     "start": "babel-node server.js",
-    "dev": "nodemon server.js --exec babel-node",
-    "lint": "eslint ."
+    "dev": "nodemon server.js --exec babel-node"
   },
   "repository": {
     "type": "git",

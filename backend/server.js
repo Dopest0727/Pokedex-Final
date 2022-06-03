@@ -1,11 +1,11 @@
-import express from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import allEndpoints from 'express-list-endpoints';
-import bcrypt from 'bcrypt';
+import express from 'express'
+import cors from 'cors'
+import mongoose from 'mongoose'
+import allEndpoints from 'express-list-endpoints'
+import bcrypt from 'bcrypt'
 
-import User from './models/User.js';
-import allPokemons from './data/allPokemons.json';
+import User from './models/User.js'
+import pokedex from './data/pokedex.json'
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/pokedex-api'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -21,14 +21,14 @@ app.get('/', (req, res) => {
   res.send(allEndpoints(app))
 })
 
-// POKEMOS
-  
+// POKEMONS
+
 app.get('/pokemons', async (req, res) => {
   try {
-    if (!allPokemons) {
+    if (!pokedex) {
       res.status(404).send('No data to show')
     } else {
-      res.json(allPokemons.pokemon)
+      res.json(pokedex.pokemon)
     }
   } catch (error) {
     res.status(400).json({ error: 'Not found' })
@@ -37,7 +37,7 @@ app.get('/pokemons', async (req, res) => {
 
 app.get('/pokemons/id/:id', async (req, res) => {
   const { id } = req.params
-  const pokemon = allPokemons.pokemon.find((item) => item.id === +id)
+  const pokemon = pokedex.pokemon.find((item) => item.id === +id)
   try {
     if (!pokemon) {
       res.status(404).send('No pokemon found with this ID')
@@ -51,7 +51,7 @@ app.get('/pokemons/id/:id', async (req, res) => {
 
 app.get('/pokemons/name/:pokeName', async (req, res) => {
   const { pokeName } = req.params
-  const pokemon = allPokemons.pokemon.find((item) => item.name === pokeName)
+  const pokemon = pokedex.pokemon.find((item) => item.name === pokeName)
   try {
     if (!pokemon) {
       res.status(404).send('No pokemon found with this name')
@@ -63,7 +63,7 @@ app.get('/pokemons/name/:pokeName', async (req, res) => {
   }
 })
 
-// USER 
+// USER
 
 app.get('/users', async (req, res) => {
   try {
@@ -72,7 +72,7 @@ app.get('/users', async (req, res) => {
     res.status(200).json({
       success: true,
       status_code: 200,
-      response: allUsers
+      response: allUsers,
     })
   } catch (error) {
     res.status(400).json({
@@ -80,8 +80,8 @@ app.get('/users', async (req, res) => {
       status_code: 400,
       response: {
         message: 'Bad request.',
-        errors: error
-      }
+        errors: error,
+      },
     })
   }
 })
@@ -98,22 +98,22 @@ app.post('/signup', async (req, res) => {
         status_code: 400,
         success: false,
         response: {
-          message: 'Username or email already exists.'
-        }
+          message: 'Username or email already exists.',
+        },
       })
     } else if (shortPassword) {
       res.status(400).json({
         status_code: 400,
         success: false,
         response: {
-          message: 'Password must be at least 10 characters long.'
-        }
+          message: 'Password must be at least 10 characters long.',
+        },
       })
     } else {
       const newUser = await new User({
         username: username,
         email: email,
-        password: bcrypt.hashSync(password, salt)
+        password: bcrypt.hashSync(password, salt),
       }).save()
 
       res.status(201).json({
@@ -123,8 +123,8 @@ app.post('/signup', async (req, res) => {
           username: newUser.username,
           email: newUser.email,
           accessToken: newUser.accessToken,
-          userId: newUser._id
-        }
+          userId: newUser._id,
+        },
       })
     }
   } catch (error) {
@@ -133,8 +133,8 @@ app.post('/signup', async (req, res) => {
       status_code: 400,
       response: {
         message: 'Unable to create user.',
-        errors: error.errors
-      }
+        errors: error.errors,
+      },
     })
   }
 })
@@ -153,15 +153,15 @@ app.post('/signin', async (req, res) => {
           username: user.username,
           email: user.email,
           accessToken: user.accessToken,
-          userId: user._id
-        }
+          userId: user._id,
+        },
       })
     } else {
       res.status(400).json({
         status_code: 400,
         success: false,
         response: {
-          message: 'Username and email and password does not match.'
+          message: 'Username and email and password does not match.',
         },
       })
     }
@@ -171,8 +171,8 @@ app.post('/signin', async (req, res) => {
       status_code: 400,
       response: {
         message: 'Bad request.',
-        errors: error
-      }
+        errors: error,
+      },
     })
   }
 })
@@ -190,8 +190,8 @@ const authenticateUser = async (req, res, next) => {
         success: false,
         status_code: 401,
         response: {
-          message: 'You are logged out, please log in.'
-        }
+          message: 'You are logged out, please log in.',
+        },
       })
     }
   } catch (error) {
@@ -200,8 +200,8 @@ const authenticateUser = async (req, res, next) => {
       status_code: 400,
       response: {
         message: 'Bad request.',
-        errors: error
-      }
+        errors: error,
+      },
     })
   }
 }
@@ -212,8 +212,8 @@ app.get('/loggedin', (req, res) => {
     success: true,
     status_code: 200,
     response: {
-      message: 'You are logged in!'
-    }
+      message: 'You are logged in!',
+    },
   })
 })
 
@@ -228,17 +228,22 @@ app.patch('/profile/:userId/edit', async (req, res) => {
     if (email && !password) {
       await User.findByIdAndUpdate(userId, { email })
     } else if (!email && password) {
-      await User.findByIdAndUpdate(userId, { password: bcrypt.hashSync(password, salt) })
+      await User.findByIdAndUpdate(userId, {
+        password: bcrypt.hashSync(password, salt),
+      })
     } else {
-      await User.findByIdAndUpdate(userId, { email, password: bcrypt.hashSync(password, salt) })
+      await User.findByIdAndUpdate(userId, {
+        email,
+        password: bcrypt.hashSync(password, salt),
+      })
     }
 
     res.status(200).json({
       success: true,
       status_code: 200,
       response: {
-        message: 'User has been updated.'
-      }
+        message: 'User has been updated.',
+      },
     })
   } catch (err) {
     res.status(400).json({
@@ -246,8 +251,8 @@ app.patch('/profile/:userId/edit', async (req, res) => {
       status_code: 400,
       response: {
         message: 'Bad request, could not find and update this user.',
-        error: err.errors
-      }
+        error: err.errors,
+      },
     })
   }
 })
@@ -263,8 +268,8 @@ app.delete('/profile/:userId/delete', async (req, res) => {
       success: true,
       status_code: 200,
       response: {
-        message: 'User has been deleted.'
-      }
+        message: 'User has been deleted.',
+      },
     })
   } catch (err) {
     res.status(400).json({
@@ -272,8 +277,8 @@ app.delete('/profile/:userId/delete', async (req, res) => {
       status_code: 400,
       response: {
         message: 'Bad request, could not find and delete this user.',
-        error: err.errors
-      }
+        error: err.errors,
+      },
     })
   }
 })
