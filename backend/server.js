@@ -69,7 +69,7 @@ app.get("/", (req, res) => {
   res.send(listEndpoints());
 });
 
-app.post("/register", async (req, res) => {
+app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   try {
     const salt = bcrypt.genSaltSync();
