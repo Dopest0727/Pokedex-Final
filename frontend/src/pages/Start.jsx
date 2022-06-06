@@ -19,6 +19,9 @@ const Start = () => {
   const navigateSignIn = () => {
     navigate('/signin')
   }
+  const navigateSignUp = () => {
+    navigate('/signup')
+  }
   const pokecard = {
     imageAlt: 'Picture of Pokeball',
     welcome: 'Welcome back',
@@ -60,6 +63,9 @@ const Start = () => {
             <Flex w="100%">
               <ButtonGroup w="100%" colorScheme="twitter" spacing="1">
                 <Button w="100%" variant="solid" onClick={navigateSignIn}>
+                  Sign In
+                </Button>
+                <Button w="100%" variant="solid" onClick={navigateSignUp}>
                   Sign Up
                 </Button>
               </ButtonGroup>

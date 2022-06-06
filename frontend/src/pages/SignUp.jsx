@@ -2,7 +2,21 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { authenticated } from '../reducers/auth'
-import { Container, Text, Input, Button } from '@chakra-ui/react'
+import {
+  Container,
+  Input,
+  Button,
+  Alert,
+  AlertTitle,
+  AlertIcon,
+  Box,
+  Image,
+  FormControl,
+  Flex,
+  ButtonGroup,
+  Stack,
+} from '@chakra-ui/react'
+import pokebg from '../IMG/pokebg.jpg'
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -11,6 +25,12 @@ const Signup = () => {
   const [passwordTwo, setPasswordTwo] = useState()
   const [error, setError] = useState('')
   const dispatch = useDispatch()
+
+  const pokecard = {
+    imageAlt: 'Picture of Pokeball',
+    welcome: 'Welcome back',
+    phrase: "Ready to catch 'em all?",
+  }
 
   const registerUser = async (options) => {
     try {
@@ -51,29 +71,78 @@ const Signup = () => {
 
   return (
     <>
-      <Container>
-        <Text textAlign="center">New Arrivals</Text>
-        <Input
-          required={true}
-          placeholder="username"
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        <Input
-          type="password"
-          required={true}
-          placeholder="password"
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <Input
-          type="password"
-          required={true}
-          placeholder="confrim password"
-          onChange={(e) => setPasswordTwo(e.target.value)}
-        />
-        <Button onClick={onSignUp}>REGISTER IF YOU MUST</Button>
-        <Button onClick={() => navigate('/signin')}>
-          Already registered? Login here
-        </Button>
+      <Container centerContent my="10%">
+        <Box
+          maxW="xl"
+          p="8"
+          borderWidth="2px"
+          borderColor="blue.400"
+          borderRadius="md"
+        >
+          <Image borderRadius="md" src={pokebg} alt={pokecard.imageAlt} />
+          <Box py="4">
+            <FormControl isRequired>
+              <Input
+                mb="3"
+                //value={username}
+                required={true}
+                placeholder="Username"
+                _placeholder={{ opacity: 1, color: 'blue.400' }}
+                onChange={(event) => setUsername(event.target.value)}
+                autoComplete="true"
+              />
+              <Input
+                mb="3"
+                //value={password}
+                type="password"
+                placeholder="Password"
+                _placeholder={{ opacity: 1, color: 'blue.400' }}
+                required={true}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+              <Input
+                type="password"
+                required={true}
+                placeholder="Confrim password"
+                _placeholder={{ opacity: 1, color: 'blue.400' }}
+                onChange={(e) => setPasswordTwo(e.target.value)}
+              />
+            </FormControl>
+          </Box>
+          <Box>
+            {error.length > 0 && (
+              <Alert status="info">
+                <AlertIcon />
+                <AlertTitle>Error</AlertTitle>
+                {error}
+              </Alert>
+            )}
+          </Box>
+          <Box pt="4">
+            <Stack
+              w="100%"
+              display="flex"
+              direction="row"
+              spacing={4}
+              alignItems="center"
+            >
+              <Flex w="100%">
+                <ButtonGroup w="100%" colorScheme="twitter" spacing="1">
+                  <Button w="100%" variant="solid" onClick={onSignUp}>
+                    Sign Up
+                  </Button>
+                  <Button
+                    w="100%"
+                    variant="outline"
+                    onClick={() => navigate('/')}
+                  >
+                    Go Back
+                  </Button>
+                </ButtonGroup>
+              </Flex>
+            </Stack>
+          </Box>
+        </Box>
       </Container>
     </>
   )
