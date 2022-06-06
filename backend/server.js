@@ -65,25 +65,25 @@ app.get('/pokemons/name/:pokeName', async (req, res) => {
 
 // USER
 
-app.get("/", (req, res) => {
-  res.send(listEndpoints());
-});
+app.get('/', (req, res) => {
+  res.send(listEndpoints())
+})
 
-app.post("/signup", async (req, res) => {
-  const { username, password } = req.body;
+app.post('/signup', async (req, res) => {
+  const { username, password } = req.body
   try {
-    const salt = bcrypt.genSaltSync();
+    const salt = bcrypt.genSaltSync()
     //
     if (password.length < 8) {
       res.status(400).json({
-        response: "Password must contain at least 8 characters long",
+        response: 'Password must contain at least 8 characters long',
         success: false,
-      });
+      })
     } else {
       const newUser = await new User({
         username: username,
         password: bcrypt.hashSync(password, salt),
-      }).save();
+      }).save()
       res.status(201).json({
         response: {
           username: newUser.username,
@@ -91,30 +91,30 @@ app.post("/signup", async (req, res) => {
           userId: newUser._id,
         },
         success: true,
-      });
+      })
     }
     //
   } catch (error) {
     if (error.code === 11000) {
       res.status(400).json({
-        response: "Username is already taken. Please enter new username.",
+        response: 'Username is already taken. Please enter new username.',
         success: false,
-      });
+      })
     } else {
-      console.log(error);
+      console.log(error)
       res.status(400).json({
         response: error,
         success: false,
-      });
+      })
     }
   }
-});
+})
 
-app.post("/signin", async (req, res) => {
-  const { username, password } = req.body;
+app.post('/signin', async (req, res) => {
+  const { username, password } = req.body
 
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username })
 
     if (user && bcrypt.compareSync(password, user.password)) {
       res.status(200).json({
@@ -124,22 +124,22 @@ app.post("/signin", async (req, res) => {
           accessToken: user.accessToken,
           userId: user._id,
         },
-      });
+      })
     } else {
       res.status(400).json({
         response: "Username and password don't match.",
         success: false,
-      });
+      })
     }
   } catch (error) {
     res.status(400).json({
       response: error,
       success: false,
-    });
+    })
   }
-});
+})
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+  console.log(`Server running on http://localhost:${port}`)
+})
