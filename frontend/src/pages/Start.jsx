@@ -16,8 +16,8 @@ import pokebg from '../IMG/pokebg.jpg'
 
 const Start = () => {
   const navigate = useNavigate()
-  const navigateSignUp = () => {
-    navigate('/signup')
+  const navigateSignIn = () => {
+    navigate('/signin')
   }
   const pokecard = {
     imageAlt: 'Picture of Pokeball',
@@ -59,7 +59,7 @@ const Start = () => {
           >
             <Flex w="100%">
               <ButtonGroup w="100%" colorScheme="twitter" spacing="1">
-                <Button w="100%" variant="solid" onClick={navigateSignUp}>
+                <Button w="100%" variant="solid" onClick={navigateSignIn}>
                   Sign Up
                 </Button>
               </ButtonGroup>

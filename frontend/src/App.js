@@ -3,30 +3,21 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider } from '@chakra-ui/react'
 
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import Start from "./pages/Start"
 import Main from './pages/Main'
 
 import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
-import user from "./reducers/user";
+import { authenticated } from "./reducers/auth";
 
 const reducer = combineReducers({
-  user: user.reducer,
+  authenticated: authenticated.reducer,
 });
 
-const persistedStateJSON = localStorage.getItem("state")
-let persistedState = {}
+const store = configureStore({ reducer });
 
-if (persistedStateJSON) {
-  persistedState = JSON.parse(persistedStateJSON)
-}
-
-const store = configureStore({ reducer, preloadedState: persistedState })
-
-store.subscribe(() => {
-  localStorage.setItem("state", JSON.stringify(store.getState()))
-})
 
 
 const App = () => {
@@ -36,7 +27,8 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Start />}></Route>
-          <Route path="/signup" element={<SignIn />}></Route>
+          <Route path="/signin" element={<SignIn />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/main" element={<Main />}></Route>
         </Routes>
       </BrowserRouter>

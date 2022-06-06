@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector, batch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Container, Button, Input } from '@chakra-ui/react'
-
-import { authenticated } from 'reducers/auth'
+import { authenticated } from "../reducers/auth";
 
 const SignIn = () => {
   const [username, setUsername] = useState('')
@@ -14,7 +13,6 @@ const SignIn = () => {
 
   const authToken = useSelector((state) => state.authenticated.authToken)
 
-  // Alternative to navigating to home instead of putting it inside the function (See Signup.jsx)
   useEffect(() => {
     if (authToken) {
       navigate('/main')
@@ -49,7 +47,7 @@ const SignIn = () => {
 
   return (
     <Container>
-      <form onSubmit={onFormSubmit}>
+      <form>
         <label htmlFor="username">Username</label>
         <Input
           type="text"
@@ -65,7 +63,6 @@ const SignIn = () => {
           type="password"
           id="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
           required={true}
           onChange={(event) => setPassword(event.target.value)}
         />
@@ -81,7 +78,7 @@ const SignIn = () => {
           LOGIN... ?
         </Button>
 
-        <Button onClick={() => navigate('/signup')} color="secondary">
+        <Button onClick={() => navigate('/signup')}>
           Are you new? Register here
         </Button>
       </form>
