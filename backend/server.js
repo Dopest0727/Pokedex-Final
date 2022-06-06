@@ -87,9 +87,9 @@ app.get('/users', async (req, res) => {
 })
 
 app.post('/signup', async (req, res) => {
-  const { username, email, password } = req.body
+  const { username, password } = req.body
   try {
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] })
+    const existingUser = await User.findOne({ username  })
     const shortPassword = password.length < 10
     const salt = bcrypt.genSaltSync()
 
@@ -112,7 +112,6 @@ app.post('/signup', async (req, res) => {
     } else {
       const newUser = await new User({
         username: username,
-        email: email,
         password: bcrypt.hashSync(password, salt),
       }).save()
 
@@ -121,7 +120,6 @@ app.post('/signup', async (req, res) => {
         status_code: 201,
         response: {
           username: newUser.username,
-          email: newUser.email,
           accessToken: newUser.accessToken,
           userId: newUser._id,
         },
@@ -140,10 +138,10 @@ app.post('/signup', async (req, res) => {
 })
 
 app.post('/signin', async (req, res) => {
-  const { username, email, password } = req.body
+  const { username, password } = req.body
 
   try {
-    const user = await User.findOne({ $or: [{ username }, { email }] })
+    const user = await User.findOne({ username })
 
     if (user && bcrypt.compareSync(password, user.password)) {
       res.status(200).json({
@@ -151,7 +149,6 @@ app.post('/signin', async (req, res) => {
         status_code: 200,
         response: {
           username: user.username,
-          email: user.email,
           accessToken: user.accessToken,
           userId: user._id,
         },
@@ -206,8 +203,8 @@ const authenticateUser = async (req, res, next) => {
   }
 }
 
-app.get('/loggedin', authenticateUser)
-app.get('/loggedin', (req, res) => {
+app.get('/main', authenticateUser)
+app.get('/main', (req, res) => {
   res.status(200).json({
     success: true,
     status_code: 200,

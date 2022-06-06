@@ -4,27 +4,25 @@ import { useNavigate } from "react-router-dom";
 import { 
   Container, 
   Button, 
-  Input, 
-  Stack, 
-  Text 
+  Input
 } from "@chakra-ui/react"
 
 import { API_URL } from "../utils/utils";
 
 import user from "../reducers/user";
 
-const Login = () => {
+const SignIn = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [mode, setMode] = useState("sign up")
+  const [mode, setMode] = useState("signup")
   const [validationError, setValidationError] = useState(null);
   const dispatch = useDispatch();
   const accessToken = useSelector((store) => store.user.accessToken);
 
   useEffect(() => {
     if (accessToken) {
-      navigate("/");
+      navigate("/main");
     }
   }, [accessToken]);
 
@@ -38,13 +36,14 @@ const Login = () => {
       body: JSON.stringify({ username, password }),
     };
     fetch(API_URL(mode), options)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      if (data.success) {
           batch(() => {
             dispatch(user.actions.setUserId(data.userId));
             dispatch(user.actions.setAccessToken(data.accessToken));
-            dispatch(user.actions.setUserName(data.username));
+            dispatch(user.actions.setUsername(data.username));
             dispatch(user.actions.setError(null));
             setValidationError(null);
           });
@@ -53,7 +52,7 @@ const Login = () => {
             dispatch(user.actions.setError(data.response));
             dispatch(user.actions.setUserId(null));
             dispatch(user.actions.setAccessToken(null));
-            dispatch(user.actions.setUserName(null));
+            dispatch(user.actions.setUsername(null));
             setValidationError(data.response);
           });
         }
@@ -77,15 +76,16 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)} />
 
       <Button type="submit">
-        {mode === "sign up" ? "Sign Up" : "Sign In"}
+        {mode === "signup" ? "Sign Up" : "Sign In"}
       </Button>
+      
       <Button type="button"
         onClick={() => setMode(mode === "sign up" ? "sign in" : "sign up")}>
-        {mode === "sign up"
+        {mode === "signup"
           ?
-          "Sign In"
+          "You have an account? Click here to log in"
           :
-          "Sign Up"
+          "Don't have an account? Click here to register"
         }
       </Button>
     </form>
@@ -93,4 +93,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default SignIn

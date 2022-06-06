@@ -10,8 +10,7 @@ import {
   Text,
   Badge,
   Stack,
-  Button,
-  Spacer
+  Button
 } from '@chakra-ui/react'
 import pokebg from '../IMG/pokebg.jpg'
 
@@ -19,9 +18,6 @@ const Start = () => {
   const navigate = useNavigate()
   const navigateSignUp = () => {
     navigate('/signup')
-  }
-  const navigateSignIn = () => {
-    navigate('/signin')
   }
   const pokecard = {
     imageAlt: 'Picture of Pokeball',
@@ -63,12 +59,8 @@ const Start = () => {
           >
             <Flex w="100%">
               <ButtonGroup w="100%" colorScheme="twitter" spacing="1">
-                <Button w="50%" variant="solid" onClick={navigateSignIn}>
-                  Sign in
-                </Button>
-                <Spacer />
-                <Button w="50%" variant="outline" borderWidth="1px" onClick={navigateSignUp}>
-                  Sign up
+                <Button w="100%" variant="solid" onClick={navigateSignUp}>
+                  Sign Up
                 </Button>
               </ButtonGroup>
             </Flex>
