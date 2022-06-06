@@ -12,12 +12,13 @@ import { API_URL } from "../utils/utils";
 import user from "../reducers/user";
 
 const SignIn = () => {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [mode, setMode] = useState("signup")
   const [validationError, setValidationError] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const accessToken = useSelector((store) => store.user.accessToken);
 
   useEffect(() => {
@@ -34,13 +35,13 @@ const SignIn = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ username, password }),
-    };
+    }
     fetch(API_URL(mode), options)
     .then(res => res.json())
     .then(data => {
-      console.log(data)
       if (data.success) {
           batch(() => {
+            console.log(data.response)
             dispatch(user.actions.setUserId(data.userId));
             dispatch(user.actions.setAccessToken(data.accessToken));
             dispatch(user.actions.setUsername(data.username));
@@ -49,6 +50,7 @@ const SignIn = () => {
           });
         } else {
           batch(() => {
+            alert(data.response.message)
             dispatch(user.actions.setError(data.response));
             dispatch(user.actions.setUserId(null));
             dispatch(user.actions.setAccessToken(null));

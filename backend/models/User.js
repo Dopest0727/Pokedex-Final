@@ -11,12 +11,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email: {
-		type: String,
-		lowercase: true,
-		unique: true,
-		required: true,
-	},
+  
   accessToken: {
     type: String,
     default: () => crypto.randomBytes(128).toString("hex")
