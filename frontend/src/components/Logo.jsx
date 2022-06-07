@@ -7,6 +7,7 @@ export default function Logo(props) {
       <Text fontSize="lg" fontWeight="bold">
         Logo
       </Text>
+      
     </Box>
   )
 }
