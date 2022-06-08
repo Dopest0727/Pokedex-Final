@@ -5,7 +5,8 @@ const Main = () => {
   return (
     <div>
       <NavBar />
-      <p>hej</p>
+      <p>Startsida?</p>
+      <p>vad kan vi ladda här är frågan</p>
     </div>
   )
 }

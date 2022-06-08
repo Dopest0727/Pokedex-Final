@@ -1,8 +1,15 @@
 import React from 'react'
-import Animation from '../IMG/animation.gif'
 
-const Loader = () => {
-  return <div>Loading...</div>
+import { useSelector } from 'react-redux'
+
+//import Animation from '../IMG/animation.gif'
+
+export const AnimationLoader = () => {
+  const isLoading = useSelector((state) => state.Loader.isLoading)
+
+  return ( 
+    <div>
+      {/* {isLoading && <div> AHHHHHHHHHHHHHHHHHHH </div>} */}
+    </div>
+    )
 }
-
-export default Loader

@@ -1,7 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { ChakraProvider } from '@chakra-ui/react'
+import { Provider } from 'react-redux'
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
 
+import { ChakraProvider } from '@chakra-ui/react'
 
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
@@ -11,14 +13,14 @@ import Profile from './pages/Profile'
 import Contact from './pages/Contact'
 import Pokedex from './pages/Pokedex'
 
-import AnimationLoader from './components/AnimationLoader'
-
-import { Provider } from 'react-redux'
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
-
 import { authenticated } from './reducers/auth'
 
+/* import { AnimationLoader } from './components/AnimationLoader'
+import { loading } from './reducers/loading'
+ */
+
 const reducer = combineReducers({
+  /* loading: loading.reducer, */
   authenticated: authenticated.reducer,
 })
 
