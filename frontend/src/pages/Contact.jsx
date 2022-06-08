@@ -1,3 +1,4 @@
+import { Heading, Box, Container, Text } from '@chakra-ui/react'
 import React from 'react'
 import NavBar from '../components/NavBar'
 
@@ -5,8 +6,16 @@ const Contact = () => {
   return (
     <div>
       <NavBar />
-      <h1>Contact page</h1>
-      <p>add contact information, create links to social media </p>
+      <Container>
+        <Box>
+          <Heading>Contact</Heading>
+          <Text>socialmedia </Text>
+        </Box>
+        <Box>
+        <Heading>About</Heading>
+          <Text>Blabla</Text>
+        </Box>
+      </Container>
     </div>
   )
 }

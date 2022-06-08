@@ -12,6 +12,7 @@ import Main from './pages/Main'
 import Profile from './pages/Profile'
 import Contact from './pages/Contact'
 import Pokedex from './pages/Pokedex'
+import SinglePokemon from './pages/SinglePokemon'
 
 import { authenticated } from './reducers/auth'
 
@@ -39,6 +40,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/contact" element={<Contact />}></Route>
             <Route path="/pokedex" element={<Pokedex />}></Route>
+            <Route path="/singlepokemon" element={<SinglePokemon />}></Route>
           </Routes>
         </BrowserRouter>
       </Provider>

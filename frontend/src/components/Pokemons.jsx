@@ -8,11 +8,19 @@ import {
   Stack,
   Flex,
   Spacer,
+  Button
+
 } from '@chakra-ui/react'
 //import { getPokemons, getPokemonData } from '../utils/API'
+import { useNavigate } from 'react-router-dom'
 
 export const Pokemons = (props) => {
   const pokemon = props.pokemon
+  const navigate = useNavigate()
+  const navigateSinglePokemon = () => {
+    navigate('/singlepokemon')
+  }
+
   return (
     <Container m="5">
       <Box
@@ -24,6 +32,7 @@ export const Pokemons = (props) => {
         key={pokemon.id}
       >
         <Box>
+        
           <Stack w="100%" display="flex" direction="column" alignItems="center">
             <Image src={pokemon.img} alt={pokemon.name} title={pokemon.name} />
             <Text>{pokemon.name}</Text>
@@ -66,6 +75,9 @@ export const Pokemons = (props) => {
               </Flex>
             </Flex>
           </Stack>
+          <Button w="100%" variant="solid" onClick={navigateSinglePokemon}>
+                    Read more
+                  </Button>
         </Box>
       </Box>
     </Container>
