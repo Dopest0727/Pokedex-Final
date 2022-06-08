@@ -75,9 +75,10 @@ const MenuLinks = ({ isOpen }) => {
         direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
+        <MenuItem to="/main">Home </MenuItem>
+        <MenuItem to="/pokedex">Pokedex </MenuItem>
         <MenuItem to="/profile">Profile</MenuItem>
         <MenuItem to="/contact">Contact </MenuItem>
-        <MenuItem to="/pokedex">Pokedex </MenuItem>
         <MenuItem to="/" isLast>
           <Button
             onClick={logout}
