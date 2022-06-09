@@ -22,7 +22,7 @@ const Pokedex = () => {
           <Input
             my="5"
             borderWidth="2px"
-            borderColor="blue.400"
+      borderColor="orange.200"
             placeholder="Search for your favorite pokemon!"
             onChange={(event) => setQuery(event.target.value)}
           />

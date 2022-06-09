@@ -6,7 +6,7 @@ import {
   Image,
   Stack,
   Flex,
-  Spacer,
+  Center,
   Button,
   ButtonGroup,
 } from '@chakra-ui/react'
@@ -14,24 +14,30 @@ import { useNavigate } from 'react-router-dom'
 
 export const Pokemons = (props) => {
   const backgrounds = {
-    Fire: 'red', // f08030
-    Bug: 'green', // a8b820
-    Poison: 'purple', // a040a0
-    Water: 'blue', // 6890f0
-    Normal: 'blackAlpha', // a8a878
-    Grass: 'green', // 78c850
-    Electric: 'yellow', // f8d030
-    Psychic: 'pink', // f85888
-    Rock: 'gray', // b8a038
-    Ground: 'blackAlpha', // e0c068
-    Fighting: 'blackAlpha', // c02038
-    Flying: 'purple', // a890f0
-    Ice: 'teal', // 98d8d8
-    Fairy: 'pink', // ee99ac
-    Steel: 'gray', // b8b8d0
-    Ghost: 'purple', // 705898
-    Dragon: 'purple', // 7038f8
-    Dark: 'blackAlpha', //705848
+    //BLACKALPHA CHECK
+    Normal: 'blackAlpha.400', // a8a878
+    Ground: 'blackAlpha.500', // e0c068
+    Fighting: 'blackAlpha.600', // c02038
+    //PURPLR CHECK
+    Poison: 'purple.300', // a040a0
+    Flying: 'purple.400', // a890f0
+    Ghost: 'purple.500', // 705898
+    Dragon: 'purple.300', // 7038f8
+    //PINK CHECK
+    Psychic: 'pink.300', // f85888
+    //GREEN CHECK
+    Grass: 'green.300', // 78c850
+    Bug: 'green.500', // a8b820
+    //GRAY CHECK
+    Rock: 'gray.500', // b8a038
+    //BLUE CHECK
+    Water: 'blue.500', // 6890f0
+    //RED CHECK
+    Fire: 'red.400', // f08030
+    //TEAL CHECK
+    Ice: 'teal.400', // 98d8d8
+    //YELLOW CHECK
+    Electric: 'yellow.500', // f8d030  
   }
 
   const pokemon = props.pokemon
@@ -41,55 +47,70 @@ export const Pokemons = (props) => {
   }
 
   return (
-    <Box
+    // POKEMON CONTAINER
+    <Box 
       w="xs"
-      p="5"
       borderWidth="2px"
-      borderColor="blue.400"
+      borderColor="orange.200"
       borderRadius="md"
       key={pokemon.id}
     >
       <Box>
         <Stack w="100%" display="flex" direction="column" alignItems="center">
-          <Image src={pokemon.img} alt={pokemon.name} title={pokemon.name} />
-          <Text>{pokemon.name}</Text>
-          <Flex w="100%" display="flex" direction="column">
-            <Badge
+          <Box bgColor="orange.100" w="100%" borderRadius="md"> {/* IMAGE CONTAINER  */}
+            <Center>
+              <Image
+                m="5"
+                src={pokemon.img}
+                alt={pokemon.name}
+                title={pokemon.name}
+                borderRadius="md"
+              />
+            </Center>
+          </Box>
+          <Flex w="100%" display="flex" direction="column" px="4" py="2"> 
+            {/* ID BADGE  */}
+            <Badge 
               borderRadius="md"
               w="100%"
               textAlign="left"
-              colorScheme="twitter"
+              bgColor="blue.300"
+              color="white"
               py="2"
-              px="4"
-              my="1"
+              px="3"
+              mb="2"
             >
               ID: {pokemon.id}
             </Badge>
-            <Flex w="100%" display="flex" direction="row" spacing={1}>
-            {pokemon.type.map((type) => (
-                
+            <Flex w="100%" display="flex" direction="row">
+              {pokemon.type.map((type) => (
                 <Badge
-                key={type}
                   borderRadius="md"
                   w="100%"
-                  textAlign="left"
-                  colorScheme={backgrounds[type]}
+                  textAlign="center"
+                  color="white"
                   py="2"
-                  px="4"
-                  my="1"
+                  px="3"
+                  mb="2"
+                  bgColor={backgrounds[type]}
+                  key={type}
                 >
                   {type}
                 </Badge>
-              
-            ))}
+              ))}
             </Flex>
+            <Button
+              bgColor="orange.300"
+              mb="2"
+              w="100%"
+              color="white"
+              variant="solid"
+              onClick={navigateSinglePokemon}
+            >
+              {pokemon.name}
+            </Button>
           </Flex>
         </Stack>
-        <ButtonGroup py="1" w="100%" colorScheme="twitter" spacing="1">
-          <Button w="100%" variant="solid" onClick={navigateSinglePokemon}>
-            Read more
-          </Button>
-        </ButtonGroup>
       </Box>
     </Box>
   )
