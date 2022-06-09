@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  useBreakpointValue,
   Box,
   Text,
   Badge,
@@ -11,7 +10,6 @@ import {
   Button,
   ButtonGroup
 } from '@chakra-ui/react'
-//import { getPokemons, getPokemonData } from '../utils/API'
 import { useNavigate } from 'react-router-dom'
 
 export const Pokemons = (props) => {
@@ -24,7 +22,7 @@ export const Pokemons = (props) => {
 
   return (
       <Box
-        maxW="sm"
+        w="xs"
         p="5"
         borderWidth="2px"
         borderColor="blue.400"
