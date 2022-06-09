@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Center, Box, useBreakpointValue } from '@chakra-ui/react'
+import { Grid, Center, Box, useBreakpointValue, Input } from '@chakra-ui/react'
 import { useState } from 'react'
 
 import NavBar from '../components/NavBar'
@@ -19,8 +19,11 @@ const Pokedex = () => {
       <NavBar />
       <Center>
         <Box>
-          <input
-            placeholder="Search"
+          <Input
+            my="5"
+            borderWidth="2px"
+            borderColor="blue.400"
+            placeholder="Search for your favorite pokemon!"
             onChange={(event) => setQuery(event.target.value)}
           />
           <Grid templateColumns={h} gap={5}>
