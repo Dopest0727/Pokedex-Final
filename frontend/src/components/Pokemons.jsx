@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Container,
+  useBreakpointValue,
   Box,
   Text,
   Badge,
@@ -8,13 +8,14 @@ import {
   Stack,
   Flex,
   Spacer,
-  Button
-
+  Button,
+  ButtonGroup
 } from '@chakra-ui/react'
 //import { getPokemons, getPokemonData } from '../utils/API'
 import { useNavigate } from 'react-router-dom'
 
 export const Pokemons = (props) => {
+
   const pokemon = props.pokemon
   const navigate = useNavigate()
   const navigateSinglePokemon = () => {
@@ -22,7 +23,6 @@ export const Pokemons = (props) => {
   }
 
   return (
-    <Container m="5">
       <Box
         maxW="sm"
         p="5"
@@ -31,8 +31,7 @@ export const Pokemons = (props) => {
         borderRadius="md"
         key={pokemon.id}
       >
-        <Box>
-        
+        <Box >
           <Stack w="100%" display="flex" direction="column" alignItems="center">
             <Image src={pokemon.img} alt={pokemon.name} title={pokemon.name} />
             <Text>{pokemon.name}</Text>
@@ -75,11 +74,12 @@ export const Pokemons = (props) => {
               </Flex>
             </Flex>
           </Stack>
-          <Button w="100%" variant="solid" onClick={navigateSinglePokemon}>
-                    Read more
-                  </Button>
+          <ButtonGroup py="1" w="100%" colorScheme="twitter" spacing="1">
+            <Button w="100%" variant="solid" onClick={navigateSinglePokemon}>
+              Read more
+            </Button>
+          </ButtonGroup>
         </Box>
       </Box>
-    </Container>
   )
 }
