@@ -16,12 +16,8 @@ import SinglePokemon from './pages/SinglePokemon'
 
 import { authenticated } from './reducers/auth'
 
-/* import { AnimationLoader } from './components/AnimationLoader'
-import { loading } from './reducers/loading'
- */
 
 const reducer = combineReducers({
-  /* loading: loading.reducer, */
   authenticated: authenticated.reducer,
 })
 
@@ -40,7 +36,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/contact" element={<Contact />}></Route>
             <Route path="/pokedex" element={<Pokedex />}></Route>
-            <Route path="/singlepokemon/:search" element={<SinglePokemon />}></Route>
+            <Route path="/singlepokemon/" element={<SinglePokemon />}></Route>
           </Routes>
         </BrowserRouter>
       </Provider>
@@ -52,3 +48,10 @@ export default App
 
 //Qb lbh ernyyl unir abguvat orggre gb qb guna or ybbxvat ng bguref ercbf. Fnq.
 //Lbh fubhyq abg or urer, areq.
+
+
+/* import { AnimationLoader } from './components/AnimationLoader'
+import { loading } from './reducers/loading'
+ */
+
+   /* loading: loading.reducer, */

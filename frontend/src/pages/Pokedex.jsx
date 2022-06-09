@@ -17,7 +17,7 @@ const Pokedex = () => {
   return (
     <>
       <NavBar />
-      <Center>
+      <Center my="10">
         <Box>
           <Input
             my="5"
@@ -31,11 +31,9 @@ const Pokedex = () => {
               .filter((pokemon) => {
                 if (query === '') {
                   return pokemon
-                } else if (
-                  pokemon.name.toLowerCase().includes(query.toLowerCase())
-                ) {
+                } else if (pokemon.name.toLowerCase().includes(query.toLowerCase())) {
                   return pokemon
-                }
+                } 
               })
               .map((pokemon) => {
                 return (

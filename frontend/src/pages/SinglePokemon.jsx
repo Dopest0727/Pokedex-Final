@@ -1,8 +1,11 @@
-// import React from 'react'
-// import {Link} from 'react-router-dom';
-// import { Grid, Center, Box } from '@chakra-ui/react'
-// import pokemons from '../data/pokemons.json'
+import React from 'react'
 
+const SinglePokemon = () => {
+    return (
+        <div>
+            
+        </div>
+    )
+}
 
-
-// export default SinglePokemon
+export default SinglePokemon
