@@ -78,7 +78,7 @@ const MenuLinks = ({ isOpen }) => {
         <MenuItem to="/main">Home </MenuItem>
         <MenuItem to="/pokedex">Pokedex </MenuItem>
         <MenuItem to="/profile">Profile</MenuItem>
-        <MenuItem to="/contact">Contact </MenuItem>
+        <MenuItem to="/contact">About Us</MenuItem>
         <MenuItem to="/" isLast>
           <Button
             onClick={logout}
