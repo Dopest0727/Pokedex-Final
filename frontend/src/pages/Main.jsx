@@ -8,20 +8,34 @@ import {
   AspectRatio,
   Flex,
   ListItem,
+  useBreakpointValue,
   ListIcon,
   List,
 } from '@chakra-ui/react'
 import React from 'react'
 import { FcNext } from 'react-icons/fc'
 import NavBar from '../components/NavBar'
+import {Footer} from '../components/Footer'
 
 const Main = () => {
+  const flex = useBreakpointValue({
+    base: 'column',
+    md: 'column',
+    lg: 'column',
+  })
+  const contMargin = useBreakpointValue({
+    base: '0',
+    sm: '0',
+    md: '0',
+    lg: '10',
+  })
+
   return (
     <div>
       <NavBar />
-      <Flex direction="row" >
-        <Container mr="10">
-          <Box maxW="xl" py="8">
+      <Flex direction={flex}>
+        <Container >
+          <Box maxW="xl" py="0">
             <Box>
               <Badge
                 borderRadius="md"
@@ -30,14 +44,14 @@ const Main = () => {
                 colorScheme="twitter"
                 py="3"
                 px="6"
-                my="1"
+                mb="2"
               >
-                <Heading as="h2" size="lg">
+                <Heading fontSize='xl'>
                   Welcome to our Pokedex! <br />
                   username
                 </Heading>
               </Badge>
-              <Text my="5">
+              <Text my="10">
                 This site is our final project at the Technigo Frontend
                 Bootcamp.
                 <br />
@@ -62,21 +76,21 @@ const Main = () => {
             </Box>
           </Box>
         </Container>
-        <Container ml="10">
+        <Container >
           <Box maxW="xl" py="5">
           <Badge
                 w="100%"
                 textAlign="left"
                 bgColor="white"
                 color="blue.400"
-                py="3"
-                my="1"
+                py="2"
+                my="2"
               >
-          <Text fontSize='xl' noOfLines={2}>
-            In this Pokedex you have access to the <br />following features!
+          <Text fontSize='lg'>
+            In this Pokedex you have access <br />to the following features!
           </Text>
           </Badge>
-          <List spacing={5} my="5">
+          <List spacing={5} mt="3" mb="5">
             <ListItem>
               <ListIcon as={FcNext} />
               <Badge py="1" px="3" mr="2" bgColor="blue.400" color="white" borderRadius="xl">Pokedex</Badge>
@@ -97,7 +111,7 @@ const Main = () => {
             </ListItem>
           </List>
           </Box>
-          <Box maxW="xl" py="8">
+          <Box maxW="xl" pb="10">
           <Badge
                 w="100%"
                 textAlign="left"
@@ -106,11 +120,10 @@ const Main = () => {
                 py="3"
                 my="1"
               >
-          <Text fontSize='xl' noOfLines={2}>
-            This page is made using the below listed technologies
+          <Text fontSize='lg'>
+            This page is made using the <br />below listed technologies
           </Text>
           </Badge>
-          <Flex>
           <List spacing={4} my="5">
             <ListItem>
               <ListIcon as={FcNext} />
@@ -137,10 +150,10 @@ const Main = () => {
               And many more!
             </ListItem>
           </List>
-          </Flex>
           </Box>
         </Container>
       </Flex>
+      <Footer />
     </div>
   )
 }

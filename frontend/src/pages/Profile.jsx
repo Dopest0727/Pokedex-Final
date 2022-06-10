@@ -1,15 +1,19 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
+import { Box } from '@chakra-ui/react'
+
+import { CaughtPokemons } from '../components/CaughtPokemon'
+//import authenticated from 'reducers/user'
 
 const Profile = () => {
-    return (
-        <div>
-            <NavBar />
-            <h1>Profile page</h1>
-            <p>Add a profile picture, description text, all the pokemon user has cought</p>
-            
-        </div>
-    )
+  return (
+    <div>
+      <NavBar />
+      <Box>
+        <CaughtPokemons />
+      </Box>
+    </div>
+  )
 }
 
 export default Profile
