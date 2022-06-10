@@ -1,14 +1,12 @@
 import React from 'react'
 import {
   Box,
-  Text,
   Badge,
   Image,
   Stack,
   Flex,
   Center,
   Button,
-  ButtonGroup,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 
@@ -69,6 +67,16 @@ export const Pokemons = (props) => {
             </Center>
           </Box>
           <Flex w="100%" display="flex" direction="column" px="4" py="2"> 
+          <Button
+              bgColor="orange.300"
+              mb="2"
+              w="100%"
+              color="white"
+              variant="solid"
+              onClick={navigateSinglePokemon}
+            >
+              {pokemon.name}
+            </Button>
             {/* ID BADGE  */}
             <Badge 
               borderRadius="md"
@@ -86,12 +94,13 @@ export const Pokemons = (props) => {
               {pokemon.type.map((type) => (
                 <Badge
                   borderRadius="md"
-                  w="100%"
+                  w="33%"
                   textAlign="center"
                   color="white"
                   py="2"
                   px="3"
                   mb="2"
+                  mr="1"
                   bgColor={backgrounds[type]}
                   key={type}
                 >
@@ -99,16 +108,6 @@ export const Pokemons = (props) => {
                 </Badge>
               ))}
             </Flex>
-            <Button
-              bgColor="orange.300"
-              mb="2"
-              w="100%"
-              color="white"
-              variant="solid"
-              onClick={navigateSinglePokemon}
-            >
-              {pokemon.name}
-            </Button>
           </Flex>
         </Stack>
       </Box>

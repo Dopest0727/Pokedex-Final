@@ -1,16 +1,19 @@
---- TO DOS --- THURSDAY
+--- TO DOS --- Friday
 
-- CHANGE POKEMON IMG BG
+Todos
+- CREATE PROFILE PAGE
 
 Possible
 - AVATAR IN PROFILES
 - CHANGE POKEDEX IMAGE TO GIF
 - ADD FILTER BY TYPE 
+- CHANGE POKEMON IMG BG
 
-Done
+Ta bort?
+- AnimationLoader
+
+******** -------- Done -------- ******** 
+
 - TYPE BADGE FILTER IF MORE THAN 1
 - TYPE BADGE CHANGE COLOR BASED ON TYPE
 - SEARCH FUNCTION
-
-Ta bort?
--AnimationLoader
