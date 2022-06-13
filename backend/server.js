@@ -81,10 +81,6 @@ app.get('/pokemons/:id', async (req, res) => {
 
 // USER
 
-app.get('/', (req, res) => {
-  res.send(listEndpoints())
-})
-
 app.post('/signup', async (req, res) => {
   const { username, password } = req.body
   try {

@@ -6,6 +6,8 @@ export const getPokemons = async () => {
       return data;
     } catch (err) {}
   };
+
+  
   
 export const getPokemonData = async (url) => {
   try {

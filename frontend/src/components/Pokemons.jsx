@@ -9,6 +9,7 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
+import { getPokemons } from '../utils/utils';
 
 export const Pokemons = (props) => {
   const backgrounds = {
@@ -38,16 +39,18 @@ export const Pokemons = (props) => {
     Electric: 'yellow.500', // f8d030  
   }
 
-  const [pokemon, setPokemon] = useState([]); 
 
-  const fetchPokemons = async () => {
-    const res = await fetch(`http://localhost:8080/pokemons/`)
-    const data = await res.json()
-    setPokemon(data)
-  }
+  const [pokemons, setPokemons] = useState([]);
+
   useEffect(() => {
-    fetchPokemons()
-    }, [])
+    getPokemons().then((data) => {
+      setPokemons(data);
+    });
+  }, []);
+
+  console.log(pokemons.response);
+    
+  
     
   const navigate = useNavigate()
   const navigateSinglePokemon = () => {
@@ -61,7 +64,7 @@ export const Pokemons = (props) => {
       borderWidth="2px"
       borderColor="orange.200"
       borderRadius="md"
-      key={pokemon.id}
+      key={pokemons.id}
     >
       <Box>
         <Stack w="100%" display="flex" direction="column" alignItems="center">
@@ -69,9 +72,9 @@ export const Pokemons = (props) => {
             <Center>
               <Image
                 m="5"
-                src={pokemon.img}
-                alt={pokemon.name}
-                title={pokemon.name}
+                src={pokemons.response.img}
+                alt={pokemons.response.name}
+                title={pokemons.response.name}
                 borderRadius="md"
               />
             </Center>
@@ -85,7 +88,7 @@ export const Pokemons = (props) => {
               variant="solid"
               onClick={navigateSinglePokemon}
             >
-              {pokemon.name}
+              {pokemons.response.name}
             </Button>
             {/* ID BADGE  */}
             <Badge 
@@ -98,10 +101,10 @@ export const Pokemons = (props) => {
               px="3"
               mb="2"
             >
-              ID: {pokemon.id}
+              ID: {pokemons.response.id}
             </Badge>
             <Flex w="100%" display="flex" direction="row">
-              {pokemon.type.map((type) => (
+              {pokemons.type.map((type) => (
                 <Badge
                   borderRadius="md"
                   w="33%"

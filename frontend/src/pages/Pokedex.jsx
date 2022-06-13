@@ -1,24 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Grid, Center, Box, useBreakpointValue, Input } from '@chakra-ui/react'
-import { useState, useEffect } from 'react'
 
 import NavBar from '../components/NavBar'
 import { Pokemons } from '../components/Pokemons'
+import { getPokemons } from '../utils/utils';
 
 const Pokedex = () => {
-  const [pokedex, setPokedex] = useState([])
+  const [pokemons, setPokemons] = useState([]);
 
-  const fetchPokemons = async () => {
-    const res = await fetch(`http://localhost:8080/pokemons/`)
-    const data = await res.json()
-    setPokedex(data)
-  }
   useEffect(() => {
-    fetchPokemons()
+    getPokemons().then((data) => {
+      setPokemons(data);
+    });
+  }, []);
+
+  console.log(pokemons.response);
+
     
-    }, [])
-    
-    console.log(fetchPokemons)
   const [query, setQuery] = useState('')
   const h = useBreakpointValue({
     base: 'repeat(1, 1fr)',
@@ -37,9 +35,10 @@ const Pokedex = () => {
             placeholder="Search for your favorite pokemon!"
             onChange={(event) => setQuery(event.target.value)}
           />
-          {pokedex.res.map((pokemon) => {
-            <div>{pokemon}</div>
-          })}
+         {pokemons.map((pokemon) => {
+           <Pokemons key={pokemon.id} pokemon={pokemon} />
+         })}
+  
           {/* <Grid templateColumns={h} gap={5}>
             {pokedex
               .filter((pokemons) => {
