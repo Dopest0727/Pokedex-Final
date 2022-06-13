@@ -114,3 +114,5 @@ export const Pokemons = (props) => {
     </Box>
   )
 }
+
+

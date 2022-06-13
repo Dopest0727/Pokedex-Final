@@ -23,12 +23,6 @@ const Main = () => {
     md: 'column',
     lg: 'column',
   })
-  const contMargin = useBreakpointValue({
-    base: '0',
-    sm: '0',
-    md: '0',
-    lg: '10',
-  })
 
   return (
     <div>
