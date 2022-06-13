@@ -32,29 +32,52 @@ app.get('/pokemons', async (req, res) => {
   }
 })
 
-app.get('/pokemons/id/:id', async (req, res) => {
+app.get('/pokemons/name/:name', async (req, res) => {
+  const { name } = req.params
+
   try {
-    const { id } = req.params
-    const pokemon = await Pokemon.find((id) => item.id === +id)
-    res.status(200).json({ success: true, response: pokemon })
-   } catch (error) {
-    res.status(400).json({ error: 'Not found' })
+    const pokemonName = await Pokemon.findOne({ name: name })
+    if (pokemonName) {
+      res.status(200).json({
+        response: pokemonName,
+        success: true,
+      })
+    } else {
+      res.status(404).json({
+        response: 'No data found',
+        success: false,
+      })
+    }
+  } catch (error) {
+    res.status(400).json({
+      response: error,
+      success: false,
+    })
   }
 })
 
-// app.get('/pokemons/name/:pokeName', async (req, res) => {
-//   const { pokeName } = req.params
-//   const pokemon = pokedex.pokemon.find((item) => item.name === pokeName)
-//   try {
-//     if (!pokemon) {
-//       res.status(404).send('No pokemon found with this name')
-//     } else {
-//       res.json(pokemon)
-//     }
-//   } catch (error) {
-//     res.status(400).json({ error: 'Not found' })
-//   }
-// })
+app.get('/pokemons/:id', async (req, res) => {
+  const { id } = req.params
+  try {
+    const singlePokemon = await Pokemon.findOne({ id: id })
+    if (singlePokemon) {
+      res.status(200).json({
+        response: singlePokemon,
+        success: true,
+      })
+    } else {
+      res.status(404).json({
+        response: 'No data found',
+        success: false,
+      })
+    }
+  } catch (error) {
+    res.status(400).json({
+      response: error,
+      success: false,
+    })
+  }
+})
 
 // USER
 
@@ -86,7 +109,6 @@ app.post('/signup', async (req, res) => {
         success: true,
       })
     }
-    //
   } catch (error) {
     if (error.code === 11000) {
       res.status(400).json({

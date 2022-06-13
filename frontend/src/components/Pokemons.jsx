@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {
   Box,
   Badge,
@@ -38,7 +38,17 @@ export const Pokemons = (props) => {
     Electric: 'yellow.500', // f8d030  
   }
 
-  const pokemon = props.pokemon
+  const [pokemon, setPokemon] = useState([]); 
+
+  const fetchPokemons = async () => {
+    const res = await fetch(`http://localhost:8080/pokemons/`)
+    const data = await res.json()
+    setPokemon(data)
+  }
+  useEffect(() => {
+    fetchPokemons()
+    }, [])
+    
   const navigate = useNavigate()
   const navigateSinglePokemon = () => {
     navigate('/singlepokemon')

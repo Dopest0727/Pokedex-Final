@@ -15,11 +15,3 @@ export const getPokemonData = async (url) => {
   } catch (err) {}
 };
 
-export const searchPokemon = async (pokemon) => {
-  try {
-    let url = `https://picopalquelee.herokuapp.com/pokemons/${pokemon}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (err) {}
-};

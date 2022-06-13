@@ -1,13 +1,24 @@
 import React from 'react'
 import { Grid, Center, Box, useBreakpointValue, Input } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import NavBar from '../components/NavBar'
 import { Pokemons } from '../components/Pokemons'
-import pokemons from '../data/pokemons.json'
 
 const Pokedex = () => {
-  const pokemonsList = pokemons.pokemon
+  const [pokedex, setPokedex] = useState([])
+
+  const fetchPokemons = async () => {
+    const res = await fetch(`http://localhost:8080/pokemons/`)
+    const data = await res.json()
+    setPokedex(data)
+  }
+  useEffect(() => {
+    fetchPokemons()
+    
+    }, [])
+    
+    console.log(fetchPokemons)
   const [query, setQuery] = useState('')
   const h = useBreakpointValue({
     base: 'repeat(1, 1fr)',
@@ -26,25 +37,26 @@ const Pokedex = () => {
             placeholder="Search for your favorite pokemon!"
             onChange={(event) => setQuery(event.target.value)}
           />
-          <Grid templateColumns={h} gap={5}>
-            {pokemonsList
-              .filter((pokemon) => {
+          {pokedex.res.map((pokemon) => {
+            <div>{pokemon}</div>
+          })}
+          {/* <Grid templateColumns={h} gap={5}>
+            {pokedex
+              .filter((pokemons) => {
                 if (query === '') {
-                  return pokemon
-                } else if (pokemon.name.toLowerCase().includes(query.toLowerCase())) {
-                  return pokemon
+                  return pokemons
+                } else if (pokemons.name.toLowerCase().includes(query.toLowerCase())) {
+                  return pokemons
                 } 
-                // else if (pokemon.type.includes(query))  { FILTER BY TYPE
-                //   return pokemon
               })
-              .map((pokemon) => {
+              .map((response) => {
                 return (
-                  <Box key={pokemon.id}>
-                    <Pokemons key={pokemon.id} pokemon={pokemon} />
+                  <Box key={response.id}>
+                    <Pokemons key={response.id} pokemon={response} />
                   </Box>
                 )
               })}
-          </Grid>
+          </Grid> */}
         </Box>
       </Center>
     </>
