@@ -48,7 +48,7 @@ export const Pokemons = (props) => {
     });
   }, []);
 
-  console.log(pokemons.response);
+
     
   
     

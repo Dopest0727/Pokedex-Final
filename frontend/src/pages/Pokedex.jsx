@@ -14,7 +14,8 @@ const Pokedex = () => {
     });
   }, []);
 
-  console.log(pokemons.response);
+  console.log(pokemons);
+  // console.log(Object.entries(pokemons)[3][1])
 
     
   const [query, setQuery] = useState('')
@@ -35,12 +36,9 @@ const Pokedex = () => {
             placeholder="Search for your favorite pokemon!"
             onChange={(event) => setQuery(event.target.value)}
           />
-         {pokemons.map((pokemon) => {
-           <Pokemons key={pokemon.id} pokemon={pokemon} />
-         })}
-  
-          {/* <Grid templateColumns={h} gap={5}>
-            {pokedex
+
+          <Grid templateColumns={h} gap={5}>
+            {pokemons
               .filter((pokemons) => {
                 if (query === '') {
                   return pokemons
@@ -48,14 +46,14 @@ const Pokedex = () => {
                   return pokemons
                 } 
               })
-              .map((response) => {
+              .map((pokemons) => {
                 return (
-                  <Box key={response.id}>
-                    <Pokemons key={response.id} pokemon={response} />
+                  <Box key={pokemons.id}>
+                    <Pokemons key={pokemons.id} pokemon={pokemons} />
                   </Box>
                 )
               })}
-          </Grid> */}
+          </Grid> 
         </Box>
       </Center>
     </>
