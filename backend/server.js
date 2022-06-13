@@ -5,7 +5,9 @@ import allEndpoints from 'express-list-endpoints'
 import bcrypt from 'bcrypt'
 
 import User from './models/User.js'
+import Pokeon from './models/Pokemon.js'
 import pokedex from './data/pokedex.json'
+import Pokemon from './models/Pokemon.js'
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/pokedex-api'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -21,47 +23,44 @@ app.get('/', (req, res) => {
   res.send(allEndpoints(app))
 })
 
-// POKEMONS
+//POKEMONS
 
 app.get('/pokemons', async (req, res) => {
   try {
-    if (!pokedex) {
-      res.status(404).send('No data to show')
-    } else {
-      res.json(pokedex.pokemon)
-    }
+    const pokemon = await Pokemon.find({})
+    res.status(200).json({ success: true, response: pokemon })
   } catch (error) {
     res.status(400).json({ error: 'Not found' })
   }
 })
 
-app.get('/pokemons/id/:id', async (req, res) => {
-  const { id } = req.params
-  const pokemon = pokedex.pokemon.find((item) => item.id === +id)
-  try {
-    if (!pokemon) {
-      res.status(404).send('No pokemon found with this ID')
-    } else {
-      res.json(pokemon)
-    }
-  } catch (error) {
-    res.status(400).json({ error: 'Not found' })
-  }
-})
+// app.get('/pokemons/id/:id', async (req, res) => {
+//   const { id } = req.params
+//   const pokemon = pokedex.pokemon.find((item) => item.id === +id)
+//   try {
+//     if (!pokemon) {
+//       res.status(404).send('No pokemon found with this ID')
+//     } else {
+//       res.json(pokemon)
+//     }
+//   } catch (error) {
+//     res.status(400).json({ error: 'Not found' })
+//   }
+// })
 
-app.get('/pokemons/name/:pokeName', async (req, res) => {
-  const { pokeName } = req.params
-  const pokemon = pokedex.pokemon.find((item) => item.name === pokeName)
-  try {
-    if (!pokemon) {
-      res.status(404).send('No pokemon found with this name')
-    } else {
-      res.json(pokemon)
-    }
-  } catch (error) {
-    res.status(400).json({ error: 'Not found' })
-  }
-})
+// app.get('/pokemons/name/:pokeName', async (req, res) => {
+//   const { pokeName } = req.params
+//   const pokemon = pokedex.pokemon.find((item) => item.name === pokeName)
+//   try {
+//     if (!pokemon) {
+//       res.status(404).send('No pokemon found with this name')
+//     } else {
+//       res.json(pokemon)
+//     }
+//   } catch (error) {
+//     res.status(400).json({ error: 'Not found' })
+//   }
+// })
 
 // USER
 

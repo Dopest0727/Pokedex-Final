@@ -34,6 +34,8 @@ const Pokedex = () => {
                 } else if (pokemon.name.toLowerCase().includes(query.toLowerCase())) {
                   return pokemon
                 } 
+                // else if (pokemon.type.includes(query))  { FILTER BY TYPE
+                //   return pokemon
               })
               .map((pokemon) => {
                 return (
