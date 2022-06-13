@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 app.get('/pokemons', async (req, res) => {
   try {
     const pokemon = await Pokemon.find({})
-    res.status(200).json({ success: true, response: pokemon })
+    res.status(200).json({ pokemon })
   } catch (error) {
     res.status(400).json({ error: 'Not found' })
   }
