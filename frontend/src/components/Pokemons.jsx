@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import {
   Box,
   Badge,
@@ -43,11 +44,15 @@ export const Pokemons = (props) => {
   const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
-    getPokemons().then((data) => {
-      setPokemons(data);
-    });
-  }, []);
-
+    axios.get('https://picopalquelee.herokuapp.com/pokemons')
+    .then(res => {
+      console.log(res)
+      setPokemons(res.data.pokemons)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },[] )
 
     
   
@@ -72,9 +77,9 @@ export const Pokemons = (props) => {
             <Center>
               <Image
                 m="5"
-                src={pokemons.response.img}
-                alt={pokemons.response.name}
-                title={pokemons.response.name}
+                src={pokemons.img}
+                alt={pokemons.name}
+                title={pokemons.name}
                 borderRadius="md"
               />
             </Center>
@@ -88,7 +93,7 @@ export const Pokemons = (props) => {
               variant="solid"
               onClick={navigateSinglePokemon}
             >
-              {pokemons.response.name}
+              {pokemons.name}
             </Button>
             {/* ID BADGE  */}
             <Badge 
@@ -101,9 +106,9 @@ export const Pokemons = (props) => {
               px="3"
               mb="2"
             >
-              ID: {pokemons.response.id}
+              ID: {pokemons.id}
             </Badge>
-            <Flex w="100%" display="flex" direction="row">
+            {/* <Flex w="100%" display="flex" direction="row">
               {pokemons.type.map((type) => (
                 <Badge
                   borderRadius="md"
@@ -120,7 +125,7 @@ export const Pokemons = (props) => {
                   {type}
                 </Badge>
               ))}
-            </Flex>
+            </Flex> */}
           </Flex>
         </Stack>
       </Box>
