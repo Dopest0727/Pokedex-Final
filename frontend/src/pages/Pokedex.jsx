@@ -14,7 +14,7 @@ const Pokedex = () => {
     });
   }, []);
 
-  console.log(pokemon.pokemon);
+  console.log(pokemons.pokemon[3]);
 
   const [query, setQuery] = useState('')
   const h = useBreakpointValue({
@@ -36,7 +36,7 @@ const Pokedex = () => {
           />
 
           <Grid templateColumns={h} gap={5}>
-            {pokemon?.pokemon
+            {pokemons
               // .filter((pokemons) => {
               //   if (query === '') {
               //     return pokemons
@@ -46,8 +46,8 @@ const Pokedex = () => {
               // })
               .map((pokemon) => {
                 return (
-                  <Box key={pokemons.id}>
-                    <Pokemons key={pokemons.id} pokemon={pokemons} />
+                  <Box key={pokemons.pokemon.id}>
+                    <Pokemons key={pokemons.pokemon.id} pokemon={pokemons.pokemon} />
                   </Box>
                 )
               })}
