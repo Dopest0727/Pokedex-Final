@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import {
   Box,
@@ -10,7 +10,7 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import { getPokemons } from '../utils/utils';
+import { getPokemons } from '../utils/utils'
 
 export const Pokemons = (props) => {
   const backgrounds = {
@@ -37,26 +37,23 @@ export const Pokemons = (props) => {
     //TEAL CHECK
     Ice: 'teal.400', // 98d8d8
     //YELLOW CHECK
-    Electric: 'yellow.500', // f8d030  
+    Electric: 'yellow.500', // f8d030
   }
 
-
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState([])
 
   useEffect(() => {
-    axios.get('https://picopalquelee.herokuapp.com/pokemons')
-    .then(res => {
-      console.log(res)
-      setPokemons(res.data.pokemons)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  },[] )
+    axios
+      .get('https://picopalquelee.herokuapp.com/pokemons')
+      .then((res) => {
+        console.log(res)
+        setPokemons(res.data.pokemons)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
-    
-  
-    
   const navigate = useNavigate()
   const navigateSinglePokemon = () => {
     navigate('/singlepokemon')
@@ -64,7 +61,7 @@ export const Pokemons = (props) => {
 
   return (
     // POKEMON CONTAINER
-    <Box 
+    <Box
       w="xs"
       borderWidth="2px"
       borderColor="orange.200"
@@ -73,7 +70,9 @@ export const Pokemons = (props) => {
     >
       <Box>
         <Stack w="100%" display="flex" direction="column" alignItems="center">
-          <Box bgColor="orange.100" w="100%" borderRadius="md"> {/* IMAGE CONTAINER  */}
+          <Box bgColor="orange.100" w="100%" borderRadius="md">
+            {' '}
+            {/* IMAGE CONTAINER  */}
             <Center>
               <Image
                 m="5"
@@ -84,8 +83,8 @@ export const Pokemons = (props) => {
               />
             </Center>
           </Box>
-          <Flex w="100%" display="flex" direction="column" px="4" py="2"> 
-          <Button
+          <Flex w="100%" display="flex" direction="column" px="4" py="2">
+            <Button
               bgColor="orange.300"
               mb="2"
               w="100%"
@@ -96,7 +95,7 @@ export const Pokemons = (props) => {
               {pokemons.name}
             </Button>
             {/* ID BADGE  */}
-            <Badge 
+            <Badge
               borderRadius="md"
               w="100%"
               textAlign="left"
@@ -108,7 +107,8 @@ export const Pokemons = (props) => {
             >
               ID: {pokemons.id}
             </Badge>
-            {/* <Flex w="100%" display="flex" direction="row">
+
+            <Flex w="100%" display="flex" direction="row">
               {pokemons.type.map((type) => (
                 <Badge
                   borderRadius="md"
@@ -125,12 +125,10 @@ export const Pokemons = (props) => {
                   {type}
                 </Badge>
               ))}
-            </Flex> */}
+            </Flex>
           </Flex>
         </Stack>
       </Box>
     </Box>
   )
 }
-
-
