@@ -36,7 +36,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/contact" element={<Contact />}></Route>
             <Route path="/pokedex" element={<Pokedex />}></Route>
-            <Route path="/singlepokemon/" element={<SinglePokemon />}></Route>
+            <Route path="/pokemons/:num" element={<SinglePokemon />}></Route>
           </Routes>
         </BrowserRouter>
       </Provider>

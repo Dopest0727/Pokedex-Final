@@ -14,16 +14,16 @@ import {
 } from '@chakra-ui/react'
 
 import NavBar from '../components/NavBar'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Pokedex = () => {
   const [pokemons, setPokemons] = useState([])
-  
+
   useEffect(() => {
     axios
-      .get('https://picopalquelee.herokuapp.com/pokemons')
+      .get(`https://picopalquelee.herokuapp.com/pokemons`)
       .then((res) => {
-        //console.log(res)
+        console.log(res)
         setPokemons(res.data.pokemons)
       })
       .catch((err) => {
@@ -33,7 +33,7 @@ const Pokedex = () => {
 
   const backgrounds = {
     Normal: '#A8A878', // a8a878 //BLACKALPHA CHECK
-    Ground: '#E0C068', // e0c068 
+    Ground: '#E0C068', // e0c068
     Fighting: '#C02038', // c02038
     Poison: '#A040A0', // #A040A0 //PURPLR CHECK
     Flying: '#A890F0', // A890F0
@@ -49,11 +49,11 @@ const Pokedex = () => {
     Electric: '#F8D030', // #F8D030
   }
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
-  const navigateSinglePokemon = () => {
-    navigate('/singlepokemon')
-  }
+  // const navigateSinglePokemon = () => {
+  //   navigate(`/pokemons/${pokemon.num}`)
+  // }
 
   const [query, setQuery] = useState('')
 
@@ -77,13 +77,13 @@ const Pokedex = () => {
           />
           <Grid templateColumns={h} gap={5}>
             {pokemons
-              .filter((pokemons) => {
+              .filter((pokemon) => {
                 if (query === '') {
-                  return pokemons
+                  return pokemon
                 } else if (
-                  pokemons.name.toLowerCase().includes(query.toLowerCase())
+                  pokemon.name.toLowerCase().includes(query.toLowerCase())
                 ) {
-                  return pokemons
+                  return pokemon
                 }
               })
               .map((pokemon) => {
@@ -93,7 +93,7 @@ const Pokedex = () => {
                     borderWidth="2px"
                     borderColor="orange.200"
                     borderRadius="md"
-                    key={pokemons.id}
+                    key={pokemon.num}
                   >
                     <Box>
                       <Stack
@@ -112,21 +112,18 @@ const Pokedex = () => {
                             />
                           </Center>
                         </Box>
-                        <Flex
-                          px="2"
-                          w="100%"
-                          display="flex"
-                          direction="column"
-                        >
+                        <Flex px="2" w="100%" display="flex" direction="column">
                           <Button
                             bgColor="orange.300"
                             mb="2"
                             w="100%"
                             color="white"
                             variant="solid"
-                            onClick={navigateSinglePokemon}
+                            // onClick={navigateSinglePokemon}
                           >
-                            {pokemon.name}
+                            <Link to={`/pokemons/${pokemon.num}`}>
+                              {pokemon.name}
+                            </Link>
                           </Button>
                           <Badge
                             borderRadius="md"
@@ -140,12 +137,7 @@ const Pokedex = () => {
                             ID: {pokemon.id}
                           </Badge>
                         </Flex>
-                        <Flex
-                          w="100%"
-                          display="flex"
-                          direction="row"
-                          px="2"
-                        >
+                        <Flex w="100%" display="flex" direction="row" px="2">
                           {pokemon.type.map((type) => (
                             <Badge
                               borderRadius="md"

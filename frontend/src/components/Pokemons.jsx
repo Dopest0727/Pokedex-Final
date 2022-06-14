@@ -9,42 +9,32 @@ import {
   Center,
   Button,
 } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
-import { getPokemons } from '../utils/utils'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export const Pokemons = (props) => {
   const backgrounds = {
-    //BLACKALPHA CHECK
-    Normal: 'blackAlpha.400', // a8a878
-    Ground: 'blackAlpha.500', // e0c068
-    Fighting: 'blackAlpha.600', // c02038
-    //PURPLR CHECK
-    Poison: 'purple.300', // a040a0
-    Flying: 'purple.400', // a890f0
-    Ghost: 'purple.500', // 705898
-    Dragon: 'purple.300', // 7038f8
-    //PINK CHECK
-    Psychic: 'pink.300', // f85888
-    //GREEN CHECK
-    Grass: 'green.300', // 78c850
-    Bug: 'green.500', // a8b820
-    //GRAY CHECK
-    Rock: 'gray.500', // b8a038
-    //BLUE CHECK
-    Water: 'blue.500', // 6890f0
-    //RED CHECK
-    Fire: 'red.400', // f08030
-    //TEAL CHECK
-    Ice: 'teal.400', // 98d8d8
-    //YELLOW CHECK
-    Electric: 'yellow.500', // f8d030
+    Normal: '#A8A878', // a8a878 //BLACKALPHA CHECK
+    Ground: '#E0C068', // e0c068 
+    Fighting: '#C02038', // c02038
+    Poison: '#A040A0', // #A040A0 //PURPLR CHECK
+    Flying: '#A890F0', // A890F0
+    Ghost: '#705898', // #705898
+    Dragon: '#7038F8', // #7038F8
+    Psychic: '#F85888', // #F85888 //PINK CHECK
+    Grass: '#78C850', // #78C850 //GREEN CHECK
+    Bug: '#A8B820', // #A8B820 //GRAY CHECK
+    Rock: '#B8A038', // #B8A038  //BLUE CHECK
+    Water: '#6890F0', // #6890F0 //RED CHECK
+    Fire: '#F08030', // #F08030 //TEAL CHECK
+    Ice: '#98D8D8', // #98D8D8 //YELLOW CHECK
+    Electric: '#F8D030', // #F8D030
   }
 
-  const [pokemons, setPokemons] = useState([])
-
+  const [pokemon, setPokemons] = useState([]);
+  let params = useParams();
   useEffect(() => {
     axios
-      .get('https://picopalquelee.herokuapp.com/pokemons')
+      .get(`https://picopalquelee.herokuapp.com/pokemons`)
       .then((res) => {
         console.log(res)
         setPokemons(res.data.pokemons)
@@ -52,7 +42,7 @@ export const Pokemons = (props) => {
       .catch((err) => {
         console.log(err)
       })
-  }, [])
+  }, [params.search])
 
   const navigate = useNavigate()
   const navigateSinglePokemon = () => {
@@ -66,7 +56,7 @@ export const Pokemons = (props) => {
       borderWidth="2px"
       borderColor="orange.200"
       borderRadius="md"
-      key={pokemons.id}
+      key={pokemon.id}
     >
       <Box>
         <Stack w="100%" display="flex" direction="column" alignItems="center">
@@ -76,9 +66,9 @@ export const Pokemons = (props) => {
             <Center>
               <Image
                 m="5"
-                src={pokemons.img}
-                alt={pokemons.name}
-                title={pokemons.name}
+                src={pokemon.img}
+                alt={pokemon.name}
+                title={pokemon.name}
                 borderRadius="md"
               />
             </Center>
@@ -92,7 +82,7 @@ export const Pokemons = (props) => {
               variant="solid"
               onClick={navigateSinglePokemon}
             >
-              {pokemons.name}
+              {pokemon.name}
             </Button>
             {/* ID BADGE  */}
             <Badge
@@ -105,11 +95,11 @@ export const Pokemons = (props) => {
               px="3"
               mb="2"
             >
-              ID: {pokemons.id}
+              ID: {pokemon.id}
             </Badge>
 
             <Flex w="100%" display="flex" direction="row">
-              {pokemons.type.map((type) => (
+              {pokemon.type.map((type) => (
                 <Badge
                   borderRadius="md"
                   w="33%"

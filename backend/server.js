@@ -32,6 +32,16 @@ app.get('/pokemons', async (req, res) => {
   }
 })
 
+app.get('/pokemons/:num', async (req, res) => {
+  const { num } = req.params
+  try {
+    const singlePokemon = await Pokemon.findOne({ num: num })
+      res.status(200).json({ singlePokemon })
+  } catch (error) {
+    res.status(400).json({ error: 'Not found'})
+  }
+})
+
 app.get('/pokemons/name/:name', async (req, res) => {
   const { name } = req.params
 
@@ -56,28 +66,7 @@ app.get('/pokemons/name/:name', async (req, res) => {
   }
 })
 
-app.get('/pokemons/:id', async (req, res) => {
-  const { id } = req.params
-  try {
-    const singlePokemon = await Pokemon.findOne({ id: id })
-    if (singlePokemon) {
-      res.status(200).json({
-        response: singlePokemon,
-        success: true,
-      })
-    } else {
-      res.status(404).json({
-        response: 'No data found',
-        success: false,
-      })
-    }
-  } catch (error) {
-    res.status(400).json({
-      response: error,
-      success: false,
-    })
-  }
-})
+
 
 // USER
 
