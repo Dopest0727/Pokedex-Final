@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import {
   Grid,
@@ -7,6 +8,7 @@ import {
   useBreakpointValue,
   Button,
   Input,
+  Heading,
   Image,
   Stack,
   Badge,
@@ -14,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 
 import NavBar from '../components/NavBar'
-import { Link } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 const Pokedex = () => {
   const [pokemons, setPokemons] = useState([])
@@ -49,12 +51,6 @@ const Pokedex = () => {
     Electric: '#F8D030', // #F8D030
   }
 
-  // const navigate = useNavigate()
-
-  // const navigateSinglePokemon = () => {
-  //   navigate(`/pokemons/${pokemon.num}`)
-  // }
-
   const [query, setQuery] = useState('')
 
   const h = useBreakpointValue({
@@ -66,6 +62,22 @@ const Pokedex = () => {
   return (
     <Box>
       <NavBar />
+      {/* <Center>
+        <Box>
+          <Badge
+            borderRadius="md"
+            textAlign="center"
+            colorScheme="twitter"
+            py="3"
+            px="6"
+          >
+            <Heading fontSize="xl">
+              For more in depth info about a certain pokemon press the name of
+              said pokemon!
+            </Heading>
+          </Badge>
+        </Box>
+      </Center> */}
       <Center my="10">
         <Box>
           <Input
@@ -113,18 +125,18 @@ const Pokedex = () => {
                           </Center>
                         </Box>
                         <Flex px="2" w="100%" display="flex" direction="column">
-                          <Button
-                            bgColor="orange.300"
-                            mb="2"
-                            w="100%"
-                            color="white"
-                            variant="solid"
-                            // onClick={navigateSinglePokemon}
-                          >
-                            <Link to={`/pokemons/${pokemon.num}`}>
+                          <Link to={`/pokemons/${pokemon.num}`}>
+                            <Button
+                              bgColor="orange.300"
+                              mb="2"
+                              w="100%"
+                              color="white"
+                              variant="solid"
+                            >
                               {pokemon.name}
-                            </Link>
-                          </Button>
+                            </Button>
+                          </Link>
+
                           <Badge
                             borderRadius="md"
                             w="100%"
@@ -163,6 +175,7 @@ const Pokedex = () => {
           </Grid>
         </Box>
       </Center>
+      <Footer />
     </Box>
   )
 }

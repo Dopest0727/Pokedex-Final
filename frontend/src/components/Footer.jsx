@@ -3,7 +3,7 @@ import * as React from 'react'
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import Logo  from '../components/Logo'
 
-export const Footer = () => (
+const Footer = () => (
     <Flex wrap="wrap"
     w="100%" bgColor="blue.400" as="footer" role="contentinfo" py={{ base: '6', md: '8' }}>
        <Container>
@@ -33,3 +33,5 @@ export const Footer = () => (
     </Container> 
   </Flex>
 )
+
+export default Footer

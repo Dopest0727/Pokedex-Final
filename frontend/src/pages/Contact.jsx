@@ -19,13 +19,10 @@ const Contact = () => {
         <Box>
           <Heading>About Us</Heading>
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            On January 11th we embarced on this journey to become front end developers, almost 6 months later we can say that
+            we are well on our way. We still have lots to learn and not enough time to do it, 
+            with ever-changing technologies and a hunger for knowledge we decided to make this pokedex as it has a nostalgic
+            component. Who does not know Pikachu?
           </Text>
         </Box>
       </Container>

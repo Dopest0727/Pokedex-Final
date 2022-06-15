@@ -15,7 +15,7 @@ import {
 import React from 'react'
 import { FcNext } from 'react-icons/fc'
 import NavBar from '../components/NavBar'
-import {Footer} from '../components/Footer'
+import Footer from '../components/Footer'
 
 const Main = () => {
   const flex = useBreakpointValue({
