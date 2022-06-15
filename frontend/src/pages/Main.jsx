@@ -30,6 +30,7 @@ const Main = () => {
     }
   }, [authToken]);
 
+  console.log(authToken)
   const flex = useBreakpointValue({
     base: 'column',
     md: 'column',

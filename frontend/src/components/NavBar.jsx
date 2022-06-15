@@ -62,6 +62,7 @@ const MenuLinks = ({ isOpen }) => {
   const dispatch = useDispatch()
   const logout = () => {
     dispatch(authenticated.actions.logout())
+    localStorage.clear()
   }
   return (
     <Box

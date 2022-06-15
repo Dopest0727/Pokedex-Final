@@ -1,7 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import { createStore, combineReducers, compose } from '@reduxjs/toolkit'
+import persistState from "redux-localstorage";
 
 import { ChakraProvider } from '@chakra-ui/react'
 
@@ -16,12 +17,13 @@ import SinglePokemon from './pages/SinglePokemon'
 
 import { authenticated } from './reducers/auth'
 
+const enhancer = compose(persistState());
 
 const reducer = combineReducers({
   authenticated: authenticated.reducer,
-})
+});
 
-const store = configureStore({ reducer })
+const store = createStore(reducer, enhancer);
 
 const App = () => {
   return (
