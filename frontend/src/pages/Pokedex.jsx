@@ -8,7 +8,6 @@ import {
   useBreakpointValue,
   Button,
   Input,
-  Heading,
   Image,
   Stack,
   Badge,

@@ -12,7 +12,7 @@ import {
   ListIcon,
   List,
 } from '@chakra-ui/react'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { FcNext } from 'react-icons/fc'
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
