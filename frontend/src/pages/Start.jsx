@@ -10,7 +10,7 @@ import {
   Text,
   Badge,
   Stack,
-  Button
+  Button,
 } from '@chakra-ui/react'
 import pokebg from '../IMG/pokebg.jpg'
 

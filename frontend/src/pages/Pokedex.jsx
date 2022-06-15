@@ -20,7 +20,6 @@ import Footer from '../components/Footer'
 
 const Pokedex = () => {
   const [pokemons, setPokemons] = useState([])
-
   useEffect(() => {
     axios
       .get(`https://picopalquelee.herokuapp.com/pokemons`)

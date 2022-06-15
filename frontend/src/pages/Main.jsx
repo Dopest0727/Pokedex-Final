@@ -12,12 +12,24 @@ import {
   ListIcon,
   List,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FcNext } from 'react-icons/fc'
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 
 const Main = () => {
+  const authToken = useSelector((state) => state.authenticated.authToken);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!authToken) {
+      navigate("/");
+    }
+  }, [authToken]);
+
   const flex = useBreakpointValue({
     base: 'column',
     md: 'column',

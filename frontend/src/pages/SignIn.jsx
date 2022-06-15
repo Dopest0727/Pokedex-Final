@@ -48,6 +48,7 @@ const SignIn = () => {
       )
       const data = await response.json()
       if (data.success) {
+        console.log(data)
         batch(() => {
           dispatch(authenticated.actions.login(data.response))
           dispatch(authenticated.actions.setError(null))
@@ -80,6 +81,7 @@ const SignIn = () => {
           <FormControl isRequired>
             <Input
               mb="3"
+              id="username"
               //value={username}
               placeholder="Username"
               _placeholder={{ opacity: 1, color: 'blue.400' }}
@@ -88,6 +90,7 @@ const SignIn = () => {
               autoComplete="true"
             />
             <Input
+              id="password"
               //value={password}
               placeholder="Password"
               _placeholder={{ opacity: 1, color: 'blue.400' }}

@@ -11,7 +11,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  
+  caughtPokemon: {
+    type: Array,
+    initialState: [],
+  },
   accessToken: {
     type: String,
     default: () => crypto.randomBytes(128).toString("hex")

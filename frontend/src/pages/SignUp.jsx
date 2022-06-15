@@ -72,6 +72,7 @@ const Signup = () => {
           <Box py="4">
             <FormControl isRequired>
               <Input
+                id="username"
                 mb="3"
                 required={true}
                 placeholder="Username"
@@ -80,6 +81,7 @@ const Signup = () => {
                 autoComplete="true"
               />
               <Input
+                id="password"
                 mb="3"
                 type="password"
                 placeholder="Password"

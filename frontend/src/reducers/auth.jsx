@@ -13,6 +13,7 @@ export const authenticated = createSlice({
       state.authToken = action.payload.accessToken;
       state.username = action.payload.username;
       state.userId = action.payload.userId;
+      console.log(action.payload)
     },
     logout: (state, action) => {
       state.authToken = "";

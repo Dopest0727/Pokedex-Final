@@ -11,6 +11,26 @@ const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/pokedex-api'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+const authenticateUser = async (req, res, next) => {
+  const accessToken = req.header("Authorization");
+  try {
+    const user = await User.findOne({ accessToken: accessToken });
+    if (user) {
+      next();
+    } else {
+      res.status(401).json({
+        response: "Please log in",
+        success: false,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      response: error,
+      success: false,
+    });
+  }
+};
+
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -66,8 +86,14 @@ app.get('/pokemons/name/:name', async (req, res) => {
   }
 })
 
+// app.post('/caughtpokemon', async (req, res) => {
+//   const { userId, pokemonId } = req.body  
+//   try {
 
-
+//     const user = await User.findOne({ _id: userId })
+//     await user.caughpokemon.push(pokemonId).save()
+    
+//   }
 // USER
 
 app.post('/signup', async (req, res) => {
@@ -138,6 +164,18 @@ app.post('/signin', async (req, res) => {
     })
   }
 })
+
+
+app.get("/main", (req, res) => {
+  if (main) {
+    res.status(200).json({ success: true, response: main });
+  } else {
+    res.status(400).json({
+      response: "Not found",
+      success: false,
+    });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
