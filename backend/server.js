@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
   res.send(allEndpoints(app))
 })
 
-app.get("/users", authenticateUser);
+
 app.get("/users", async (req, res) => {
   const users = await User.find({})
   .sort({createdAt: 'desc'})
@@ -50,7 +50,7 @@ app.get("/users", async (req, res) => {
 
 //POKEMONS ENDPOINTS
 
-app.get('/pokemons', authenticateUser)
+
 app.get('/pokemons', async (req, res) => {
   try {
     const pokemons = await Pokemon.find({})
@@ -60,7 +60,7 @@ app.get('/pokemons', async (req, res) => {
   }
 })
 
-app.get('/pokemons/:num', authenticateUser)
+
 app.get('/pokemons/:num', async (req, res) => {
   const { num } = req.params
   try {
