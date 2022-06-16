@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Popup from 'reactjs-popup'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import {
@@ -8,17 +9,14 @@ import {
   useBreakpointValue,
   Button,
   Input,
+  Heading,
   Image,
   Stack,
   Badge,
   Flex,
 } from '@chakra-ui/react'
-
 import NavBar from '../components/NavBar'
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Footer from '../components/Footer'
-
 const Pokedex = () => {
   const [pokemons, setPokemons] = useState([])
   useEffect(() => {
@@ -32,16 +30,6 @@ const Pokedex = () => {
         console.log(err)
       })
   }, [])
-  const authToken = useSelector((state) => state.authenticated.authToken);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!authToken) {
-      navigate("/");
-    }
-  }, [authToken, navigate]);
-
-
   const backgrounds = {
     Normal: '#A8A878', // a8a878 //BLACKALPHA CHECK
     Ground: '#E0C068', // e0c068
@@ -59,15 +47,12 @@ const Pokedex = () => {
     Ice: '#98D8D8', // #98D8D8 //YELLOW CHECK
     Electric: '#F8D030', // #F8D030
   }
-
   const [query, setQuery] = useState('')
-
   const h = useBreakpointValue({
     base: 'repeat(1, 1fr)',
     md: 'repeat(2, 1fr)',
     lg: 'repeat(3, 1fr)',
   })
-
   return (
     <Box>
       <NavBar />
@@ -98,7 +83,6 @@ const Pokedex = () => {
           />
           <Grid templateColumns={h} gap={5}>
             {pokemons
-            // eslint-disable-next-line 
               .filter((pokemon) => {
                 if (query === '') {
                   return pokemon
@@ -134,7 +118,49 @@ const Pokedex = () => {
                             />
                           </Center>
                         </Box>
-                        <Flex px="2" w="100%" display="flex" direction="column">
+                        <Flex
+                          px="2"
+                          w="100%"
+                          display="flex"
+                          direction="column"
+                          blur='0.2'
+                          
+                        >
+                          <Popup
+                            trigger={
+                              <Button
+                                bgColor="orange.300"
+                                mb="2"
+                                w="100%"
+                                color="white"
+                                variant="solid"
+                              >
+                                {' '}
+                                Read more{' '}
+                              </Button>
+                            }
+                            modal
+                            nested
+                          >
+                            {(close) => (
+                              <Box>
+                                <Box
+                                  backgroundColor="white"
+                                  border="3px solid orange"
+                                >
+                                  <Button onClick={close}> X </Button>
+                                  <Image src={pokemon.img} />
+                                  <h1>Number: {pokemon.num}</h1>
+                                  <h1>Name: {pokemon.name}</h1>
+                                  <h1>Type: {pokemon.type}</h1>
+                                  <h1>Height: {pokemon.height}</h1>
+                                  <h1>Weight: {pokemon.weight}</h1>
+                                  <h1>Weaknesses: {pokemon.weaknesses}</h1>
+                                </Box>
+                                <div></div>
+                              </Box>
+                            )}
+                          </Popup>
                           <Link to={`/pokemons/${pokemon.num}`}>
                             <Button
                               bgColor="orange.300"
@@ -146,7 +172,6 @@ const Pokedex = () => {
                               {pokemon.name}
                             </Button>
                           </Link>
-
                           <Badge
                             borderRadius="md"
                             w="100%"
@@ -189,5 +214,4 @@ const Pokedex = () => {
     </Box>
   )
 }
-
 export default Pokedex
