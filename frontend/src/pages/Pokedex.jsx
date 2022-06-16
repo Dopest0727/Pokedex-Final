@@ -15,6 +15,8 @@ import {
 } from '@chakra-ui/react'
 
 import NavBar from '../components/NavBar'
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Footer from '../components/Footer'
 
 const Pokedex = () => {
@@ -30,7 +32,14 @@ const Pokedex = () => {
         console.log(err)
       })
   }, [])
+  const authToken = useSelector((state) => state.authenticated.authToken);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!authToken) {
+      navigate("/");
+    }
+  }, [authToken, navigate]);
 
 
   const backgrounds = {

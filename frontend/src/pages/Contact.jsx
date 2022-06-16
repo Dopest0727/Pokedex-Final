@@ -22,6 +22,7 @@ const Contact = () => {
       navigate("/");
     }
   }, [authToken, navigate]);
+  
   return (
     <div>
       <NavBar />
