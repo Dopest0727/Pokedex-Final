@@ -158,7 +158,7 @@ const Pokedex = () => {
                                   justifyContent="center"
                                 >
                                   <Button onClick={close}> X </Button>
-                                  <Image width="100%" src={pokemon.img} />
+                                  <Image width="100%" src={pokemon.img} alt={pokemon.name}/>
                                   <h1>Number: {pokemon.num}</h1>
                                   <h1>Name: {pokemon.name}</h1>
                                   <h1>Type: {pokemon.type}</h1>
