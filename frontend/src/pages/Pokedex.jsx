@@ -9,7 +9,6 @@ import {
   useBreakpointValue,
   Button,
   Input,
-  Heading,
   Image,
   Stack,
   Badge,
@@ -85,6 +84,7 @@ const Pokedex = () => {
           />
           <Grid templateColumns={h} gap={5}>
             {pokemons
+            // eslint-disable-next-line
               .filter((pokemon) => {
                 if (query === '') {
                   return pokemon
