@@ -63,7 +63,6 @@ const Pokedex = () => {
         <Box w="xs">
           <Badge
             borderRadius="md"
-            textAlign="center"
             colorScheme="twitter"
             py="3"
             px="6"
