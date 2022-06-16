@@ -57,6 +57,15 @@ const Pokedex = () => {
     Electric: '#F8D030', // #F8D030
   }
 
+<<<<<<< HEAD
+=======
+  const [query, setQuery] = useState('')
+  const h = useBreakpointValue({
+    base: 'repeat(1, 1fr)',
+    md: 'repeat(2, 1fr)',
+    lg: 'repeat(3, 1fr)',
+  })
+>>>>>>> 1b808260beee0adb9e8a5f5dae0ce0cad12181d6
   return (
     <Box>
       <NavBar />
@@ -104,7 +113,7 @@ const Pokedex = () => {
                     borderWidth="2px"
                     borderColor="orange.200"
                     borderRadius="md"
-                    key={pokemon.num}
+                    key={pokemon._id}
                   >
                     <Box>
                       <Stack
@@ -130,6 +139,10 @@ const Pokedex = () => {
                           direction="column"
                           blur="0.2"
                         >
+                          {/*    {pokemon.next_evolution.map((next_evolution) => (
+                            <></>
+                          ))} */}
+
                           <Popup
                             trigger={
                               <Button
@@ -139,8 +152,7 @@ const Pokedex = () => {
                                 color="white"
                                 variant="solid"
                               >
-                                {' '}
-                                Read more{' '}
+                                Read more
                               </Button>
                             }
                             modal
@@ -162,8 +174,8 @@ const Pokedex = () => {
                                   <h1>Height: {pokemon.height}</h1>
                                   <h1>Weight: {pokemon.weight}</h1>
                                   <h1>Weaknesses: {pokemon.weaknesses}</h1>
+                                  <h1></h1>
                                 </Box>
-                                <div></div>
                               </Box>
                             )}
                           </Popup>
@@ -216,8 +228,10 @@ const Pokedex = () => {
           </Grid>
         </Box>
       </Center>
+
       <Footer />
     </Box>
   )
 }
+
 export default Pokedex
