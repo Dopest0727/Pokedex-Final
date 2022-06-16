@@ -12,8 +12,13 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   caughtPokemon: {
-    type: Array,
-    initialState: [],
+    type: mongoose.Schema.Types.ObjectId, 
+    default: [],
+    ref: 'Pokemon'
+  },
+  createdAt: {
+    type: Date,
+    default: () => new Date()
   },
   accessToken: {
     type: String,

@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react'
 
 import { authenticated } from '../reducers/auth'
+import LoadingSpinner from '../components/LoadinSpinner'
 import pokebg from '../IMG/pokebg.jpg'
 
 const SignIn = () => {
@@ -25,6 +26,7 @@ const SignIn = () => {
   const [error, setError] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const Loading = useSelector((store) => store.authenticated.loading)
 
   const authToken = useSelector((state) => state.authenticated.authToken)
 
@@ -38,7 +40,7 @@ const SignIn = () => {
     if (authToken) {
       navigate('/main')
     }
-  }, [authToken])
+  }, [authToken, navigate])
 
   const userLogin = async (options) => {
     try {
@@ -68,6 +70,10 @@ const SignIn = () => {
   }
 
   return (
+    <>
+    {Loading ? 
+        <LoadingSpinner />
+      : 
     <Container centerContent my="10%">
       <Box
         maxW="xl"
@@ -82,7 +88,6 @@ const SignIn = () => {
             <Input
               mb="3"
               id="username"
-              //value={username}
               placeholder="Username"
               _placeholder={{ opacity: 1, color: 'blue.400' }}
               required={true}
@@ -91,7 +96,6 @@ const SignIn = () => {
             />
             <Input
               id="password"
-              //value={password}
               placeholder="Password"
               _placeholder={{ opacity: 1, color: 'blue.400' }}
               type="password"
@@ -145,6 +149,8 @@ const SignIn = () => {
         </Box>
       </Box>
     </Container>
+    }
+    </>
   )
 }
 

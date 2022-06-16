@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { authenticated } from '../reducers/auth'
 import {
   Container,
@@ -16,10 +16,13 @@ import {
   ButtonGroup,
   Stack,
 } from '@chakra-ui/react'
+
 import pokebg from '../IMG/pokebg.jpg'
+import LoadingSpinner from '../components/LoadinSpinner'
 
 const Signup = () => {
   const navigate = useNavigate()
+  const Loading = useSelector((store) => store.authenticated.loading)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -60,72 +63,76 @@ const Signup = () => {
 
   return (
     <>
-      <Container centerContent my="10%">
-        <Box
-          maxW="xl"
-          p="8"
-          borderWidth="2px"
-          borderColor="blue.400"
-          borderRadius="md"
-        >
-          <Image borderRadius="md" src={pokebg} alt={pokecard.imageAlt} />
-          <Box py="4">
-            <FormControl isRequired>
-              <Input
-                id="username"
-                mb="3"
-                required={true}
-                placeholder="Username"
-                _placeholder={{ opacity: 1, color: 'blue.400' }}
-                onChange={(event) => setUsername(event.target.value)}
-                autoComplete="true"
-              />
-              <Input
-                id="password"
-                mb="3"
-                type="password"
-                placeholder="Password"
-                _placeholder={{ opacity: 1, color: 'blue.400' }}
-                required={true}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </FormControl>
+      {Loading ? (
+        <LoadingSpinner />
+      ) : (
+        <Container centerContent my="10%">
+          <Box
+            maxW="xl"
+            p="8"
+            borderWidth="2px"
+            borderColor="blue.400"
+            borderRadius="md"
+          >
+            <Image borderRadius="md" src={pokebg} alt={pokecard.imageAlt} />
+            <Box py="4">
+              <FormControl isRequired>
+                <Input
+                  id="username"
+                  mb="3"
+                  required={true}
+                  placeholder="Username"
+                  _placeholder={{ opacity: 1, color: 'blue.400' }}
+                  onChange={(event) => setUsername(event.target.value)}
+                  autoComplete="true"
+                />
+                <Input
+                  id="password"
+                  mb="3"
+                  type="password"
+                  placeholder="Password"
+                  _placeholder={{ opacity: 1, color: 'blue.400' }}
+                  required={true}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </FormControl>
+            </Box>
+            <Box>
+              {error.length > 0 && (
+                <Alert status="info">
+                  <AlertIcon />
+                  <AlertTitle>Error</AlertTitle>
+                  {error}
+                </Alert>
+              )}
+            </Box>
+            <Box pt="4">
+              <Stack
+                w="100%"
+                display="flex"
+                direction="row"
+                spacing={4}
+                alignItems="center"
+              >
+                <Flex w="100%">
+                  <ButtonGroup w="100%" colorScheme="twitter" spacing="1">
+                    <Button w="100%" variant="solid" onClick={signUp}>
+                      Sign Up
+                    </Button>
+                    <Button
+                      w="100%"
+                      variant="outline"
+                      onClick={() => navigate('/')}
+                    >
+                      Go Back
+                    </Button>
+                  </ButtonGroup>
+                </Flex>
+              </Stack>
+            </Box>
           </Box>
-          <Box>
-            {error.length > 0 && (
-              <Alert status="info">
-                <AlertIcon />
-                <AlertTitle>Error</AlertTitle>
-                {error}
-              </Alert>
-            )}
-          </Box>
-          <Box pt="4">
-            <Stack
-              w="100%"
-              display="flex"
-              direction="row"
-              spacing={4}
-              alignItems="center"
-            >
-              <Flex w="100%">
-                <ButtonGroup w="100%" colorScheme="twitter" spacing="1">
-                  <Button w="100%" variant="solid" onClick={signUp}>
-                    Sign Up
-                  </Button>
-                  <Button
-                    w="100%"
-                    variant="outline"
-                    onClick={() => navigate('/')}
-                  >
-                    Go Back
-                  </Button>
-                </ButtonGroup>
-              </Flex>
-            </Stack>
-          </Box>
-        </Box>
-      </Container>
+        </Container>
+      )}
     </>
   )
 }

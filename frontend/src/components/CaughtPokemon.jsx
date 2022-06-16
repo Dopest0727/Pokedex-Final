@@ -12,7 +12,6 @@ export const CaughtPokemons = () => {
       {caughtpokemon.map((pokemon) => {
         return (
           <Box key={pokemon.id}>
-            <h1>Hello {username}!</h1>
             <p>Display all the pokemon user has cought,</p>
             <Image
               m="5"

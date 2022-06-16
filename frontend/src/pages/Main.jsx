@@ -28,7 +28,7 @@ const Main = () => {
     if (!authToken) {
       navigate("/");
     }
-  }, [authToken]);
+  }, [authToken, navigate]);
 
   console.log(authToken)
   const flex = useBreakpointValue({

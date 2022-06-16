@@ -41,8 +41,16 @@ app.get('/', (req, res) => {
   res.send(allEndpoints(app))
 })
 
-//POKEMONS
+app.get("/users", authenticateUser);
+app.get("/users", async (req, res) => {
+  const users = await User.find({})
+  .sort({createdAt: 'desc'})
+  res.status(201).json(users)
+});
 
+//POKEMONS ENDPOINTS
+
+app.get('/pokemons', authenticateUser)
 app.get('/pokemons', async (req, res) => {
   try {
     const pokemons = await Pokemon.find({})
@@ -52,6 +60,7 @@ app.get('/pokemons', async (req, res) => {
   }
 })
 
+app.get('/pokemons/:num', authenticateUser)
 app.get('/pokemons/:num', async (req, res) => {
   const { num } = req.params
   try {
@@ -86,6 +95,9 @@ app.get('/pokemons/name/:name', async (req, res) => {
   }
 })
 
+
+
+//USER ENDPOINTS
 // app.post('/caughtpokemon', async (req, res) => {
 //   const { userId, pokemonId } = req.body  
 //   try {
@@ -165,7 +177,6 @@ app.post('/signin', async (req, res) => {
   }
 })
 
-
 app.get("/main", (req, res) => {
   if (main) {
     res.status(200).json({ success: true, response: main });
@@ -176,7 +187,6 @@ app.get("/main", (req, res) => {
     });
   }
 });
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)

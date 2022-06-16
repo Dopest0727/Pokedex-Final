@@ -31,6 +31,8 @@ const Pokedex = () => {
       })
   }, [])
 
+
+
   const backgrounds = {
     Normal: '#A8A878', // a8a878 //BLACKALPHA CHECK
     Ground: '#E0C068', // e0c068
@@ -87,6 +89,7 @@ const Pokedex = () => {
           />
           <Grid templateColumns={h} gap={5}>
             {pokemons
+            // eslint-disable-next-line 
               .filter((pokemon) => {
                 if (query === '') {
                   return pokemon
