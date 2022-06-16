@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Image } from '@chakra-ui/react'
-import { useSelector } from 'react-redux'
+
 
 import pokemons from '../data/pokemons.json'
 

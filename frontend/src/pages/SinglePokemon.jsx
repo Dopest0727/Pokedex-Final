@@ -4,7 +4,6 @@ import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
 const SinglePokemon = () => {
-// eslint-disable-next-line
   const { num } = useParams()
   const [singlePokemon, setSingelPokemon] = useState([])
   useEffect(() => {
@@ -20,7 +19,7 @@ const SinglePokemon = () => {
       }
     }
     fetch()
-  }, [])
+  }, [num])
 
   return (
     <article>
