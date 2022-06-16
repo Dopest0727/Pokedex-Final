@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import axios from 'axios'
 import {
@@ -10,7 +9,9 @@ import {
   Button,
   Input,
   Image,
+  Heading,
   Stack,
+  Text,
   Badge,
   Flex,
 } from '@chakra-ui/react'
@@ -24,11 +25,9 @@ const Pokedex = () => {
     axios
       .get(`https://picopalquelee.herokuapp.com/pokemons`)
       .then((res) => {
-        //console.log(res)
         setPokemons(res.data.pokemons)
       })
       .catch((err) => {
-        //console.log(err)
       })
   }, [])
 
@@ -60,28 +59,29 @@ const Pokedex = () => {
   return (
     <Box>
       <NavBar />
-      {/* <Center>
-        <Box>
+      <Center>
+        <Box w="xs">
           <Badge
             borderRadius="md"
             textAlign="center"
             colorScheme="twitter"
             py="3"
             px="6"
+            w="100%"
+            textAlign="left"
           >
-            <Heading fontSize="xl">
-              For more in depth info about a certain pokemon press the name of
-              said pokemon!
+            <Heading fontSize="md">
+              For more in depth info about <br /> a certain pokemon press <br /> the read more button!
             </Heading>
           </Badge>
         </Box>
-      </Center> */}
-      <Center my="10">
+      </Center>
+      <Center mb="10">
         <Box>
           <Input
             my="5"
             borderWidth="2px"
-            borderColor="orange.200"
+            borderColor="blue.200"
             placeholder="Search for your favorite pokemon!"
             onChange={(event) => setQuery(event.target.value)}
           />
@@ -102,8 +102,8 @@ const Pokedex = () => {
                   <Box
                     w="xs"
                     borderWidth="2px"
-                    borderColor="orange.200"
-                    borderRadius="md"
+                    borderColor="blue.200"
+                    borderRadius="lg"
                     key={pokemon._id}
                   >
                     <Box>
@@ -113,7 +113,7 @@ const Pokedex = () => {
                         direction="column"
                         alignItems="center"
                       >
-                        <Box bgColor="orange.100" w="100%" borderRadius="md">
+                        <Box bgColor="blue.100" w="100%" borderRadius="md">
                           <Center>
                             <Image
                               m="5"
@@ -123,25 +123,31 @@ const Pokedex = () => {
                             />
                           </Center>
                         </Box>
-                        <Flex
-                          px="2"
-                          w="100%"
-                          display="flex"
-                          direction="column"
-                          blur="0.2"
-                        >
-                          {/*    {pokemon.next_evolution.map((next_evolution) => (
-                            <></>
-                          ))} */}
-
+                        <Flex px="2" w="100%" display="flex" direction="column">
+                          <Badge
+                            bgColor="blue.300"
+                            mb="2"
+                            w="100%"
+                            color="white"
+                            variant="solid"
+                            borderRadius="md"
+                            textAlign="center"
+                            py="3"
+                            px="3"
+                          >
+                            {pokemon.name}
+                          </Badge>
                           <Popup
                             trigger={
                               <Button
-                                bgColor="orange.300"
-                                mb="2"
+                                bgColor="blue.300"
                                 w="100%"
                                 color="white"
                                 variant="solid"
+                                _hover={{
+                                  background: 'blue.500',
+                                  color: 'white',
+                                }}
                               >
                                 Read more
                               </Button>
@@ -152,58 +158,52 @@ const Pokedex = () => {
                             {(close) => (
                               <Box>
                                 <Box
-                                  backgroundColor="white"
-                                  border="3px solid orange"
-                                  padding="30px"
+                                  w="md"
+                                  bgColor="orange.200"
+                                  borderRadius="lg"
+                                  borderWidth="2px"
+                                  borderColor="orange.200"
+                                  p="10"
                                   justifyContent="center"
                                 >
+                                  <Center>
+                                    <Image
+                                      width="50%"
+                                      src={pokemon.img}
+                                      alt={pokemon.name}
+                                    />
+                                  </Center>
+                                  <Flex direction="row" w="100%">
+                                    <Badge>Number:</Badge>
+                                    <Text>{pokemon.num}</Text>
+                                  </Flex>
+
+                                  <Badge>Name: {pokemon.name}</Badge>
+                                  <Badge>
+                                    Type: {pokemon.type[0]} {pokemon.type[1]}
+                                  </Badge>
+                                  <Badge>Height: {pokemon.height}</Badge>
+                                  <Badge>Weight: {pokemon.weight}</Badge>
+                                  <Badge>
+                                    Weaknesses: {pokemon.weaknesses}
+                                  </Badge>
+
                                   <Button onClick={close}> X </Button>
-                                  <Image width="100%" src={pokemon.img} alt={pokemon.name}/>
-                                  <h1>Number: {pokemon.num}</h1>
-                                  <h1>Name: {pokemon.name}</h1>
-                                  <h1>Type: {pokemon.type}</h1>
-                                  <h1>Height: {pokemon.height}</h1>
-                                  <h1>Weight: {pokemon.weight}</h1>
-                                  <h1>Weaknesses: {pokemon.weaknesses}</h1>
-                                
                                 </Box>
                               </Box>
                             )}
                           </Popup>
-                          <Link to={`/pokemons/${pokemon.num}`}>
-                            <Button
-                              bgColor="orange.300"
-                              mb="2"
-                              w="100%"
-                              color="white"
-                              variant="solid"
-                            >
-                              {pokemon.name}
-                            </Button>
-                          </Link>
-                          <Badge
-                            borderRadius="md"
-                            w="100%"
-                            textAlign="left"
-                            bgColor="blue.300"
-                            color="white"
-                            py="2"
-                            px="3"
-                          >
-                            ID: {pokemon.id}
-                          </Badge>
                         </Flex>
                         <Flex w="100%" display="flex" direction="row" px="2">
                           {pokemon.type.map((type) => (
                             <Badge
                               borderRadius="md"
-                              w="33%"
+                              w="100%"
                               textAlign="center"
                               color="white"
-                              py="2"
+                              py="3"
                               px="3"
                               mb="2"
-                              mr="1"
                               bgColor={backgrounds[type]}
                               key={type}
                             >
@@ -219,7 +219,6 @@ const Pokedex = () => {
           </Grid>
         </Box>
       </Center>
-
       <Footer />
     </Box>
   )
