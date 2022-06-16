@@ -7,13 +7,16 @@ import {
   LinkBox,
   LinkOverlay,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect }  from 'react'
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import NavBar from '../components/NavBar'
 import { FaGithubSquare, FaLinkedin, FaStackOverflow } from 'react-icons/fa'
 
 const Contact = () => {
   const authToken = useSelector((state) => state.authenticated.authToken);
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!authToken) {
       navigate("/");
