@@ -4,9 +4,10 @@ import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
 const SinglePokemon = () => {
-  const { num } = useParams()
+  
   const [singlePokemon, setSingelPokemon] = useState([])
   useEffect(() => {
+    const { num } = useParams()
     const fetch = async () => {
       try {
         const { data } = await axios.get(

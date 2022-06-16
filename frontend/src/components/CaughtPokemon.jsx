@@ -6,7 +6,6 @@ import pokemons from '../data/pokemons.json'
 
 export const CaughtPokemons = () => {
   const caughtpokemon = pokemons.pokemon
-  const username = useSelector(store => store.authenticated.username)
   return (
     <>
       {caughtpokemon.map((pokemon) => {
