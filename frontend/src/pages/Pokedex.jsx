@@ -15,6 +15,7 @@ import {
   Badge,
   Flex,
 } from '@chakra-ui/react'
+
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 const Pokedex = () => {
@@ -47,6 +48,7 @@ const Pokedex = () => {
     Ice: '#98D8D8', // #98D8D8 //YELLOW CHECK
     Electric: '#F8D030', // #F8D030
   }
+
   const [query, setQuery] = useState('')
   const h = useBreakpointValue({
     base: 'repeat(1, 1fr)',
@@ -99,7 +101,7 @@ const Pokedex = () => {
                     borderWidth="2px"
                     borderColor="orange.200"
                     borderRadius="md"
-                    key={pokemon.num}
+                    key={pokemon._id}
                   >
                     <Box>
                       <Stack
@@ -125,6 +127,10 @@ const Pokedex = () => {
                           direction="column"
                           blur="0.2"
                         >
+                          {/*    {pokemon.next_evolution.map((next_evolution) => (
+                            <></>
+                          ))} */}
+
                           <Popup
                             trigger={
                               <Button
@@ -134,8 +140,7 @@ const Pokedex = () => {
                                 color="white"
                                 variant="solid"
                               >
-                                {' '}
-                                Read more{' '}
+                                Read more
                               </Button>
                             }
                             modal
@@ -150,18 +155,15 @@ const Pokedex = () => {
                                   justifyContent="center"
                                 >
                                   <Button onClick={close}> X </Button>
-                                  <Image 
-                                  width="100%" 
-                                  src={pokemon.img} 
-                                  />
+                                  <Image width="100%" src={pokemon.img} />
                                   <h1>Number: {pokemon.num}</h1>
                                   <h1>Name: {pokemon.name}</h1>
                                   <h1>Type: {pokemon.type}</h1>
                                   <h1>Height: {pokemon.height}</h1>
                                   <h1>Weight: {pokemon.weight}</h1>
                                   <h1>Weaknesses: {pokemon.weaknesses}</h1>
+                                  <h1></h1>
                                 </Box>
-                                <div></div>
                               </Box>
                             )}
                           </Popup>
@@ -214,8 +216,10 @@ const Pokedex = () => {
           </Grid>
         </Box>
       </Center>
+
       <Footer />
     </Box>
   )
 }
+
 export default Pokedex

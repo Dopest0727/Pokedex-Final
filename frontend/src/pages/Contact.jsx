@@ -9,6 +9,7 @@ import {
   Image,
 } from '@chakra-ui/react'
 import React from 'react'
+import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import { FaGithubSquare, FaLinkedin, FaStackOverflow } from 'react-icons/fa'
 const Contact = () => {
@@ -28,7 +29,7 @@ const Contact = () => {
           </Text>
         </Box>
       </Container>
-      <Container>
+      <Container paddingBottom='25%'>
         <Heading>Contact</Heading>
         <Flex direction="row" width="100%" textAlign="center" gap="10%">
           <Box
@@ -113,6 +114,7 @@ const Contact = () => {
           </Box>
         </Flex>
       </Container>
+      <Footer />
     </div>
   )
 }

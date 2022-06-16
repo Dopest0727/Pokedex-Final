@@ -40,7 +40,7 @@ const Main = () => {
   return (
     <div>
       <NavBar />
-      <Flex direction={flex}>
+      <Flex direction={flex} >
         <Container >
           <Box maxW="xl" py="0">
             <Box>
