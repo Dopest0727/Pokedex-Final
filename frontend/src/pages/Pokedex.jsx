@@ -165,7 +165,7 @@ const Pokedex = () => {
                                   <h1>Height: {pokemon.height}</h1>
                                   <h1>Weight: {pokemon.weight}</h1>
                                   <h1>Weaknesses: {pokemon.weaknesses}</h1>
-                                  <h1></h1>
+                                
                                 </Box>
                               </Box>
                             )}
