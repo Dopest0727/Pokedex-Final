@@ -10,12 +10,6 @@ import {
   LinkOverlay,
   Image,
 } from '@chakra-ui/react'
-<<<<<<< HEAD
-
-=======
-import React from 'react'
-import Footer from '../components/Footer'
->>>>>>> 1b808260beee0adb9e8a5f5dae0ce0cad12181d6
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 
@@ -91,6 +85,7 @@ const Contact = () => {
               alt="Rijad"
               width="100%"
               height="auto"
+              filter="grayscale(100%)"
             />
             <Box paddingTop="10%" paddingBottom="10%">
               <Text> alternativt att vi skriver lite text om oss själva </Text>
@@ -122,11 +117,7 @@ const Contact = () => {
         </Flex>
       </Container>
       <Footer />
-<<<<<<< HEAD
     </>
-=======
-    </div>
->>>>>>> 1b808260beee0adb9e8a5f5dae0ce0cad12181d6
   )
 }
 export default Contact

@@ -38,13 +38,8 @@ const Main = () => {
   return (
     <>
       <NavBar />
-<<<<<<< HEAD
       <Flex direction={flex}>
         <Container>
-=======
-      <Flex direction={flex} >
-        <Container >
->>>>>>> 1b808260beee0adb9e8a5f5dae0ce0cad12181d6
           <Box maxW="xl" py="0">
             <Box>
               <Badge

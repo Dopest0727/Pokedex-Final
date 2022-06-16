@@ -57,15 +57,6 @@ const Pokedex = () => {
     Electric: '#F8D030', // #F8D030
   }
 
-<<<<<<< HEAD
-=======
-  const [query, setQuery] = useState('')
-  const h = useBreakpointValue({
-    base: 'repeat(1, 1fr)',
-    md: 'repeat(2, 1fr)',
-    lg: 'repeat(3, 1fr)',
-  })
->>>>>>> 1b808260beee0adb9e8a5f5dae0ce0cad12181d6
   return (
     <Box>
       <NavBar />
