@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { authenticated } from '../reducers/auth'
 import {
   Container,
   Input,
@@ -18,15 +17,16 @@ import {
 } from '@chakra-ui/react'
 
 import pokebg from '../IMG/pokebg.jpg'
+import { authenticated } from '../reducers/auth'
 import LoadingSpinner from '../components/LoadinSpinner'
 
 const Signup = () => {
-  const navigate = useNavigate()
   const Loading = useSelector((store) => store.authenticated.loading)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const pokecard = {
     imageAlt: 'Picture of Pokeball',

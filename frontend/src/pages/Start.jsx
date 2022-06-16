@@ -12,6 +12,7 @@ import {
   Stack,
   Button,
 } from '@chakra-ui/react'
+
 import pokebg from '../IMG/pokebg.jpg'
 
 const Start = () => {

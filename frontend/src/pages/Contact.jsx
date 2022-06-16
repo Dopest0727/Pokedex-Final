@@ -1,3 +1,5 @@
+import React from 'react'
+import { FaGithubSquare, FaLinkedin, FaStackOverflow } from 'react-icons/fa'
 import {
   Heading,
   Box,
@@ -8,12 +10,13 @@ import {
   LinkOverlay,
   Image,
 } from '@chakra-ui/react'
-import React from 'react'
+
 import NavBar from '../components/NavBar'
-import { FaGithubSquare, FaLinkedin, FaStackOverflow } from 'react-icons/fa'
+import Footer from '../components/Footer'
+
 const Contact = () => {
   return (
-    <div>
+    <>
       <NavBar />
       <Container>
         <Box>
@@ -113,7 +116,8 @@ const Contact = () => {
           </Box>
         </Flex>
       </Container>
-    </div>
+      <Footer />
+    </>
   )
 }
 export default Contact

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Popup from 'reactjs-popup'
 import { Link } from 'react-router-dom'
+import Popup from 'reactjs-popup'
 import axios from 'axios'
 import {
   Grid,
@@ -14,21 +14,31 @@ import {
   Badge,
   Flex,
 } from '@chakra-ui/react'
+
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
+
 const Pokedex = () => {
   const [pokemons, setPokemons] = useState([])
   useEffect(() => {
     axios
       .get(`https://picopalquelee.herokuapp.com/pokemons`)
       .then((res) => {
-        console.log(res)
+        //console.log(res)
         setPokemons(res.data.pokemons)
       })
       .catch((err) => {
-        console.log(err)
+        //console.log(err)
       })
   }, [])
+
+  const [query, setQuery] = useState('')
+  const h = useBreakpointValue({
+    base: 'repeat(1, 1fr)',
+    md: 'repeat(2, 1fr)',
+    lg: 'repeat(3, 1fr)',
+  })
+
   const backgrounds = {
     Normal: '#A8A878', // a8a878 //BLACKALPHA CHECK
     Ground: '#E0C068', // e0c068
@@ -46,12 +56,7 @@ const Pokedex = () => {
     Ice: '#98D8D8', // #98D8D8 //YELLOW CHECK
     Electric: '#F8D030', // #F8D030
   }
-  const [query, setQuery] = useState('')
-  const h = useBreakpointValue({
-    base: 'repeat(1, 1fr)',
-    md: 'repeat(2, 1fr)',
-    lg: 'repeat(3, 1fr)',
-  })
+
   return (
     <Box>
       <NavBar />
@@ -82,7 +87,7 @@ const Pokedex = () => {
           />
           <Grid templateColumns={h} gap={5}>
             {pokemons
-            // eslint-disable-next-line
+              // eslint-disable-next-line
               .filter((pokemon) => {
                 if (query === '') {
                   return pokemon
@@ -150,10 +155,7 @@ const Pokedex = () => {
                                   justifyContent="center"
                                 >
                                   <Button onClick={close}> X </Button>
-                                  <Image 
-                                  width="100%" 
-                                  src={pokemon.img} 
-                                  />
+                                  <Image width="100%" src={pokemon.img} />
                                   <h1>Number: {pokemon.num}</h1>
                                   <h1>Name: {pokemon.name}</h1>
                                   <h1>Type: {pokemon.type}</h1>

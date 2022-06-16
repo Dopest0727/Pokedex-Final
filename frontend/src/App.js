@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, compose } from '@reduxjs/toolkit'
 import persistState from "redux-localstorage";
-
 import { ChakraProvider } from '@chakra-ui/react'
 
 import SignIn from './pages/SignIn'
@@ -18,11 +17,9 @@ import SinglePokemon from './pages/SinglePokemon'
 import { authenticated } from './reducers/auth'
 
 const enhancer = compose(persistState());
-
 const reducer = combineReducers({
   authenticated: authenticated.reducer,
 });
-
 const store = createStore(reducer, enhancer);
 
 const App = () => {
@@ -50,10 +47,3 @@ export default App
 
 //Qb lbh ernyyl unir abguvat orggre gb qb guna or ybbxvat ng bguref ercbf. Fnq.
 //Lbh fubhyq abg or urer, areq.
-
-
-/* import { AnimationLoader } from './components/AnimationLoader'
-import { loading } from './reducers/loading'
- */
-
-   /* loading: loading.reducer, */

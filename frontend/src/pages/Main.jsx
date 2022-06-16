@@ -1,3 +1,7 @@
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { FcNext } from 'react-icons/fc'
 import {
   Heading,
   Box,
@@ -12,36 +16,30 @@ import {
   ListIcon,
   List,
 } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
-import { FcNext } from 'react-icons/fc'
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 
 const Main = () => {
-  const authToken = useSelector((state) => state.authenticated.authToken);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!authToken) {
-      navigate("/");
-    }
-  }, [authToken, navigate]);
-
-  console.log(authToken)
+  const authToken = useSelector((state) => state.authenticated.authToken)
+  const navigate = useNavigate()
   const flex = useBreakpointValue({
     base: 'column',
     md: 'column',
     lg: 'column',
   })
 
+  useEffect(() => {
+    if (!authToken) {
+      navigate('/')
+    }
+  }, [authToken, navigate])
+
   return (
-    <div>
+    <>
       <NavBar />
       <Flex direction={flex}>
-        <Container >
+        <Container>
           <Box maxW="xl" py="0">
             <Box>
               <Badge
@@ -53,7 +51,7 @@ const Main = () => {
                 px="6"
                 mb="2"
               >
-                <Heading fontSize='xl'>
+                <Heading fontSize="xl">
                   Welcome to our Pokedex! <br />
                   username
                 </Heading>
@@ -83,85 +81,114 @@ const Main = () => {
             </Box>
           </Box>
         </Container>
-        <Container >
+        <Container>
           <Box maxW="xl" py="5">
-          <Badge
-                w="100%"
-                textAlign="left"
-                bgColor="white"
-                color="blue.400"
-                py="2"
-                my="2"
-              >
-          <Text fontSize='lg'>
-            In this Pokedex you have access <br />to the following features!
-          </Text>
-          </Badge>
-          <List spacing={5} mt="3" mb="5">
-            <ListItem>
-              <ListIcon as={FcNext} />
-              <Badge py="1" px="3" mr="2" bgColor="blue.400" color="white" borderRadius="xl">Pokedex</Badge>
-                Where you can see all the available pokemons and pich the
-              ones you have caught.
-            </ListItem>
-            <ListItem>
-              <ListIcon as={FcNext} />
-              <Badge py="1" px="3" mr="2" bgColor="blue.400" color="white" borderRadius="xl">Profile</Badge>
-               Where you can see all the pokemons you,ve caught and
-              display your user information.
-            </ListItem>
-            <ListItem>
-              <ListIcon as={FcNext} />
-              <Badge py="1" px="3" mr="2" bgColor="blue.400" color="white" borderRadius="xl"> About Us</Badge>
-              A page about the creator of the app and how to contact
-              us.
-            </ListItem>
-          </List>
+            <Badge
+              w="100%"
+              textAlign="left"
+              bgColor="white"
+              color="blue.400"
+              py="2"
+              my="2"
+            >
+              <Text fontSize="lg">
+                In this Pokedex you have access <br />
+                to the following features!
+              </Text>
+            </Badge>
+            <List spacing={5} mt="3" mb="5">
+              <ListItem>
+                <ListIcon as={FcNext} />
+                <Badge
+                  py="1"
+                  px="3"
+                  mr="2"
+                  bgColor="blue.400"
+                  color="white"
+                  borderRadius="xl"
+                >
+                  Pokedex
+                </Badge>
+                Where you can see all the available pokemons and pich the ones
+                you have caught.
+              </ListItem>
+              <ListItem>
+                <ListIcon as={FcNext} />
+                <Badge
+                  py="1"
+                  px="3"
+                  mr="2"
+                  bgColor="blue.400"
+                  color="white"
+                  borderRadius="xl"
+                >
+                  Profile
+                </Badge>
+                Where you can see all the pokemons you,ve caught and display
+                your user information.
+              </ListItem>
+              <ListItem>
+                <ListIcon as={FcNext} />
+                <Badge
+                  py="1"
+                  px="3"
+                  mr="2"
+                  bgColor="blue.400"
+                  color="white"
+                  borderRadius="xl"
+                >
+                  {' '}
+                  About Us
+                </Badge>
+                A page about the creator of the app and how to contact us.
+              </ListItem>
+            </List>
           </Box>
           <Box maxW="xl" pb="10">
-          <Badge
-                w="100%"
-                textAlign="left"
-                bgColor="white"
-                color="blue.400"
-                py="3"
-                my="1"
-              >
-          <Text fontSize='lg'>
-            This page is made using the <br />below listed technologies
-          </Text>
-          </Badge>
-          <List spacing={4} my="5">
-            <ListItem>
-              <ListIcon as={FcNext} />
-              React
-            </ListItem>
-            <ListItem>
-              <ListIcon as={FcNext} />
-              Redux
-            </ListItem>
-            <ListItem>
-              <ListIcon as={FcNext} />
-              Chakra UI
-            </ListItem>
-            <ListItem>
-              <ListIcon as={FcNext} />
-              Node JS
-            </ListItem>
-            <ListItem>
-              <ListIcon as={FcNext} />
-              Mongo DB
-            </ListItem>
-            <ListItem>
-              <ListIcon as={FcNext} />
-              And many more!
-            </ListItem>
-          </List>
+            <Badge
+              w="100%"
+              textAlign="left"
+              bgColor="white"
+              color="blue.400"
+              py="3"
+              my="1"
+            >
+              <Text fontSize="lg">
+                This page is made using the <br />
+                below listed technologies
+              </Text>
+            </Badge>
+            <List spacing={4} my="5">
+              <ListItem>
+                <ListIcon as={FcNext} />
+                React
+              </ListItem>
+              <ListItem>
+                <ListIcon as={FcNext} />
+                Redux
+              </ListItem>
+              <ListItem>
+                <ListIcon as={FcNext} />
+                Chakra UI
+              </ListItem>
+              <ListItem>
+                <ListIcon as={FcNext} />
+                Node JS
+              </ListItem>
+              <ListItem>
+                <ListIcon as={FcNext} />
+                Mongo DB
+              </ListItem>
+              <ListItem>
+                <ListIcon as={FcNext} />
+                And many more!
+              </ListItem>
+            </List>
           </Box>
         </Container>
       </Flex>
       <Footer />
-    </div>
+    </>
   )
 }
 
