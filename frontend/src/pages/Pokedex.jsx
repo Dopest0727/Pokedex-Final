@@ -123,8 +123,7 @@ const Pokedex = () => {
                           w="100%"
                           display="flex"
                           direction="column"
-                          blur='0.2'
-                          
+                          blur="0.2"
                         >
                           <Popup
                             trigger={
@@ -147,9 +146,14 @@ const Pokedex = () => {
                                 <Box
                                   backgroundColor="white"
                                   border="3px solid orange"
+                                  padding="30px"
+                                  justifyContent="center"
                                 >
                                   <Button onClick={close}> X </Button>
-                                  <Image src={pokemon.img} />
+                                  <Image 
+                                  width="100%" 
+                                  src={pokemon.img} 
+                                  />
                                   <h1>Number: {pokemon.num}</h1>
                                   <h1>Name: {pokemon.name}</h1>
                                   <h1>Type: {pokemon.type}</h1>
