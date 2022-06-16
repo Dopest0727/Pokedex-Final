@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const username = useSelector(store => store.authenticated.username)
+  const authToken = useSelector((state) => state.authenticated.authToken);
   const navigate = useNavigate();
 
   useEffect(() => {
