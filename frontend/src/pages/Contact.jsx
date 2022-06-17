@@ -10,6 +10,7 @@ import {
   TabPanel,
   Tabs,
   Center,
+  useBreakpointValue,
   Container,
   Text,
   Flex,
@@ -28,6 +29,13 @@ const Contact = () => {
     welcome: 'Welcome back',
     phrase: "Ready to catch 'em all?",
   }
+
+  const h = useBreakpointValue({
+    base: 'column',
+    md: 'column',
+    lg: 'row',
+  })
+
   return (
     <>
       <NavBar />
@@ -68,6 +76,7 @@ const Contact = () => {
               </Box>
             </TabPanel>
             <TabPanel>
+              <Flex direction={h} gap="5">
               <Box w="100%" borderRadius="md" my="5">
                 <Image
                   src="https://avatars.githubusercontent.com/u/74298827?v=4"
@@ -107,7 +116,7 @@ const Contact = () => {
                   </LinkBox>
                 </Flex>
               </Box>
-              <Box w="100%" borderRadius="md" mt="10" mb="5">
+              <Box w="100%" borderRadius="md" my="5">
                 <Image
                   src="https://avatars.githubusercontent.com/u/91568892?v=4"
                   alt="Rijad"
@@ -143,6 +152,7 @@ const Contact = () => {
                   </LinkBox>
                 </Flex>
               </Box>
+              </Flex>
             </TabPanel>
           </TabPanels>
         </Tabs>
