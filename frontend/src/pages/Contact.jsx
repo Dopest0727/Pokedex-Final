@@ -20,8 +20,14 @@ import {
 
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
+import pokebg from '../IMG/pokebg.jpg'
 
 const Contact = () => {
+  const pokecard = {
+    imageAlt: 'Picture of Pokeball',
+    welcome: 'Welcome back',
+    phrase: "Ready to catch 'em all?",
+  }
   return (
     <>
       <NavBar />
@@ -58,6 +64,7 @@ const Contact = () => {
                   you have as much fun using it as we did developing it! <br />
                   GO CATCH 'EM ALL SON!
                 </Text>
+                <Image borderRadius="md" src={pokebg} alt={pokecard.imageAlt} mb="4"/>
               </Box>
             </TabPanel>
             <TabPanel>

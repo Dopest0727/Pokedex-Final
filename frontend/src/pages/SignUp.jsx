@@ -24,6 +24,7 @@ const Signup = () => {
   const Loading = useSelector((store) => store.authenticated.loading)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [passwordTwo, setPasswordTwo] = useState();
   const [error, setError] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -53,19 +54,26 @@ const Signup = () => {
     }
   }
 
-  const signUp = () => {
-    createUsers({
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    })
-  }
+   const signUp = () => {
+    const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,15}$/;
+    if (password !== passwordTwo) {
+      setError("Passwords do not match.");
+    } else if (password.match(passwordPattern) && username.length > 4) {
+      createUsers({
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+    } else {
+      setError(
+        "Password needs to be between 8 and 15 characters and contain 1 lowerercase letter, 1 uppercase letter, 1 special symbol and 1 number."
+      );
+    }
+  };
 
   return (
     <>
-      {Loading ? (
-        <LoadingSpinner />
-      ) : (
         <Container centerContent my="10%">
           <Box
             maxW="xl"
@@ -94,6 +102,15 @@ const Signup = () => {
                   _placeholder={{ opacity: 1, color: 'blue.400' }}
                   required={true}
                   onChange={(event) => setPassword(event.target.value)}
+                />
+                <Input
+                  id="passwordTwo"
+                  mb="3"
+                  type="password"
+                  placeholder="Password"
+                  _placeholder={{ opacity: 1, color: 'blue.400' }}
+                  required={true}
+                  onChange={(event) => setPasswordTwo(event.target.value)}
                 />
               </FormControl>
             </Box>
@@ -132,7 +149,6 @@ const Signup = () => {
             </Box>
           </Box>
         </Container>
-      )}
     </>
   )
 }
