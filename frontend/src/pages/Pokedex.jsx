@@ -138,8 +138,7 @@ const Pokedex = () => {
                             {(close) => (
                               <Box>
                                 <Box
-                                  w="100vw"
-                                  h="100vh"
+                                  w="xs"
                                   bgColor="white"
                                   borderRadius="lg"
                                   borderWidth="2px"
