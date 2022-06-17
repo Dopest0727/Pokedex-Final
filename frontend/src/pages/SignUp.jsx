@@ -18,10 +18,8 @@ import {
 
 import pokebg from '../IMG/pokebg.jpg'
 import { authenticated } from '../reducers/auth'
-import LoadingSpinner from '../components/LoadinSpinner'
 
 const Signup = () => {
-  const Loading = useSelector((store) => store.authenticated.loading)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [passwordTwo, setPasswordTwo] = useState();
