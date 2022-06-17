@@ -9,9 +9,7 @@ import {
   Button,
   Input,
   Image,
-  Heading,
   Stack,
-  Text,
   Badge,
   Flex,
 } from '@chakra-ui/react'
@@ -27,8 +25,7 @@ const Pokedex = () => {
       .then((res) => {
         setPokemons(res.data.pokemons)
       })
-      .catch((err) => {
-      })
+      .catch((err) => {})
   }, [])
 
   const [query, setQuery] = useState('')
@@ -59,22 +56,6 @@ const Pokedex = () => {
   return (
     <Box>
       <NavBar />
-      <Center>
-        <Box w="xs">
-          <Badge
-            borderRadius="md"
-            colorScheme="twitter"
-            py="3"
-            px="6"
-            w="100%"
-            textAlign="left"
-          >
-            <Heading fontSize="md">
-              For more in depth info about <br /> a certain pokemon press <br /> the read more button!
-            </Heading>
-          </Badge>
-        </Box>
-      </Center>
       <Center mb="10">
         <Box>
           <Input
@@ -157,11 +138,11 @@ const Pokedex = () => {
                             {(close) => (
                               <Box>
                                 <Box
-                                  w="md"
-                                  bgColor="orange.200"
+                                  w="xs"
+                                  bgColor="white"
                                   borderRadius="lg"
                                   borderWidth="2px"
-                                  borderColor="orange.200"
+                                  borderColor="blue.200"
                                   p="10"
                                   justifyContent="center"
                                 >
@@ -170,24 +151,84 @@ const Pokedex = () => {
                                       width="50%"
                                       src={pokemon.img}
                                       alt={pokemon.name}
+                                      mb="10"
                                     />
                                   </Center>
-                                  <Flex direction="row" w="100%">
-                                    <Badge>Number:</Badge>
-                                    <Text>{pokemon.num}</Text>
-                                  </Flex>
-
-                                  <Badge>Name: {pokemon.name}</Badge>
-                                  <Badge>
-                                    Type: {pokemon.type[0]} {pokemon.type[1]}
-                                  </Badge>
-                                  <Badge>Height: {pokemon.height}</Badge>
-                                  <Badge>Weight: {pokemon.weight}</Badge>
-                                  <Badge>
-                                    Weaknesses: {pokemon.weaknesses}
-                                  </Badge>
-
-                                  <Button onClick={close}> X </Button>
+                                  <Stack
+                                    direction="column"
+                                    justify="space-between"
+                                  >
+                                    <Badge
+                                      color="white"
+                                      bgColor="blue.800"
+                                      variant="solid"
+                                      borderRadius="md"
+                                      textAlign="left"
+                                      p="2"
+                                    >
+                                      Number: {pokemon.num}
+                                    </Badge>
+                                    <Badge
+                                      color="white"
+                                      bgColor="blue.700"
+                                      variant="solid"
+                                      borderRadius="md"
+                                      textAlign="left"
+                                      p="2"
+                                    >
+                                      Name: {pokemon.name}
+                                    </Badge>
+                                    <Badge
+                                      color="white"
+                                      bgColor="blue.600"
+                                      variant="solid"
+                                      borderRadius="md"
+                                      textAlign="left"
+                                      p="2"
+                                    >
+                                      Type: {pokemon.type[0]} {pokemon.type[1]}
+                                    </Badge>
+                                    <Badge
+                                      color="white"
+                                      bgColor="blue.500"
+                                      variant="solid"
+                                      borderRadius="md"
+                                      textAlign="left"
+                                      p="2"
+                                    >
+                                      Height: {pokemon.height}
+                                    </Badge>
+                                    <Badge
+                                      color="white"
+                                      bgColor="blue.400"
+                                      variant="solid"
+                                      borderRadius="md"
+                                      textAlign="left"
+                                      p="2"
+                                    >
+                                      Weight: {pokemon.weight}
+                                    </Badge>
+                                    <Badge
+                                      color="white"
+                                      bgColor="blue.300"
+                                      variant="solid"
+                                      borderRadius="md"
+                                      textAlign="left"
+                                      p="2"
+                                    >
+                                      Weaknesses: {pokemon.weaknesses[0]} {pokemon.weaknesses[1]}
+                                    </Badge>
+                                  </Stack>
+                                  <Button
+                                    mt="4"
+                                    w="100%"
+                                    onClick={close}
+                                    bgColor="blue.200"
+                                    color="white"
+                                  >
+                                    {' '}
+                                    Close{' '}
+                                  </Button>
                                 </Box>
                               </Box>
                             )}

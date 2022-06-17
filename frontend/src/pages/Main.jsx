@@ -22,6 +22,7 @@ import Footer from '../components/Footer'
 
 const Main = () => {
   const authToken = useSelector((state) => state.authenticated.authToken)
+  const username = useSelector((store) => store.authenticated.username)
   const navigate = useNavigate()
   const flex = useBreakpointValue({
     base: 'column',
@@ -52,8 +53,8 @@ const Main = () => {
                 mb="2"
               >
                 <Heading fontSize="xl">
-                  Welcome to our Pokedex! <br />
-                  username
+                  Welcome to our Pokedex <br />
+                  {username}!
                 </Heading>
               </Badge>
               <Text my="10">
