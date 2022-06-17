@@ -25,7 +25,7 @@ const Contact = () => {
   return (
     <>
       <NavBar />
-      <Container minH="70vh">
+      <Container minH="80vh">
         <Tabs size="md" w="100%">
           <Center w="100%">
             <TabList>
