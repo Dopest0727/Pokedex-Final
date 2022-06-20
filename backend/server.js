@@ -71,6 +71,18 @@ app.get('/pokemons/:num', async (req, res) => {
   }
 })
 
+app.post('/pokemons/:num/', async (req, res) => {
+  const { num } = req.params
+  const user = await User.findOne({ accessToken: req.headers.accessToken})
+  user.listOfCaughtPokemons.push(num)
+})
+
+app.get("/pokemons/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const userPokemons = await Pokemon.find({ user: userId });
+  res.status(201).json({ response: userPokemons, success: true });
+});
+
 app.get('/pokemons/name/:name', async (req, res) => {
   const { name } = req.params
 
@@ -112,7 +124,6 @@ app.post('/signup', async (req, res) => {
   const { username, password } = req.body
   try {
     const salt = bcrypt.genSaltSync()
-    //
     if (password.length < 8) {
       res.status(400).json({
         response: 'Password must contain at least 8 characters long',

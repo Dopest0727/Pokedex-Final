@@ -28,6 +28,28 @@ const Pokedex = () => {
       .catch((err) => {})
   }, [])
 
+  const addPokemon = (event) => {
+    event.preventDefault();
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: accessToken,
+      },
+      body: JSON.stringify({
+        plantName,
+        user: userId,
+      }),
+    };
+    fetch(`https://picopalquelee.herokuapp.com/pokemons/:num`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          window.location.reload();
+        }
+      });
+  };
+
   const [query, setQuery] = useState('')
   const h = useBreakpointValue({
     base: 'repeat(1, 1fr)',
@@ -251,6 +273,9 @@ const Pokedex = () => {
                             </Badge>
                           ))}
                         </Flex>
+                        <Button onClick={() => {
+                    addPokemon(userId, pokemon.name);
+                  }} ></Button>
                       </Stack>
                     </Box>
                   </Box>
