@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Popup from 'reactjs-popup'
 import axios from 'axios'
 import {
@@ -16,9 +17,13 @@ import {
 
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
+import { authenticated } from '../reducers/auth'
 
 const Pokedex = () => {
   const [pokemons, setPokemons] = useState([])
+  const authToken = useSelector((state) => state.authenticated.authToken)
+  const userId = useSelector((state) => state.authenticated.userId);
+  const dispatch = useDispatch();
   useEffect(() => {
     axios
       .get(`https://picopalquelee.herokuapp.com/pokemons`)
@@ -34,13 +39,13 @@ const Pokedex = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: accessToken,
+        Authorization: authToken,
       },
       body: JSON.stringify({
-        plantName,
-        user: userId,
+        // name,
+        authenticated: userId,
       }),
-    };
+    }; 
     fetch(`https://picopalquelee.herokuapp.com/pokemons/:num`, options)
       .then((res) => res.json())
       .then((data) => {
@@ -275,7 +280,7 @@ const Pokedex = () => {
                         </Flex>
                         <Button onClick={() => {
                     addPokemon(userId, pokemon.name);
-                  }} ></Button>
+                  }} >Add</Button>
                       </Stack>
                     </Box>
                   </Box>

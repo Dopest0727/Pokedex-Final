@@ -41,15 +41,12 @@ app.get('/', (req, res) => {
   res.send(allEndpoints(app))
 })
 
-
+//POKEMONS ENDPOINTS
 app.get("/users", async (req, res) => {
   const users = await User.find({})
   .sort({createdAt: 'desc'})
   res.status(201).json(users)
 });
-
-//POKEMONS ENDPOINTS
-
 
 app.get('/pokemons', async (req, res) => {
   try {
@@ -60,7 +57,6 @@ app.get('/pokemons', async (req, res) => {
   }
 })
 
-
 app.get('/pokemons/:num', async (req, res) => {
   const { num } = req.params
   try {
@@ -69,12 +65,6 @@ app.get('/pokemons/:num', async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: 'Not found'})
   }
-})
-
-app.post('/pokemons/:num/', async (req, res) => {
-  const { num } = req.params
-  const user = await User.findOne({ accessToken: req.headers.accessToken})
-  user.listOfCaughtPokemons.push(num)
 })
 
 app.get("/pokemons/:userId", async (req, res) => {
@@ -107,18 +97,11 @@ app.get('/pokemons/name/:name', async (req, res) => {
   }
 })
 
-
-
-//USER ENDPOINTS
-// app.post('/caughtpokemon', async (req, res) => {
-//   const { userId, pokemonId } = req.body  
-//   try {
-
-//     const user = await User.findOne({ _id: userId })
-//     await user.caughpokemon.push(pokemonId).save()
-    
-//   }
-// USER
+app.post('/pokemons/add/:num/', async (req, res) => {
+  const { num } = req.params
+  const user = await User.findOne({ accessToken: req.headers.accessToken})
+  user.listOfCaughtPokemons.push(num)
+})
 
 app.post('/signup', async (req, res) => {
   const { username, password } = req.body
@@ -188,16 +171,6 @@ app.post('/signin', async (req, res) => {
   }
 })
 
-app.get("/main", (req, res) => {
-  if (main) {
-    res.status(200).json({ success: true, response: main });
-  } else {
-    res.status(400).json({
-      response: "Not found",
-      success: false,
-    });
-  }
-});
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
