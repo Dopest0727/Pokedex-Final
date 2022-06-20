@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Popup from 'reactjs-popup'
 import axios from 'axios'
 import {
@@ -17,13 +17,12 @@ import {
 
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
-import { authenticated } from '../reducers/auth'
 
 const Pokedex = () => {
   const [pokemons, setPokemons] = useState([])
   const authToken = useSelector((state) => state.authenticated.authToken)
-  const userId = useSelector((state) => state.authenticated.userId);
-  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.authenticated.userId)
+
   useEffect(() => {
     axios
       .get(`https://picopalquelee.herokuapp.com/pokemons`)
@@ -34,26 +33,26 @@ const Pokedex = () => {
   }, [])
 
   const addPokemon = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const options = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: authToken,
       },
       body: JSON.stringify({
-        // name,
+        name,
         authenticated: userId,
       }),
-    }; 
+    }
     fetch(`https://picopalquelee.herokuapp.com/pokemons/:num`, options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          window.location.reload();
+          window.location.reload()
         }
-      });
-  };
+      })
+  }
 
   const [query, setQuery] = useState('')
   const h = useBreakpointValue({
@@ -243,7 +242,8 @@ const Pokedex = () => {
                                       textAlign="left"
                                       p="2"
                                     >
-                                      Weaknesses: {pokemon.weaknesses[0]} {pokemon.weaknesses[1]}
+                                      Weaknesses: {pokemon.weaknesses[0]}{' '}
+                                      {pokemon.weaknesses[1]}
                                     </Badge>
                                   </Stack>
                                   <Button
@@ -278,9 +278,13 @@ const Pokedex = () => {
                             </Badge>
                           ))}
                         </Flex>
-                        <Button onClick={() => {
-                    addPokemon(userId, pokemon.name);
-                  }} >Add</Button>
+                        <Button
+                          onChange={() => {
+                            addPokemon(userId, pokemon.name)
+                          }}
+                        >
+                          Add
+                        </Button>
                       </Stack>
                     </Box>
                   </Box>

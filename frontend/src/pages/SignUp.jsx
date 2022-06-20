@@ -72,81 +72,81 @@ const Signup = () => {
 
   return (
     <>
-        <Container centerContent my="10%">
-          <Box
-            maxW="xl"
-            p="8"
-            borderWidth="2px"
-            borderColor="blue.400"
-            borderRadius="md"
-          >
-            <Image borderRadius="md" src={pokebg} alt={pokecard.imageAlt} />
-            <Box py="4">
-              <FormControl isRequired>
-                <Input
-                  id="username"
-                  mb="3"
-                  required={true}
-                  placeholder="Username"
-                  _placeholder={{ opacity: 1, color: 'blue.400' }}
-                  onChange={(event) => setUsername(event.target.value)}
-                  autoComplete="true"
-                />
-                <Input
-                  id="password"
-                  mb="3"
-                  type="password"
-                  placeholder="Password"
-                  _placeholder={{ opacity: 1, color: 'blue.400' }}
-                  required={true}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-                <Input
-                  id="passwordTwo"
-                  mb="3"
-                  type="password"
-                  placeholder="Repeat password"
-                  _placeholder={{ opacity: 1, color: 'blue.400' }}
-                  required={true}
-                  onChange={(event) => setPasswordTwo(event.target.value)}
-                />
-              </FormControl>
-            </Box>
-            <Box>
-              {error.length > 0 && (
-                <Alert status="info">
-                  <AlertIcon />
-                  <AlertTitle>Error</AlertTitle>
-                  {error}
-                </Alert>
-              )}
-            </Box>
-            <Box pt="4">
-              <Stack
-                w="100%"
-                display="flex"
-                direction="row"
-                spacing={4}
-                alignItems="center"
-              >
-                <Flex w="100%">
-                  <ButtonGroup w="100%" colorScheme="twitter" spacing="1">
-                    <Button w="100%" variant="solid" onClick={signUp}>
-                      Sign Up
-                    </Button>
-                    <Button
-                      w="100%"
-                      variant="outline"
-                      onClick={() => navigate('/')}
-                    >
-                      Go Back
-                    </Button>
-                  </ButtonGroup>
-                </Flex>
-              </Stack>
-            </Box>
+      <Container centerContent my="10%">
+        <Box
+          maxW="xl"
+          p="8"
+          borderWidth="2px"
+          borderColor="blue.400"
+          borderRadius="md"
+        >
+          <Image borderRadius="md" src={pokebg} alt={pokecard.imageAlt} />
+          <Box py="4">
+            <FormControl isRequired>
+              <Input
+                id="username"
+                mb="3"
+                required={true}
+                placeholder="Username"
+                _placeholder={{ opacity: 1, color: 'blue.400' }}
+                onChange={(event) => setUsername(event.target.value)}
+                autoComplete="true"
+              />
+              <Input
+                id="password"
+                mb="3"
+                type="password"
+                placeholder="Password"
+                _placeholder={{ opacity: 1, color: 'blue.400' }}
+                required={true}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+              <Input
+                id="passwordTwo"
+                mb="3"
+                type="password"
+                placeholder="Repeat password"
+                _placeholder={{ opacity: 1, color: 'blue.400' }}
+                required={true}
+                onChange={(event) => setPasswordTwo(event.target.value)}
+              />
+            </FormControl>
           </Box>
-        </Container>
+          <Box>
+            {error.length > 0 && (
+              <Alert status="info">
+                <AlertIcon />
+                <AlertTitle>Error</AlertTitle>
+                {error}
+              </Alert>
+            )}
+          </Box>
+          <Box pt="4">
+            <Stack
+              w="100%"
+              display="flex"
+              direction="row"
+              spacing={4}
+              alignItems="center"
+            >
+              <Flex w="100%">
+                <ButtonGroup w="100%" colorScheme="twitter" spacing="1">
+                  <Button w="100%" variant="solid" onClick={signUp}>
+                    Sign Up
+                  </Button>
+                  <Button
+                    w="100%"
+                    variant="outline"
+                    onClick={() => navigate('/')}
+                  >
+                    Go Back
+                  </Button>
+                </ButtonGroup>
+              </Flex>
+            </Stack>
+          </Box>
+        </Box>
+      </Container>
     </>
   )
 }
