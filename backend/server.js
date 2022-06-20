@@ -71,6 +71,15 @@ app.get('/pokemons/:num', async (req, res) => {
   }
 })
 
+/* authenticateUser */
+app.post('/pokemons/:num/', authenticateUser)
+
+app.post('/pokemons/:num/', async (req, res) => {
+  const { num } = req.params
+  const user = await User.findOne({ accessToken: req.headers.accessToken})
+  user.listOfCaughtPokemons.push(num)
+})
+
 app.get('/pokemons/name/:name', async (req, res) => {
   const { name } = req.params
 

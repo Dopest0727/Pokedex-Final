@@ -14,7 +14,12 @@ const UserSchema = new mongoose.Schema({
   accessToken: {
     type: String,
     default: () => crypto.randomBytes(128).toString("hex")
+  },
+  listOfCaughtPokemons: {
+    type: Array,
+    default: []
   }
+  
 })
 
 const User = mongoose.model("User", UserSchema)
