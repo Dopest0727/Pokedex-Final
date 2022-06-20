@@ -57,8 +57,8 @@ const Pokedex = () => {
   const [query, setQuery] = useState('')
   const h = useBreakpointValue({
     base: 'repeat(1, 1fr)',
-    md: 'repeat(2, 1fr)',
-    lg: 'repeat(3, 1fr)',
+    md: 'repeat(3, 1fr)',
+    lg: 'repeat(5, 1fr)',
   })
 
   const backgrounds = {
@@ -104,13 +104,12 @@ const Pokedex = () => {
                 }
               })
               .map((pokemon) => {
+                console.log(pokemons)
                 return (
                   <Box
-                    w="xs"
-                    borderWidth="2px"
-                    borderColor="blue.200"
-                    borderRadius="lg"
+                    w="100%"
                     key={pokemon._id}
+                    bgColor={backgrounds[pokemon.type[0]]}
                   >
                     <Box>
                       <Stack
@@ -119,108 +118,102 @@ const Pokedex = () => {
                         direction="column"
                         alignItems="center"
                       >
-                        <Box bgColor="blue.100" w="100%" borderRadius="md">
+                        <Box
+                          key={pokemon.type}
+                          borderRadius="md"
+                          textAlign="center"
+                        >
+                          <p>#{pokemon.num}</p>
                           <Center>
-                            <Image
-                              m="5"
-                              src={pokemon.img}
-                              alt={pokemon.name}
-                              borderRadius="lg"
-                            />
+                            <Image m="5" src={pokemon.img} alt={pokemon.name} />
                           </Center>
+                          <b>{pokemon.name}</b>
+                          <br />
+                          Type: {pokemon.type[0]} {pokemon.type[1]}
                         </Box>
-                        <Flex px="2" w="100%" display="flex" direction="column">
-                          <Badge
-                            bgColor="blue.300"
-                            mb="2"
-                            w="100%"
-                            color="white"
-                            variant="solid"
-                            borderRadius="md"
-                            textAlign="center"
-                            py="3"
-                            px="3"
-                          >
-                            {pokemon.name}
-                          </Badge>
-                          <Popup
-                            trigger={
-                              <Button
-                                bgColor="blue.300"
-                                w="100%"
-                                color="white"
-                                variant="solid"
-                                _hover={{
-                                  background: 'blue.500',
-                                  color: 'white',
-                                }}
-                              >
-                                Read more
-                              </Button>
-                            }
-                            modal
-                            nested
-                          >
-                            {(close) => (
-                              <Box>
-                                <Box
-                                  w="xs"
-                                  bgColor="white"
-                                  borderRadius="lg"
-                                  borderWidth="2px"
-                                  borderColor="blue.200"
-                                  p="10"
-                                  justifyContent="center"
+
+                        <Flex w="100%" display="flex" direction="column">
+                          <Box>
+                            <Popup
+                              trigger={
+                                <Button
+                                  bgColor={backgrounds[pokemon.type[0]]}
+                                  w="100%"
+                                  borderRadius="0"
+                                  color="black"
+                                  variant="solid"
+                                  _hover={{
+                                    background: 'blue.500',
+                                    color: 'white',
+                                  }}
                                 >
-                                  <Center>
-                                    <Image
-                                      width="50%"
-                                      src={pokemon.img}
-                                      alt={pokemon.name}
-                                      mb="10"
-                                    />
-                                  </Center>
-                                  <Stack
-                                    direction="column"
-                                    justify="space-between"
+                                  Read more
+                                </Button>
+                              }
+                              modal
+                              nested
+                            >
+                              {(close) => (
+                                <Box
+                                  top={'0'}
+                                  left={'0'}
+                                  width={'100vw'}
+                                  height={'100vh'}
+                                  blur={'3px'}
+                                  background={'rgba(0, 0, 0, 0.7)'}
+                                  display={'flex'}
+                                  alignItems={'center'}
+                                  justifyContent={'center'}
+                                >
+                                  <Box
+                                    w="xs"
+                                    bgColor={backgrounds[pokemon.type[0]]}
+                                    p="10"
+                                    justifyContent="center"
                                   >
-                                    <Badge
-                                      color="white"
-                                      bgColor="blue.800"
-                                      variant="solid"
-                                      borderRadius="md"
-                                      textAlign="left"
-                                      p="2"
+                                    <Center>
+                                      <Image
+                                        width="50%"
+                                        src={pokemon.img}
+                                        alt={pokemon.name}
+                                        mb="10"
+                                      />
+                                    </Center>
+                                    <Stack
+                                      direction="column"
+                                      justify="space-between"
                                     >
-                                      Number: {pokemon.num}
-                                    </Badge>
-                                    <Badge
+                                      <Box
+                                        display={'flex'}
+                                        alignItems={'center'}
+                                        justifyContent={'center'}
+                                        flexDir={'column'}
+                                      >
+                                        <h1>Number: {pokemon.num}</h1>
+                                        <h1>Name: {pokemon.name} </h1>
+                                        <h1> Type: {pokemon.type[0]} </h1>
+                                        <h1> {pokemon.type[1]} </h1>
+                                        <h1> Height: {pokemon.height} </h1>
+                                        <h1>Weight: {pokemon.weight} </h1>
+                                        <h1>
+                                          Weaknesses: {pokemon.weaknesses[0]},
+                                          {pokemon.weaknesses[1]}
+                                        </h1>
+                                        
+                                        Evolutions:
+                                        {pokemon.next_evolution.map((y) => (
+                                          <div key={pokemon.id}>
+                                            {y.name}
+                                          </div>
+                                        ))}
+                                      </Box>
+                                    </Stack>
+                                    <Button
+                                      mt="4"
+                                      w="100%"
+                                      onClick={close}
+                                      bgColor="blue.200"
                                       color="white"
-                                      bgColor="blue.700"
-                                      variant="solid"
-                                      borderRadius="md"
-                                      textAlign="left"
-                                      p="2"
-                                    >
-                                      Name: {pokemon.name}
-                                    </Badge>
-                                    <Badge
-                                      color="white"
-                                      bgColor="blue.600"
-                                      variant="solid"
-                                      borderRadius="md"
-                                      textAlign="left"
-                                      p="2"
-                                    >
-                                      Type: {pokemon.type[0]} {pokemon.type[1]}
-                                    </Badge>
-                                    <Badge
-                                      color="white"
-                                      bgColor="blue.500"
-                                      variant="solid"
-                                      borderRadius="md"
-                                      textAlign="left"
-                                      p="2"
                                     >
                                       Height: {pokemon.height}
                                     </Badge>
@@ -257,26 +250,9 @@ const Pokedex = () => {
                                     Close{' '}
                                   </Button>
                                 </Box>
-                              </Box>
-                            )}
-                          </Popup>
-                        </Flex>
-                        <Flex w="100%" display="flex" direction="row" px="2">
-                          {pokemon.type.map((type) => (
-                            <Badge
-                              borderRadius="md"
-                              w="100%"
-                              textAlign="center"
-                              color="white"
-                              py="3"
-                              px="3"
-                              mb="2"
-                              bgColor={backgrounds[type]}
-                              key={type}
-                            >
-                              {type}
-                            </Badge>
-                          ))}
+                              )}
+                            </Popup>
+                          </Box>
                         </Flex>
                         <Button
                           onChange={() => {

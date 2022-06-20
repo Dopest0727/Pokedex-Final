@@ -64,7 +64,7 @@ app.get('/pokemons/:num', async (req, res) => {
       res.status(200).json({ singlePokemon })
   } catch (error) {
     res.status(400).json({ error: 'Not found'})
-  }
+  }h
 })
 
 app.get("/pokemons/users/:userId", async (req, res) => {
