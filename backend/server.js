@@ -67,7 +67,7 @@ app.get('/pokemons/:num', async (req, res) => {
   }
 })
 
-app.get("/pokemons/:userId", async (req, res) => {
+app.get("/pokemons/users/:userId", async (req, res) => {
   const { userId } = req.params;
   const userPokemons = await Pokemon.find({ user: userId });
   res.status(201).json({ response: userPokemons, success: true });
