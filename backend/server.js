@@ -74,29 +74,29 @@ app.get('/pokemons/:num', async (req, res) => {
 //   res.status(201).json({ response: userPokemons, success: true });
 // });
 
-// app.get('/pokemons/name/:name', async (req, res) => {
-//   const { name } = req.params
+app.get('/pokemons/name/:name', async (req, res) => {
+  const { name } = req.params
 
-//   try {
-//     const pokemonName = await Pokemon.findOne({ name: name })
-//     if (pokemonName) {
-//       res.status(200).json({
-//         response: pokemonName,
-//         success: true,
-//       })
-//     } else {
-//       res.status(404).json({
-//         response: 'No data found',
-//         success: false,
-//       })
-//     }
-//   } catch (error) {
-//     res.status(400).json({
-//       response: error,
-//       success: false,
-//     })
-//   }
-// })
+  try {
+    const pokemonName = await Pokemon.findOne({ name: name })
+    if (pokemonName) {
+      res.status(200).json({
+        response: pokemonName,
+        success: true,
+      })
+    } else {
+      res.status(404).json({
+        response: 'No data found',
+        success: false,
+      })
+    }
+  } catch (error) {
+    res.status(400).json({
+      response: error,
+      success: false,
+    })
+  }
+})
 
 // app.post('/pokemons/add/:num/', async (req, res) => {
 //   const { num } = req.params
