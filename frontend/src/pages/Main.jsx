@@ -113,7 +113,7 @@ const Main = () => {
                 Where you can see all the available pokemons and pick the ones
                 you've caught.
               </ListItem>
-              <ListItem>
+              {/* <ListItem>
                 <ListIcon as={FcNext} />
                 <Badge
                   py="1"
@@ -127,7 +127,7 @@ const Main = () => {
                 </Badge>
                 Where you can see all the pokemons you,ve caught and display
                 your user information.
-              </ListItem>
+              </ListItem> */}
               <ListItem>
                 <ListIcon as={FcNext} />
                 <Badge
@@ -138,7 +138,6 @@ const Main = () => {
                   color="white"
                   borderRadius="md"
                 >
-                  {' '}
                   About Us
                 </Badge>
                 A page about the creator of the app and how to contact us.

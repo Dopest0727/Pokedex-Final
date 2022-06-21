@@ -17,7 +17,6 @@ import {
 } from '@chakra-ui/react'
 
 import { authenticated } from '../reducers/auth'
-import LoadingSpinner from '../components/LoadinSpinner'
 import pokebg from '../IMG/pokebg.jpg'
 
 const SignIn = () => {
@@ -49,14 +48,12 @@ const SignIn = () => {
       )
       const data = await response.json()
       if (data.success) {
-        //console.log(data)
         batch(() => {
           dispatch(authenticated.actions.login(data.response))
           dispatch(authenticated.actions.setError(null))
         })
       } else if (!data.success) {
         setError(data.response)
-        //console.log(error)
         batch(() => {
           dispatch(authenticated.actions.setUserId(null))
           dispatch(authenticated.actions.setError(data.response))
@@ -64,15 +61,11 @@ const SignIn = () => {
         })
       }
     } catch (error) {
-      //console.log(error)
     }
   }
 
   return (
     <>
-      {Loading ? (
-        <LoadingSpinner />
-      ) : (
         <Container centerContent my="10%">
           <Box
             maxW="xl"
@@ -148,7 +141,6 @@ const SignIn = () => {
             </Box>
           </Box>
         </Container>
-      )}
     </>
   )
 }

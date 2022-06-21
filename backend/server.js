@@ -11,25 +11,25 @@ const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/pokedex-api'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
-const authenticateUser = async (req, res, next) => {
-  const accessToken = req.header("Authorization");
-  try {
-    const user = await User.findOne({ accessToken: accessToken });
-    if (user) {
-      next();
-    } else {
-      res.status(401).json({
-        response: "Please log in",
-        success: false,
-      });
-    }
-  } catch (error) {
-    res.status(400).json({
-      response: error,
-      success: false,
-    });
-  }
-};
+// const authenticateUser = async (req, res, next) => {
+//   const accessToken = req.header("Authorization");
+//   try {
+//     const user = await User.findOne({ accessToken: accessToken });
+//     if (user) {
+//       next();
+//     } else {
+//       res.status(401).json({
+//         response: "Please log in",
+//         success: false,
+//       });
+//     }
+//   } catch (error) {
+//     res.status(400).json({
+//       response: error,
+//       success: false,
+//     });
+//   }
+// };
 
 const port = process.env.PORT || 8080
 const app = express()
@@ -42,6 +42,7 @@ app.get('/', (req, res) => {
 })
 
 //POKEMONS ENDPOINTS
+
 app.get("/users", async (req, res) => {
   const users = await User.find({})
   .sort({createdAt: 'desc'})
@@ -67,41 +68,41 @@ app.get('/pokemons/:num', async (req, res) => {
   }h
 })
 
-app.get("/pokemons/users/:userId", async (req, res) => {
-  const { userId } = req.params;
-  const userPokemons = await Pokemon.find({ user: userId });
-  res.status(201).json({ response: userPokemons, success: true });
-});
+// app.get("/pokemons/users/:userId", async (req, res) => {
+//   const { userId } = req.params;
+//   const userPokemons = await Pokemon.find({ user: userId });
+//   res.status(201).json({ response: userPokemons, success: true });
+// });
 
-app.get('/pokemons/name/:name', async (req, res) => {
-  const { name } = req.params
+// app.get('/pokemons/name/:name', async (req, res) => {
+//   const { name } = req.params
 
-  try {
-    const pokemonName = await Pokemon.findOne({ name: name })
-    if (pokemonName) {
-      res.status(200).json({
-        response: pokemonName,
-        success: true,
-      })
-    } else {
-      res.status(404).json({
-        response: 'No data found',
-        success: false,
-      })
-    }
-  } catch (error) {
-    res.status(400).json({
-      response: error,
-      success: false,
-    })
-  }
-})
+//   try {
+//     const pokemonName = await Pokemon.findOne({ name: name })
+//     if (pokemonName) {
+//       res.status(200).json({
+//         response: pokemonName,
+//         success: true,
+//       })
+//     } else {
+//       res.status(404).json({
+//         response: 'No data found',
+//         success: false,
+//       })
+//     }
+//   } catch (error) {
+//     res.status(400).json({
+//       response: error,
+//       success: false,
+//     })
+//   }
+// })
 
-app.post('/pokemons/add/:num/', async (req, res) => {
-  const { num } = req.params
-  const user = await User.findOne({ accessToken: req.headers.accessToken})
-  user.listOfCaughtPokemons.push(num)
-})
+// app.post('/pokemons/add/:num/', async (req, res) => {
+//   const { num } = req.params
+//   const user = await User.findOne({ accessToken: req.headers.accessToken})
+//   user.listOfCaughtPokemons.push(num)
+// })
 
 app.post('/signup', async (req, res) => {
   const { username, password } = req.body

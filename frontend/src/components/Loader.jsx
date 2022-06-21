@@ -1,15 +1,15 @@
 import React from "react"
 import gif from '../IMG/animation.gif'
-import { Box, Img, Center } from "@chakra-ui/react"
+import { Box, Img, Center, Container } from "@chakra-ui/react"
 
 
 const Loader = () => {
     return (
-        <Box w="100wv">
+        <Container w="100%">
             <Center>
-                <Img src={gif} alt={'gif'} />
+                <Img w="100%" src={gif} alt={'gif'} />
             </Center> 
-        </Box>
+        </Container>
     )
 }
 

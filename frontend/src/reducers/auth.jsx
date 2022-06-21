@@ -7,6 +7,7 @@ export const authenticated = createSlice({
     authToken: null,
     username: null,
     error: null,
+    listOfCaughtPokemons: null,
     loading: false,
   },
   reducers: {
@@ -14,6 +15,7 @@ export const authenticated = createSlice({
       state.authToken = action.payload.accessToken;
       state.username = action.payload.username;
       state.userId = action.payload.userId;
+      state.caughtPokemon = action.payload.listOfCaughtPokemons;
       console.log(action.payload)
     },
     logout: (state, action) => {
