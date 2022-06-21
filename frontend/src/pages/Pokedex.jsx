@@ -31,6 +31,10 @@ const Pokedex = () => {
       .catch((err) => {})
   }, [])
 
+  useEffect(() => { 
+    setTimeout(() => setLoading(false), 3000);
+  }, []);
+
   const [query, setQuery] = useState('')
   const h = useBreakpointValue({
     base: 'repeat(1, 1fr)',
@@ -60,7 +64,7 @@ const Pokedex = () => {
     <Box>
       <NavBar />
       <Center mb="10">
-        {loading ? (
+        {loading === false ? (
           <Box>
             <Input
               my="5"

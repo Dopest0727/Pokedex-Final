@@ -11,7 +11,7 @@ const NavBar = (props) => {
 
   return (
     <NavBarContainer {...props}>
-      <MenuItem to="/main"> <Logo w="100px" color={['white', 'white', 'blue.400', 'blue.400']} /> </MenuItem>
+      <Logo w="100px" color={['white', 'white', 'blue.400', 'blue.400']} /> 
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} />
     </NavBarContainer>

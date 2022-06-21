@@ -1,13 +1,24 @@
 import React from "react"
-import { Box, Text } from "@chakra-ui/react"
+import { Box, Text, Link } from "@chakra-ui/react"
 
 export default function Logo(props) {
+  const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
+    return (
+      <Link href={to}>
+        <Text display="block" {...rest}>
+          {children}
+        </Text>
+      </Link>
+    )
+  }
+
   return (
     <Box {...props}>
-      <Text fontSize="lg" fontWeight="bold">
-        Pokedex
-      </Text>
-      
+      <MenuItem to="/main"> 
+        
+          Pokedex
+        
+      </MenuItem>
     </Box>
   )
 }
