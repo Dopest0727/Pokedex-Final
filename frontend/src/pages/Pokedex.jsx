@@ -13,26 +13,31 @@ import {
   Badge,
   Flex,
 } from '@chakra-ui/react'
+import Loader from '../components/Loader'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 const Pokedex = () => {
+  const [loading, setLoading] = useState(false)
   const [pokemons, setPokemons] = useState([])
   useEffect(() => {
     axios
       .get(`https://picopalquelee.herokuapp.com/pokemons`)
       .then((res) => {
         setPokemons(res.data.pokemons)
+        setLoading(true)
       })
       .catch((err) => {})
   }, [])
-   const [query, setQuery] = useState('')
-   const h = useBreakpointValue({
-     base: 'repeat(1, 1fr)',
-     md: 'repeat(2, 1fr)',
-     lg: 'repeat(3, 1fr)',
-   })
+  console.log([pokemons])
+  console.log(loading)
+  const [query, setQuery] = useState('')
+  const h = useBreakpointValue({
+    base: 'repeat(1, 1fr)',
+    md: 'repeat(2, 1fr)',
+    lg: 'repeat(3, 1fr)',
+  })
 
-   const backgrounds = {
+  const backgrounds = {
     Normal: '#A8A878', // a8a878 //BLACKALPHA CHECK
     Ground: '#E0C068', // e0c068
     Fighting: '#C02038', // c02038
@@ -64,7 +69,8 @@ const Pokedex = () => {
             onChange={(event) => setQuery(event.target.value)}
           />
           <Grid templateColumns={h} gap={5}>
-            {pokemons
+          {loading ? (
+            pokemons
               // eslint-disable-next-line
               .filter((pokemon) => {
                 if (query === '') {
@@ -256,7 +262,10 @@ const Pokedex = () => {
                      </Box>
                    </Box>
                 )
-              })}
+              })
+             ) : (
+                 <Loader />                 
+              )}
           </Grid>
         </Box>
       </Center>
