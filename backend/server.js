@@ -123,7 +123,6 @@ app.post('/signup', async (req, res) => {
           username: newUser.username,
           accessToken: newUser.accessToken,
           userId: newUser._id,
-          listOfCaughtPokemons,
         },
         success: true,
       })
