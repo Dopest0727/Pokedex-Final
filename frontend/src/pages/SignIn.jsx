@@ -21,7 +21,6 @@ import pokebg from '../IMG/pokebg.jpg'
 
 const SignIn = () => {
   const authToken = useSelector((state) => state.authenticated.authToken)
-  const Loading = useSelector((store) => store.authenticated.loading)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')

@@ -1,6 +1,6 @@
 import React from "react"
 import gif from '../IMG/animation.gif'
-import { Box, Img, Center, Container } from "@chakra-ui/react"
+import { Img, Center, Container } from "@chakra-ui/react"
 
 
 const Loader = () => {
