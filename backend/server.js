@@ -68,11 +68,11 @@ app.get('/pokemons/:num', async (req, res) => {
   }h
 })
 
-// app.get("/pokemons/users/:userId", async (req, res) => {
-//   const { userId } = req.params;
-//   const userPokemons = await Pokemon.find({ user: userId });
-//   res.status(201).json({ response: userPokemons, success: true });
-// });
+app.get("/pokemons/users/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const userPokemons = await Pokemon.find({ user: userId });
+  res.status(201).json({ response: userPokemons, success: true });
+});
 
 app.get('/pokemons/name/:name', async (req, res) => {
   const { name } = req.params
@@ -98,11 +98,11 @@ app.get('/pokemons/name/:name', async (req, res) => {
   }
 })
 
-// app.post('/pokemons/add/:num/', async (req, res) => {
-//   const { num } = req.params
-//   const user = await User.findOne({ accessToken: req.headers.accessToken})
-//   user.listOfCaughtPokemons.push(num)
-// })
+app.post('/pokemons/add/:num/', async (req, res) => {
+  const { num } = req.params
+  const user = await User.findOne({ accessToken: req.headers.accessToken})
+  user.listOfCaughtPokemons.push(num)
+})
 
 app.post('/signup', async (req, res) => {
   const { username, password } = req.body
