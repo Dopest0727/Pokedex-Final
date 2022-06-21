@@ -106,12 +106,12 @@ const Main = () => {
                   mr="2"
                   bgColor="blue.400"
                   color="white"
-                  borderRadius="xl"
+                  borderRadius="md"
                 >
                   Pokedex
                 </Badge>
-                Where you can see all the available pokemons and pich the ones
-                you have caught.
+                Where you can see all the available pokemons and pick the ones
+                you've caught.
               </ListItem>
               <ListItem>
                 <ListIcon as={FcNext} />
@@ -121,7 +121,7 @@ const Main = () => {
                   mr="2"
                   bgColor="blue.400"
                   color="white"
-                  borderRadius="xl"
+                  borderRadius="md"
                 >
                   Profile
                 </Badge>
@@ -136,7 +136,7 @@ const Main = () => {
                   mr="2"
                   bgColor="blue.400"
                   color="white"
-                  borderRadius="xl"
+                  borderRadius="md"
                 >
                   {' '}
                   About Us

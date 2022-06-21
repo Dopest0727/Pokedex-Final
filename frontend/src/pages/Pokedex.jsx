@@ -49,6 +49,8 @@ const Pokedex = () => {
     Ice: '#98D8D8', // #98D8D8 //YELLOW CHECK
     Electric: '#F8D030', // #F8D030
   }
+
+
   return (
     <Box>
       <NavBar />
@@ -116,9 +118,11 @@ const Pokedex = () => {
                            <Popup
                              trigger={
                                <Button
-                                 bgColor="blue.300"
+                                 bgColor="white"
+                                 borderWidth="2px"
+                                 borderColor="blue.200"
                                  w="100%"
-                                 color="white"
+                                 color="blue.300"
                                  variant="solid"
                                  _hover={{
                                    background: 'blue.500',
@@ -248,6 +252,7 @@ const Pokedex = () => {
                            ))}
                          </Flex>
                        </Stack>
+                       <Button>Caught</Button>
                      </Box>
                    </Box>
                 )
