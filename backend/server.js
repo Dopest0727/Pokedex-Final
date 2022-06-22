@@ -104,6 +104,32 @@ app.post('/pokemons/add/:num/', async (req, res) => {
   user.listOfCaughtPokemons.push(num)
 })
 
+app.patch('/users/add/', async (req, res) => {
+  const { id, caught } = req.body
+  try  {
+    const editingUser = await User.findByIdAndUpdate(id, {caught} );
+  
+  if (editingUser) {
+    res.status(200).json({
+      response: editingUser,
+      success: true
+
+    })
+  } else {
+    res.status(400).json({
+      response: 'Update Failed',
+      success: false
+    })
+  }
+}
+catch(error) {
+  res.status(404).json({
+    response: error,
+    success: false
+  })
+}
+})
+
 app.post('/signup', async (req, res) => {
   const { username, password } = req.body
   try {

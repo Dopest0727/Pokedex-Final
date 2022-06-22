@@ -15,6 +15,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: () => crypto.randomBytes(128).toString('hex'),
   },
+    caught : {
+    type: Array
+  },
 })
 
 const User = mongoose.model('User', UserSchema)
