@@ -23,20 +23,10 @@ import PrimaryButton from '../components/PrimaryButton'
 import FlexContainer from '../components/FlexContainer'
 
 const Pokedex = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [pokemons, setPokemons] = useState([])
-  const navigate = useNavigate()
   const authToken = useSelector((state) => state.authenticated.authToken)
-
-  useEffect(() => {
-    axios
-      .get(`https://picopalquelee.herokuapp.com/pokemons`)
-      .then((res) => {
-        setPokemons(res.data.pokemons)
-        setLoading(true)
-      })
-      .catch((err) => {})
-  }, [])
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!authToken) {
@@ -45,7 +35,13 @@ const Pokedex = () => {
   }, [authToken, navigate])
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 3000)
+    axios
+      .get(`https://picopalquelee.herokuapp.com/pokemons`)
+      .then((res) => {
+        setPokemons(res.data.pokemons)
+        setLoading(false)
+      })
+      .catch((err) => {})
   }, [])
 
   const [query, setQuery] = useState('')
@@ -75,7 +71,7 @@ const Pokedex = () => {
 
   return (
     <>
-      {loading === false ? (
+      {!loading ? (
         <Box>
           <NavBar />
           <Center mb="10">
@@ -171,6 +167,7 @@ const Pokedex = () => {
                               )}
                             </Popup>
                           </FlexContainer>
+                          
                           <FlexContainer direction="row">
                             {pokemon.type.map((type) => (
                               <BadgeContainer2

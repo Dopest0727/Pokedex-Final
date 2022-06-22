@@ -68,11 +68,6 @@ app.get('/pokemons/:num', async (req, res) => {
   h
 })
 
-app.get('/pokemons/users/:userId', async (req, res) => {
-  const { userId } = req.params
-  const userPokemons = await Pokemon.find({ user: userId })
-  res.status(201).json({ response: userPokemons, success: true })
-})
 
 app.get('/pokemons/name/:name', async (req, res) => {
   const { name } = req.params

@@ -4,6 +4,7 @@ const authenticated = createSlice({
   name: 'authenticated',
   initialState: {
     userId: null,
+    userCaught: null,
     authToken: null,
     username: null,
     error: null,
@@ -14,6 +15,9 @@ const authenticated = createSlice({
       state.authToken = action.payload.accessToken
       state.username = action.payload.username
       state.userId = action.payload.userId
+    },
+    setUserCaught: (store, action) => {
+      store.userCaught  = action.payload
     },
     logout: (state, action) => {
       state.authToken = ''
