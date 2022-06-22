@@ -17,6 +17,8 @@ import {
 import Loader from '../components/Loader'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
+import BadgeContainer from '../components/BadgeContainer'
+import BadgeContainer2 from '../components/BadgeContainer2'
 
 const Pokedex = () => {
   const [loading, setLoading] = useState(false)
@@ -31,9 +33,9 @@ const Pokedex = () => {
       .catch((err) => {})
   }, [])
 
-  useEffect(() => { 
-    setTimeout(() => setLoading(false), 3000);
-  }, []);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 3000)
+  }, [])
 
   const [query, setQuery] = useState('')
   const h = useBreakpointValue({
@@ -117,19 +119,11 @@ const Pokedex = () => {
                             display="flex"
                             direction="column"
                           >
-                            <Badge
+                            <BadgeContainer2
                               bgColor="blue.300"
-                              mb="2"
-                              w="100%"
-                              color="white"
-                              variant="solid"
-                              borderRadius="md"
-                              textAlign="center"
-                              py="3"
-                              px="3"
                             >
                               {pokemon.name}
-                            </Badge>
+                            </BadgeContainer2>
                             <Popup
                               trigger={
                                 <Button
@@ -173,68 +167,26 @@ const Pokedex = () => {
                                       direction="column"
                                       justify="space-between"
                                     >
-                                      <Badge
-                                        color="white"
-                                        bgColor="blue.800"
-                                        variant="solid"
-                                        borderRadius="md"
-                                        textAlign="left"
-                                        p="2"
-                                      >
+                                      <BadgeContainer bgColor="blue.800">
                                         Number: {pokemon.num}
-                                      </Badge>
-                                      <Badge
-                                        color="white"
-                                        bgColor="blue.700"
-                                        variant="solid"
-                                        borderRadius="md"
-                                        textAlign="left"
-                                        p="2"
-                                      >
+                                      </BadgeContainer>
+                                      <BadgeContainer bgColor="blue.700">
                                         Name: {pokemon.name}
-                                      </Badge>
-                                      <Badge
-                                        color="white"
-                                        bgColor="blue.600"
-                                        variant="solid"
-                                        borderRadius="md"
-                                        textAlign="left"
-                                        p="2"
-                                      >
+                                      </BadgeContainer>
+                                      <BadgeContainer bgColor="blue.600">
                                         Type: {pokemon.type[0]}{' '}
                                         {pokemon.type[1]}
-                                      </Badge>
-                                      <Badge
-                                        color="white"
-                                        bgColor="blue.500"
-                                        variant="solid"
-                                        borderRadius="md"
-                                        textAlign="left"
-                                        p="2"
-                                      >
+                                      </BadgeContainer>
+                                      <BadgeContainer bgColor="blue.500">
                                         Height: {pokemon.height}
-                                      </Badge>
-                                      <Badge
-                                        color="white"
-                                        bgColor="blue.400"
-                                        variant="solid"
-                                        borderRadius="md"
-                                        textAlign="left"
-                                        p="2"
-                                      >
+                                      </BadgeContainer>
+                                      <BadgeContainer bgColor="blue.400">
                                         Weight: {pokemon.weight}
-                                      </Badge>
-                                      <Badge
-                                        color="white"
-                                        bgColor="blue.300"
-                                        variant="solid"
-                                        borderRadius="md"
-                                        textAlign="left"
-                                        p="2"
-                                      >
+                                      </BadgeContainer>
+                                      <BadgeContainer bgColor="blue.300">
                                         Weaknesses: {pokemon.weaknesses[0]}{' '}
                                         {pokemon.weaknesses[1]}
-                                      </Badge>
+                                      </BadgeContainer>
                                     </Stack>
                                     <Button
                                       mt="4"
@@ -243,8 +195,7 @@ const Pokedex = () => {
                                       bgColor="blue.200"
                                       color="white"
                                     >
-                                      {' '}
-                                      Close{' '}
+                                      Close
                                     </Button>
                                   </Box>
                                 </Box>
@@ -253,19 +204,12 @@ const Pokedex = () => {
                           </Flex>
                           <Flex w="100%" display="flex" direction="row" px="2">
                             {pokemon.type.map((type) => (
-                              <Badge
-                                borderRadius="md"
-                                w="100%"
-                                textAlign="center"
-                                color="white"
-                                py="3"
-                                px="3"
-                                mb="2"
+                              <BadgeContainer2
                                 bgColor={backgrounds[type]}
                                 key={type}
                               >
                                 {type}
-                              </Badge>
+                              </BadgeContainer2>
                             ))}
                           </Flex>
                         </Stack>
