@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import axios from 'axios'
 import {
@@ -9,7 +11,6 @@ import {
   Input,
   Image,
   Stack,
-  Flex,
 } from '@chakra-ui/react'
 
 import Loader from '../components/Loader'
@@ -19,10 +20,13 @@ import BadgeContainer from '../components/BadgeContainer'
 import BadgeContainer2 from '../components/BadgeContainer2'
 import BoxesStarter from '../components/BoxesStarter'
 import PrimaryButton from '../components/PrimaryButton'
+import FlexContainer from '../components/FlexContainer'
 
 const Pokedex = () => {
   const [loading, setLoading] = useState(false)
   const [pokemons, setPokemons] = useState([])
+  const navigate = useNavigate()
+  const authToken = useSelector((state) => state.authenticated.authToken)
 
   useEffect(() => {
     axios
@@ -33,6 +37,12 @@ const Pokedex = () => {
       })
       .catch((err) => {})
   }, [])
+
+  useEffect(() => {
+    if (!authToken) {
+      navigate('/')
+    }
+  }, [authToken, navigate])
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 3000)
@@ -64,133 +74,123 @@ const Pokedex = () => {
   }
 
   return (
-    <Box>
-      <NavBar />
-      <Center mb="10">
-        {loading === false ? (
-          <Box>
-            <Input
-              my="5"
-              borderWidth="2px"
-              borderColor="blue.200"
-              placeholder="Search for your favorite pokemon!"
-              onChange={(event) => setQuery(event.target.value)}
-            />
-            <Grid templateColumns={h} gap={5}>
-              {pokemons
-                // eslint-disable-next-line
-                .filter((pokemon) => {
-                  if (query === '') {
-                    return pokemon
-                  } else if (
-                    pokemon.name.toLowerCase().includes(query.toLowerCase())
-                  ) {
-                    return pokemon
-                  }
-                })
-                .map((pokemon) => {
-                  return (
-                    <BoxesStarter key={pokemon._id}>
-                      <Box>
-                        <Stack
-                          w="100%"
-                          display="flex"
-                          direction="column"
-                          alignItems="center"
-                        >
-                          <Box bgColor="blue.100" w="100%" borderRadius="md">
-                            <Center>
-                              <Image
-                                m="5"
-                                src={pokemon.img}
-                                alt={pokemon.name}
-                                borderRadius="lg"
-                              />
-                            </Center>
-                          </Box>
-                          <Flex
-                            px="2"
+    <>
+      {loading === false ? (
+        <Box>
+          <NavBar />
+          <Center mb="10">
+            <Box>
+              <Input
+                my="5"
+                borderWidth="2px"
+                borderColor="blue.200"
+                placeholder="Search for your favorite pokemon!"
+                onChange={(event) => setQuery(event.target.value)}
+              />
+              <Grid templateColumns={h} gap={5}>
+                {pokemons
+                  // eslint-disable-next-line
+                  .filter((pokemon) => {
+                    if (query === '') {
+                      return pokemon
+                    } else if (
+                      pokemon.name.toLowerCase().includes(query.toLowerCase())
+                    ) {
+                      return pokemon
+                    }
+                  })
+                  .map((pokemon) => {
+                    return (
+                      <BoxesStarter key={pokemon._id}>
+                          <Stack
                             w="100%"
                             display="flex"
                             direction="column"
+                            alignItems="center"
                           >
-                            <BadgeContainer2 bgColor="blue.300">
-                              {pokemon.name}
-                            </BadgeContainer2>
-                            <Popup
-                              trigger={<PrimaryButton>Read more</PrimaryButton>}
-                              modal
-                              nested
-                            >
-                              {(close) => (
-                                <Box>
-                                  <BoxesStarter p="10" justifyContent="center">
-                                    <Center>
-                                      <Image
-                                        width="50%"
-                                        src={pokemon.img}
-                                        alt={pokemon.name}
-                                        mb="10"
-                                      />
-                                    </Center>
-                                    <Stack
-                                      direction="column"
-                                      justify="space-between"
-                                    >
-                                      <BadgeContainer bgColor="blue.800">
-                                        Number: {pokemon.num}
-                                      </BadgeContainer>
-                                      <BadgeContainer bgColor="blue.700">
-                                        Name: {pokemon.name}
-                                      </BadgeContainer>
-                                      <BadgeContainer bgColor="blue.600">
-                                        Type: {pokemon.type[0]}{' '}
-                                        {pokemon.type[1]}
-                                      </BadgeContainer>
-                                      <BadgeContainer bgColor="blue.500">
-                                        Height: {pokemon.height}
-                                      </BadgeContainer>
-                                      <BadgeContainer bgColor="blue.400">
-                                        Weight: {pokemon.weight}
-                                      </BadgeContainer>
-                                      <BadgeContainer bgColor="blue.300">
-                                        Weaknesses: {pokemon.weaknesses[0]}{' '}
-                                        {pokemon.weaknesses[1]}
-                                      </BadgeContainer>
-                                    </Stack>
-                                    <PrimaryButton mt="4" onClick={close}>
-                                      Close
-                                    </PrimaryButton>
-                                  </BoxesStarter>
-                                </Box>
-                              )}
-                            </Popup>
-                          </Flex>
-                          <Flex w="100%" display="flex" direction="row" px="2">
-                            {pokemon.type.map((type) => (
-                              <BadgeContainer2
-                                bgColor={backgrounds[type]}
-                                key={type}
-                              >
-                                {type}
+                            <Box bgColor="blue.100" w="100%" borderRadius="md">
+                              <Center>
+                                <Image
+                                  m="5"
+                                  src={pokemon.img}
+                                  alt={pokemon.name}
+                                  borderRadius="lg"
+                                />
+                              </Center>
+                            </Box>
+                            <FlexContainer direction="column">
+                              <BadgeContainer2 bgColor="blue.300">
+                                {pokemon.name}
                               </BadgeContainer2>
-                            ))}
-                          </Flex>
-                        </Stack>
-                      </Box>
-                    </BoxesStarter>
-                  )
-                })}
-            </Grid>
-          </Box>
-        ) : (
-          <>
-            <Loader />
-          </>
-        )}
-      </Center>
-      <Footer />
-    </Box>
+                              <Popup
+                                trigger={
+                                  <PrimaryButton>Read more</PrimaryButton>
+                                }
+                                modal
+                                nested
+                              >
+                                {(close) => (
+                                  <Box>
+                                    <BoxesStarter p="10" justifyContent="center">
+                                      <Center>
+                                        <Image
+                                          width="50%"
+                                          src={pokemon.img}
+                                          alt={pokemon.name}
+                                          mb="10"
+                                        />
+                                      </Center>
+                                      <Stack direction="column" justify="space-between">
+                                        <BadgeContainer bgColor="blue.800">
+                                          Number: {pokemon.num}
+                                        </BadgeContainer>
+                                        <BadgeContainer bgColor="blue.700">
+                                          Name: {pokemon.name}
+                                        </BadgeContainer>
+                                        <BadgeContainer bgColor="blue.600">
+                                          Type: {pokemon.type[0]}{' '}
+                                          {pokemon.type[1]}
+                                        </BadgeContainer>
+                                        <BadgeContainer bgColor="blue.500">
+                                          Height: {pokemon.height}
+                                        </BadgeContainer>
+                                        <BadgeContainer bgColor="blue.400">
+                                          Weight: {pokemon.weight}
+                                        </BadgeContainer>
+                                        <BadgeContainer bgColor="blue.300">
+                                          Weaknesses: {pokemon.weaknesses[0]}{' '}{pokemon.weaknesses[1]}
+                                        </BadgeContainer>
+                                      </Stack>
+                                      <PrimaryButton mt="4" onClick={close}>
+                                        Close
+                                      </PrimaryButton>
+                                    </BoxesStarter>
+                                  </Box>
+                                )}
+                              </Popup>
+                            </FlexContainer>
+                            <FlexContainer direction="row">
+                              {pokemon.type.map((type) => (
+                                <BadgeContainer2 bgColor={backgrounds[type]} key={type}>
+                                  {type}
+                                </BadgeContainer2>
+                              ))}
+                            </FlexContainer>
+                          </Stack>
+                      </BoxesStarter>
+                    )
+                  })}
+              </Grid>
+            </Box>
+          </Center>
+          <Footer />
+        </Box>
+      ) : (
+        <>
+          <Loader />
+        </>
+      )}
+    </>
   )
 }
 

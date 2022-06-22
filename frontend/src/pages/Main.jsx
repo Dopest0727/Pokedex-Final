@@ -113,21 +113,6 @@ const Main = () => {
                 Where you can see all the available pokemons and pick the ones
                 you've caught.
               </ListItem>
-              {/* <ListItem>
-                <ListIcon as={FcNext} />
-                <Badge
-                  py="1"
-                  px="3"
-                  mr="2"
-                  bgColor="blue.400"
-                  color="white"
-                  borderRadius="md"
-                >
-                  Profile
-                </Badge>
-                Where you can see all the pokemons you,ve caught and display
-                your user information.
-              </ListItem> */}
               <ListItem>
                 <ListIcon as={FcNext} />
                 <Badge
