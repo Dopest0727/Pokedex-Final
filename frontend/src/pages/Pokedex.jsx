@@ -119,9 +119,7 @@ const Pokedex = () => {
                             display="flex"
                             direction="column"
                           >
-                            <BadgeContainer2
-                              bgColor="blue.300"
-                            >
+                            <BadgeContainer2 bgColor="blue.300">
                               {pokemon.name}
                             </BadgeContainer2>
                             <Popup
