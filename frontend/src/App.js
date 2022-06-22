@@ -12,7 +12,7 @@ import Main from './pages/Main'
 
 import Contact from './pages/Contact'
 import Pokedex from './pages/Pokedex'
-
+//import Profile from './pages/Profile'
 import authenticated from './reducers/auth'
 
 const enhancer = compose(persistState())
@@ -33,6 +33,7 @@ const App = () => {
             <Route path="/main" element={<Main />}></Route>
             <Route path="/contact" element={<Contact />}></Route>
             <Route path="/pokedex" element={<Pokedex />}></Route>
+            {/* <Route path="/profile" element={<Profile />}></Route> */}
           </Routes>
         </BrowserRouter>
       </Provider>
