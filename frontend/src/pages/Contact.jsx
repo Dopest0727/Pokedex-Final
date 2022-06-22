@@ -72,86 +72,91 @@ const Contact = () => {
                   you have as much fun using it as we did developing it! <br />
                   GO CATCH 'EM ALL SON!
                 </Text>
-                <Image borderRadius="md" src={pokebg} alt={pokecard.imageAlt} mb="4"/>
+                <Image
+                  borderRadius="md"
+                  src={pokebg}
+                  alt={pokecard.imageAlt}
+                  mb="4"
+                />
               </Box>
             </TabPanel>
             <TabPanel>
               <Flex direction={h} gap="5">
-              <Box w="100%" borderRadius="md" my="5">
-                <Image
-                  src="https://avatars.githubusercontent.com/u/74298827?v=4"
-                  alt="Maurii"
-                  borderRadius="full"
-                  filter="grayscale(100%)"
-                />
-                <Box mt="5">
-                  <Text>Maurii Aka "The Creator"</Text>
-                  <Text>+46760533266</Text>
-                  <Text>maurii@treunkter.com</Text>
+                <Box w="100%" borderRadius="md" my="5">
+                  <Image
+                    src="https://avatars.githubusercontent.com/u/74298827?v=4"
+                    alt="Maurii"
+                    borderRadius="full"
+                    filter="grayscale(100%)"
+                  />
+                  <Box mt="5">
+                    <Text>Maurii"</Text>
+                    <Text>+46760533266</Text>
+                    <Text>maurii@treunkter.com</Text>
+                  </Box>
+                  <Flex direction="row" mt="5">
+                    <LinkBox>
+                      <LinkOverlay
+                        href="https://github.com/Dopest0727"
+                        isExternal
+                      >
+                        <FaGithubSquare size={36} />
+                      </LinkOverlay>
+                    </LinkBox>
+                    <LinkBox mx="1">
+                      <LinkOverlay
+                        href="https://stackoverflow.com/users/14403128/mauricio-urra"
+                        isExternal
+                      >
+                        <FaStackOverflow size={36} />
+                      </LinkOverlay>
+                    </LinkBox>
+                    <LinkBox>
+                      <LinkOverlay
+                        href="https://www.linkedin.com/in/maurii/"
+                        isExternal
+                      >
+                        <FaLinkedin size={36} />
+                      </LinkOverlay>
+                    </LinkBox>
+                  </Flex>
                 </Box>
-                <Flex direction="row" mt="5">
-                  <LinkBox>
-                    <LinkOverlay
-                      href="https://github.com/Dopest0727"
-                      isExternal
-                    >
-                      <FaGithubSquare size={36} />
-                    </LinkOverlay>
-                  </LinkBox>
-                  <LinkBox mx="1">
-                    <LinkOverlay
-                      href="https://stackoverflow.com/users/14403128/mauricio-urra"
-                      isExternal
-                    >
-                      <FaStackOverflow size={36} />
-                    </LinkOverlay>
-                  </LinkBox>
-                  <LinkBox>
-                    <LinkOverlay
-                      href="https://www.linkedin.com/in/maurii/"
-                      isExternal
-                    >
-                      <FaLinkedin size={36} />
-                    </LinkOverlay>
-                  </LinkBox>
-                </Flex>
-              </Box>
-              <Box w="100%" borderRadius="md" my="5">
-                <Image
-                  src="https://avatars.githubusercontent.com/u/91568892?v=4"
-                  alt="Rijad"
-                  borderRadius="full"
-                  filter="grayscale(100%)"
-                />
-                <Box mt="5">
-                  <Text>Rijad Aka "Balkan Boy"</Text>
-                  <Text>+46721410119</Text>
-                  <Text>riri90@jebotemail.com</Text>
+                <Box w="100%" borderRadius="md" my="5">
+                  <Image
+                    src="https://avatars.githubusercontent.com/u/91568892?v=4"
+                    alt="Rijad"
+                    borderRadius="full"
+                    filter="grayscale(100%)"
+                  />
+                  <Box mt="5">
+                    <Text>Rijad"</Text>
+                    <Text>+46721410119</Text>
+                    <Text>rijad@gmail.com</Text>
+                  </Box>
+                  <Flex direction="row" mt="5">
+                    <LinkBox>
+                      <LinkOverlay href="https://github.com/rijad90" isExternal>
+                        <FaGithubSquare size={36} />
+                      </LinkOverlay>
+                    </LinkBox>
+                    <LinkBox mx="1">
+                      <LinkOverlay
+                        href="https://stackoverflow.com/users/17900772/rijad"
+                        isExternal
+                      >
+                        <FaStackOverflow size={36} />
+                      </LinkOverlay>
+                    </LinkBox>
+                    <LinkBox>
+                      <LinkOverlay
+                        href="https://www.linkedin.com/in/rijad-ilijazagic-72b303a8/"
+                        isExternal
+                      >
+                        <FaLinkedin size={36} />
+                      </LinkOverlay>
+                    </LinkBox>
+                  </Flex>
                 </Box>
-                <Flex direction="row" mt="5">
-                  <LinkBox>
-                    <LinkOverlay href="https://github.com/rijad90" isExternal>
-                      <FaGithubSquare size={36} />
-                    </LinkOverlay>
-                  </LinkBox>
-                  <LinkBox mx="1">
-                    <LinkOverlay
-                      href="https://stackoverflow.com/users/17900772/rijad"
-                      isExternal
-                    >
-                      <FaStackOverflow size={36} />
-                    </LinkOverlay>
-                  </LinkBox>
-                  <LinkBox>
-                    <LinkOverlay
-                      href="https://www.linkedin.com/in/rijad-ilijazagic-72b303a8/"
-                      isExternal
-                    >
-                      <FaLinkedin size={36} />
-                    </LinkOverlay>
-                  </LinkBox>
-                </Flex>
-              </Box>
               </Flex>
             </TabPanel>
           </TabPanels>

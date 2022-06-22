@@ -1,5 +1,5 @@
-import React from "react"
-import { Box, Text, Link } from "@chakra-ui/react"
+import React from 'react'
+import { Box, Text, Link } from '@chakra-ui/react'
 
 export default function Logo(props) {
   const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
@@ -14,11 +14,7 @@ export default function Logo(props) {
 
   return (
     <Box {...props}>
-      <MenuItem to="/main"> 
-        
-          Pokedex
-        
-      </MenuItem>
+      <MenuItem to="/main">Pokedex</MenuItem>
     </Box>
   )
 }

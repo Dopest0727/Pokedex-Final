@@ -17,12 +17,12 @@ import {
 } from '@chakra-ui/react'
 
 import pokebg from '../IMG/pokebg.jpg'
-import { authenticated } from '../reducers/auth'
+import authenticated from '../reducers/auth'
 
 const Signup = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [passwordTwo, setPasswordTwo] = useState();
+  const [passwordTwo, setPasswordTwo] = useState()
   const [error, setError] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -52,23 +52,22 @@ const Signup = () => {
     }
   }
 
-   const signUp = () => {
-    const passwordPattern =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  const signUp = () => {
+    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/
     if (password !== passwordTwo) {
-      setError("Passwords do not match.");
+      setError('Passwords do not match.')
     } else if (password.match(passwordPattern) && username.length > 4) {
       createUsers({
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
-      });
+      })
     } else {
       setError(
-        "Password needs to be at least 8 characters, contain 1 lowerercase/uppercase letter and 1 number."
-      );
+        'Password needs to be at least 8 characters, contain 1 lowerercase/uppercase letter and 1 number.'
+      )
     }
-  };
+  }
 
   return (
     <>

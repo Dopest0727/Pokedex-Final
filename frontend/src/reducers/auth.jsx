@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
-export const authenticated = createSlice({
-  name: "authenticated",
+const authenticated = createSlice({
+  name: 'authenticated',
   initialState: {
     userId: null,
     authToken: null,
@@ -11,23 +11,24 @@ export const authenticated = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      state.authToken = action.payload.accessToken;
-      state.username = action.payload.username;
-      state.userId = action.payload.userId;
-      console.log(action.payload)
+      state.authToken = action.payload.accessToken
+      state.username = action.payload.username
+      state.userId = action.payload.userId
     },
     logout: (state, action) => {
-      state.authToken = "";
-      state.username = "";
+      state.authToken = ''
+      state.username = ''
     },
     setUserId: (state, action) => {
-      state.userId = action.payload;
+      state.userId = action.payload
     },
     setError: (state, action) => {
-      state.error = action.payload;
+      state.error = action.payload
     },
     setLoading: (state, action) => {
-      state.loading = action.payload;
-    }
+      state.loading = action.payload
+    },
   },
-});
+})
+
+export default authenticated

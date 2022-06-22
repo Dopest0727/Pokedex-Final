@@ -1,9 +1,4 @@
-import {
-  Container,
-  Flex,
-  Stack,
-  Text,
-} from '@chakra-ui/react'
+import { Container, Flex, Stack, Text } from '@chakra-ui/react'
 import * as React from 'react'
 import Logo from '../components/Logo'
 

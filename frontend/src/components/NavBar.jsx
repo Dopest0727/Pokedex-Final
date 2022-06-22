@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, Box, Flex, Text, Button, Stack } from '@chakra-ui/react'
 import { useDispatch } from 'react-redux'
-import { authenticated } from '../reducers/auth'
+import authenticated from '../reducers/auth'
 
 import Logo from '../components/Logo'
 
@@ -11,7 +11,7 @@ const NavBar = (props) => {
 
   return (
     <NavBarContainer {...props}>
-      <Logo w="100px" color={['white', 'white', 'blue.400', 'blue.400']} /> 
+      <Logo w="100px" color={['white', 'white', 'blue.400', 'blue.400']} />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} />
     </NavBarContainer>
@@ -78,15 +78,9 @@ const MenuLinks = ({ isOpen }) => {
       >
         <MenuItem to="/main">Home </MenuItem>
         <MenuItem to="/pokedex">Pokedex </MenuItem>
-        <MenuItem to="/profile">Profile</MenuItem>
         <MenuItem to="/contact">About Us</MenuItem>
         <MenuItem to="/" isLast>
-          <Button
-            onClick={logout}
-            size="md"
-            rounded="md"
-            colorScheme='twitter'
-          >
+          <Button onClick={logout} size="md" rounded="md" colorScheme="twitter">
             Sign Out
           </Button>
         </MenuItem>

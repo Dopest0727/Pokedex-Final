@@ -1,10 +1,10 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose'
 
 const PokemonSchema = new mongoose.Schema({
   id: {
     type: Number,
     required: true,
-    unique: true
+    unique: true,
   },
   name: String,
   num: String,
@@ -20,9 +20,9 @@ const PokemonSchema = new mongoose.Schema({
   spawn_time: String,
   multipliers: [Number],
   weaknesses: [String],
-  next_evolution: [Object]
+  next_evolution: [Object],
 })
 
-const Pokemon = mongoose.model("Pokemon", PokemonSchema)
+const Pokemon = mongoose.model('Pokemon', PokemonSchema)
 
 export default Pokemon
