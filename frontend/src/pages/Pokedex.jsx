@@ -6,11 +6,9 @@ import {
   Center,
   Box,
   useBreakpointValue,
-  Button,
   Input,
   Image,
   Stack,
-  Badge,
   Flex,
 } from '@chakra-ui/react'
 
@@ -19,10 +17,13 @@ import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import BadgeContainer from '../components/BadgeContainer'
 import BadgeContainer2 from '../components/BadgeContainer2'
+import BoxesStarter from '../components/BoxesStarter'
+import PrimaryButton from '../components/PrimaryButton'
 
 const Pokedex = () => {
   const [loading, setLoading] = useState(false)
   const [pokemons, setPokemons] = useState([])
+
   useEffect(() => {
     axios
       .get(`https://picopalquelee.herokuapp.com/pokemons`)
@@ -89,13 +90,7 @@ const Pokedex = () => {
                 })
                 .map((pokemon) => {
                   return (
-                    <Box
-                      w="xs"
-                      borderWidth="2px"
-                      borderColor="blue.200"
-                      borderRadius="lg"
-                      key={pokemon._id}
-                    >
+                    <BoxesStarter key={pokemon._id}>
                       <Box>
                         <Stack
                           w="100%"
@@ -123,36 +118,13 @@ const Pokedex = () => {
                               {pokemon.name}
                             </BadgeContainer2>
                             <Popup
-                              trigger={
-                                <Button
-                                  bgColor="white"
-                                  borderWidth="2px"
-                                  borderColor="blue.200"
-                                  w="100%"
-                                  color="blue.300"
-                                  variant="solid"
-                                  _hover={{
-                                    background: 'blue.500',
-                                    color: 'white',
-                                  }}
-                                >
-                                  Read more
-                                </Button>
-                              }
+                              trigger={<PrimaryButton>Read more</PrimaryButton>}
                               modal
                               nested
                             >
                               {(close) => (
                                 <Box>
-                                  <Box
-                                    w="xs"
-                                    bgColor="white"
-                                    borderRadius="lg"
-                                    borderWidth="2px"
-                                    borderColor="blue.200"
-                                    p="10"
-                                    justifyContent="center"
-                                  >
+                                  <BoxesStarter p="10" justifyContent="center">
                                     <Center>
                                       <Image
                                         width="50%"
@@ -186,16 +158,10 @@ const Pokedex = () => {
                                         {pokemon.weaknesses[1]}
                                       </BadgeContainer>
                                     </Stack>
-                                    <Button
-                                      mt="4"
-                                      w="100%"
-                                      onClick={close}
-                                      bgColor="blue.200"
-                                      color="white"
-                                    >
+                                    <PrimaryButton mt="4" onClick={close}>
                                       Close
-                                    </Button>
-                                  </Box>
+                                    </PrimaryButton>
+                                  </BoxesStarter>
                                 </Box>
                               )}
                             </Popup>
@@ -212,15 +178,13 @@ const Pokedex = () => {
                           </Flex>
                         </Stack>
                       </Box>
-                    </Box>
+                    </BoxesStarter>
                   )
                 })}
             </Grid>
           </Box>
         ) : (
           <>
-            <Loader />
-            <Loader />
             <Loader />
           </>
         )}

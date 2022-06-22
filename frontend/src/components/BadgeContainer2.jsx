@@ -8,9 +8,9 @@ const BadgeContainer2 = ({ children, ...props }) => {
       variant="solid"
       borderRadius="md"
       w="100%"
-                                textAlign="center"
-                                p="3"
-                                mb="2"
+      textAlign="center"
+      p="3"
+      mb="2"
       {...props}
     >
       {children}

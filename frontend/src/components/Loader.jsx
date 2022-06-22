@@ -1,16 +1,15 @@
-import React from "react"
+import React from 'react'
 import gif from '../IMG/animation.gif'
-import { Img, Center, Container } from "@chakra-ui/react"
-
+import { Img, Center } from '@chakra-ui/react'
 
 const Loader = () => {
-    return (
-        <Container w="100%">
-            <Center>
-                <Img w="100%" src={gif} alt={'gif'} />
-            </Center> 
-        </Container>
-    )
+  return (
+    <Center>
+      <Img w="100%" src={gif} alt={'gif'} />
+      <Img w="100%" src={gif} alt={'gif'} />
+      <Img w="100%" src={gif} alt={'gif'} />
+    </Center>
+  )
 }
 
 export default Loader
